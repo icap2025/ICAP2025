@@ -1,11 +1,18 @@
+import {
+  default as ScrollUp,
+} from "@/components/Landingpage-components/Common/ScrollUp";
+import { Metadata } from "next";
 import Image from "next/image";
-import Header from "@/components/LandingPageComponent/Header/index";
+
+export const metadata: Metadata = {
+  title: "Home Page | Gaibandha Student Association, SUST",
+  description: "This is Home Page for Gaibandha Student Association, SUST",
+};
 
 export default function Home() {
   return (
-    <>
-    <Header/>
-    <main className="min-h-screen bg-white dark:bg-gray-950">
+    <div className="flex flex-col min-h-screen">
+      <main className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center px-6 py-24 bg-gradient-to-br from-gray-100 to-white dark:from-gray-900 dark:to-gray-950 text-center">
         <Image
@@ -118,6 +125,8 @@ export default function Home() {
         </div>
       </footer>
     </main>
-    </>
+      <ScrollUp />
+
+    </div>
   );
 }

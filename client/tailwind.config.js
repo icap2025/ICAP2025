@@ -7,9 +7,13 @@ module.exports = {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "1rem",
+    },
     extend: {
       colors: {
-        
+        primary: "#4A6CF7",
       },
       animation: {
         

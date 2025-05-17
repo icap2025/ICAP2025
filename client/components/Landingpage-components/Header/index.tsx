@@ -1,5 +1,5 @@
 "use client";
-import { ScrollProgress } from "@/components/magicui/scroll-progress";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 // import DropdownUser from "@/components/Dashboard-components/Header/DropdownUser";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -39,7 +39,7 @@ const Header = () => {
     window.addEventListener("scroll", handleStickyNavbar);
 
     // Listen for custom event from MasonryImageGrid component
-    const handleStickyToggle = (e:any) => {
+    const handleStickyToggle = (e) => {
       setStickyEnabled(e.detail.enabled);
 
       // Force immediate update of sticky state
@@ -61,7 +61,7 @@ const Header = () => {
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
-  const handleSubmenu = (index:any) => {
+  const handleSubmenu = (index) => {
     if (openIndex === index) {
       setOpenIndex(-1);
     } else {
@@ -174,9 +174,9 @@ const Header = () => {
                                 openIndex === index ? "block" : "hidden"
                               }`}
                             >
-                              {menuItem.submenu?.map((submenuItem, index) => (
+                              {menuItem.submenu.map((submenuItem, index) => (
                                 <Link
-                                  href={submenuItem.path || "#"}
+                                  href={submenuItem.path}
                                   key={index}
                                   className="block rounded py-2.5 text-sm text-dark hover:text-primary dark:text-white/70 dark:hover:text-white lg:px-3"
                                 >
@@ -193,9 +193,8 @@ const Header = () => {
               </div>
               <div className="flex items-center justify-end pr-16 lg:pr-0">
               {isLoggedIn ? (
-                  <div>
-                    
-                  </div>// <DropdownUser />
+                <div></div>
+                  // <DropdownUser />
                 ) : (
                 <Link
                   href="/signin"
@@ -204,7 +203,6 @@ const Header = () => {
                   Sign In
                 </Link>
                 )}
-
               </div>
             </div>
           </div>

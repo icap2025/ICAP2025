@@ -14,13 +14,19 @@ const menuData: Menu[] = [
     submenu: [
       {
         id: 21,
-        title: "About ICAP 2025",
-        path: "/about",
+        title: "About GSA-SUST",
+        path: "/about-gsa",
         newTab: false,
       },
       {
         id: 22,
-        title: "Committees",
+        title: "About Gaibandha",
+        path: "/about-gaibandha",
+        newTab: false,
+      },
+      {
+        id: 23,
+        title: "Previous Committees",
         path: "/previous-committees",
         newTab: false,
       },
@@ -37,6 +43,12 @@ const menuData: Menu[] = [
     id: 4,
     title: "Gallery",
     path: "/gallery",
+    newTab: false,
+  },
+  {
+    id: 5,
+    title: "Events",
+    path: "/events",
     newTab: false,
   },
   {

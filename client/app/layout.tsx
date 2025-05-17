@@ -1,34 +1,32 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+"use client";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import Footer from "@/components/Landingpage-components/Footer";
+import Header from "@/components/Landingpage-components/Header";
+import ScrollToTop from "@/components/Landingpage-components/ScrollToTop";
+import { usePathname } from "next/navigation";
+import { Inter } from "next/font/google";
+import "../styles/index.css";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "ICPS 2025",
-  description: "International Conference on Physical Science 2025",
-};
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const pathname = usePathname();
+  const showHeaderFooter = !pathname.startsWith("/dashboard");
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html suppressHydrationWarning lang="en">
+      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
+          {showHeaderFooter && <Header />}
+          {children}
+          <div id="modal-root" />
+          {showHeaderFooter && <Footer />}
+          <ScrollToTop />
       </body>
     </html>
   );
 }
+
+
