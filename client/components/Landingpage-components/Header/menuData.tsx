@@ -9,25 +9,25 @@ const menuData: Menu[] = [
   },
   {
     id: 2,
-    title: "About",
+    title: "Tracks",
     newTab: false,
     submenu: [
       {
         id: 21,
-        title: "About GSA-SUST",
-        path: "/about-gsa",
+        title: "A",
+        path: "/",
         newTab: false,
       },
       {
         id: 22,
-        title: "About Gaibandha",
-        path: "/about-gaibandha",
+        title: "B",
+        path: "/",
         newTab: false,
       },
       {
         id: 23,
-        title: "Previous Committees",
-        path: "/previous-committees",
+        title: "C",
+        path: "/",
         newTab: false,
       },
 
@@ -35,20 +35,32 @@ const menuData: Menu[] = [
   },
   {
     id: 3,
-    title: "Members",
-    path: "/members",
+    title: "For-Authors",
+    path: "/for-authors",
     newTab: false,
   },
   {
     id: 4,
+    title: "Registration",
+    path: "/registration",
+    newTab: false,
+  },
+  {
+    id: 5,
+    title: "Schedule",
+    path: "/schedule",
+    newTab: false,
+  },
+  {
+    id: 6,
     title: "Gallery",
     path: "/gallery",
     newTab: false,
   },
   {
-    id: 5,
-    title: "Events",
-    path: "/events",
+    id: 6,
+    title: "About",
+    path: "/about",
     newTab: false,
   },
   {
@@ -56,6 +68,6 @@ const menuData: Menu[] = [
     title: "Contact",
     path: "/contact",
     newTab: false,
-  },
+  }
 ];
 export default menuData;

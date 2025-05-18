@@ -82,27 +82,30 @@ const Header = () => {
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
-            <div className="w-60 max-w-full px-4 xl:mr-12">
+            <div className="w-full md:w-60 px-4 xl:mr-12">
               <Link
                 href="/"
                 className={`header-logo block w-full ${
-                  sticky ? "py-5 lg:py-2" : "py-8"
-                } `}
+                  sticky ? "py-3 lg:py-2" : "py-5 lg:py-8"
+                }`}
               >
-                <img
-                  src="/images/logo/logo-2.svg"
-                  alt="logo"
-                  width={140}
-                  height={30}
-                  className="w-full dark:hidden"
-                />
-                <img
-                  src="/images/logo/logo.svg"
-                  alt="logo"
-                  width={140}
-                  height={30}
-                  className="hidden w-full dark:block"
-                />
+                <div className="flex items-center">
+                  <div className="relative h-8 w-auto md:h-10">
+                    <img
+                      src="/logo.svg"
+                      alt="ICAP 2025 Logo"
+                      className="h-full w-auto object-contain dark:hidden"
+                    />
+                    <img
+                      src="/images/logo/logo.svg"
+                      alt="ICAP 2025 Logo"
+                      className="hidden h-full w-auto object-contain dark:block"
+                    />
+                  </div>
+                  <span className="ml-2 text-lg font-semibold text-gray-900 dark:text-white md:text-xl">
+                    ICAP2025
+                  </span>
+                </div>
               </Link>
             </div>
             <div className="flex w-full items-center justify-between px-4">

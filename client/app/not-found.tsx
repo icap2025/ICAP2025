@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Error Page | Gaibandha Student Association, SUST",
-  description: "This is Error Page for Gaibandha Student Association, SUST",
+  title: "Error Page | ICAP2025",
+  description: "Page not found",
   // other metadata
 };
 

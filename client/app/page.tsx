@@ -2,11 +2,10 @@ import {
   default as ScrollUp,
 } from "@/components/Landingpage-components/Common/ScrollUp";
 import { Metadata } from "next";
-import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Home Page | Gaibandha Student Association, SUST",
-  description: "This is Home Page for Gaibandha Student Association, SUST",
+  title: "ICAP2025 | International Conference on Advances in Physics, SUST",
+  description: "Join us for the premier global gathering of researchers and scholars in Physical Science.",
 };
 
 export default function Home() {
@@ -15,13 +14,12 @@ export default function Home() {
       <main className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center px-6 py-24 bg-gradient-to-br from-gray-100 to-white dark:from-gray-900 dark:to-gray-950 text-center">
-        <Image
+        <img
           src="/programming.png"
           alt="Conference Logo"
           width={250}
           height={250}
           className="mb-8"
-          priority
         />
         
         <h1 className="text-4xl sm:text-6xl font-bold mb-4 text-gray-800 dark:text-white">
@@ -102,28 +100,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-            <div className="mb-6 md:mb-0">
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">ICAP 2025</h2>
-              <p>International Conference on Advances in Physics</p>
-            </div>
-            
-            <div className="flex gap-6">
-              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400">Twitter</a>
-              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400">LinkedIn</a>
-              <a href="#" className="hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-200 dark:border-gray-800 pt-8 text-center">
-            &copy; {new Date().getFullYear()} ICAP 2025. All rights reserved.
-          </div>
-        </div>
-      </footer>
     </main>
       <ScrollUp />
 

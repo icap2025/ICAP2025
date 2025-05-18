@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-// import GoogleTranslate from "@/components/ui/GoogleTranslate";
+import GoogleTranslate from "@/components/ui/GoogleTranslate";
 
 const Footer = () => {
   return (
@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className="flex justify-between">
                   <Link href="/" className="mb-8 inline-block">
                     <img
-                      src="/images/logo/logo-2.svg"
+                      src="/logo.svg"
                       alt="logo"
                       className="w-full dark:hidden"
                       width={140}
@@ -30,12 +30,11 @@ const Footer = () => {
                       height={30}
                     />
                   </Link>
-                  {/* <GoogleTranslate /> */}
+                  <GoogleTranslate />
                 </div>
 
                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer lobortis.
+                  ICAP2025 is a global gathering of researchers and scholars in Physical Science. Join us for an exciting event filled with knowledge sharing, networking, and collaboration.
                 </p>
                 <div className="flex items-center">
                   <a
@@ -95,7 +94,7 @@ const Footer = () => {
                       href="/members"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Members
+                      Tracks
                     </a>
                   </li>
                   <li>
@@ -103,7 +102,7 @@ const Footer = () => {
                       href="/gallery"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Gallery
+                      Registration
                     </a>
                   </li>
                   <li>
@@ -111,7 +110,7 @@ const Footer = () => {
                       href="/events"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Events
+                      Schedule
                     </a>
                   </li>
                 </ul>
@@ -129,7 +128,7 @@ const Footer = () => {
                       href="/about-gsa"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      About GSA
+                      For-Authors
                     </a>
                   </li>
                   <li>
@@ -137,7 +136,7 @@ const Footer = () => {
                       href="/about-gaibandha"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      About Gaibandha
+                      About ICAP
                     </a>
                   </li>
                   <li>
@@ -145,7 +144,7 @@ const Footer = () => {
                       href="/previous-committees"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Previous Committees
+                      Committees
                     </a>
                   </li>
                 </ul>
@@ -192,20 +191,19 @@ const Footer = () => {
             <div className="flex flex-wrap items-center justify-between">
               <div className="mb-6 w-full md:mb-0 md:w-1/2">
                 <p className="text-base text-body-color dark:text-body-color-dark">
-                  &copy; {new Date().getFullYear()} Gaibandha Student
-                  Association. All rights reserved.
+                  &copy; {new Date().getFullYear()} ICAP2025. All rights reserved.
                 </p>
               </div>
               <div className="w-full md:w-1/2">
                 <div className="flex justify-center md:justify-end">
                   <Link
-                    href="/members/67b5064ccc00fe46fe878716"
+                    href="https://www.facebook.com/swesocietysust"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative inline-flex items-center overflow-hidden rounded-lg border border-white px-6 py-3 text-base text-body-color shadow-md transition-all duration-300 hover:shadow-lg dark:text-body-color-dark"
                   >
                     <span className="relative flex items-center gap-2 font-medium transition-all duration-300 group-hover:translate-x-1">
-                      Developed by Farzine SWE-20
+                      Developed by SWE-20
                       <svg
                         className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                         fill="none"
