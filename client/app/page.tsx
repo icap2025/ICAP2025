@@ -2,6 +2,7 @@ import {
   default as ScrollUp,
 } from "@/components/Landingpage-components/Common/ScrollUp";
 import { Metadata } from "next";
+import Carousel from "@/components/Landingpage-components/Carousel/Carousel";
 
 export const metadata: Metadata = {
   title: "ICAP2025 | International Conference on Advances in Physics, SUST",
@@ -100,6 +101,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Carousel />
     </main>
       <ScrollUp />
 
