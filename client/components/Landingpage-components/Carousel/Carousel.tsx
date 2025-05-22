@@ -8,7 +8,7 @@ const Carousel = () => {
           location: 'Campus sust,Sylhet'
         },
         {
-          imageUrl: '/logo.svg',
+          imageUrl: '/ICAPicon.svg',
           title: 'Campus Mural',
           location: 'Arts Building, SUST'
         },
@@ -18,7 +18,7 @@ const Carousel = () => {
           location: 'SUST Main Campus'
         },
         {
-          imageUrl: '/logo.svg',
+          imageUrl: '/ICAPicon.svg',
           title: 'Campus Mural',
           location: 'Arts Building, SUST'
         },

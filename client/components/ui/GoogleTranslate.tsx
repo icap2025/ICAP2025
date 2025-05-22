@@ -125,9 +125,9 @@ const GoogleTranslate = () => {
     <div className="relative" ref={dropdownRef}>
         <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center space-x-1 px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm rounded-md dark:bg-black bg-white border hover:bg-[#0B812E] focus:outline-none focus:ring-1 focus:ring-[#3b82f6]"
+            className="flex items-center space-x-1 px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm rounded-md bg-white border-2 hover:text-white focus:outline-none focus:ring-1 ring-primary border-primary"
         >
-            <span className="font-medium dark:text-white text-black">
+            <span className="font-medium  text-black">
                 {language === 'en' ? 'English' : 'বাংলা'}
             </span>
             <svg
@@ -146,14 +146,14 @@ const GoogleTranslate = () => {
         </button>
 
         {isOpen && (
-            <div className="absolute bottom-full mb-1 sm:bottom-auto sm:top-full sm:mt-1 right-0 w-32 sm:w-40 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+            <div className="absolute bottom-full mb-1 sm:bottom-auto sm:top-full sm:mt-1 right-0 w-32 sm:w-40 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10 hover:text-primary">
                 <div className="py-1">
                     <button
                         onClick={() => changeLanguage('en')}
                         className={`block w-full text-left px-3 py-1.5 text-xs sm:text-sm ${
                             language === 'en'
-                                ? 'bg-[#dbeafe] text-[#1e3a8a]'
-                                : 'text-[#374151] hover:bg-[#f3f4f6]'
+                                ? 'bg-primary text-white'
+                                : 'text-black hover:border-primary border-2'
                         }`}
                     >
                         English
@@ -162,8 +162,8 @@ const GoogleTranslate = () => {
                         onClick={() => changeLanguage('bn')}
                         className={`block w-full text-left px-3 py-1.5 text-xs sm:text-sm ${
                             language === 'bn'
-                                ? 'bg-[#dbeafe] text-[#1e3a8a]'
-                                : 'text-[#374151] hover:bg-[#f3f4f6]'
+                                ? 'bg-primary text-white'
+                                : 'text-black hover:border-primary border-2'
                         }`}
                     >
                         বাংলা (Bengali)
