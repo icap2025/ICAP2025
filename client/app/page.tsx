@@ -33,7 +33,7 @@ export default function Home() {
             <div className="w-full flex items-center justify-center">
               {/* title */}
               <div className="title w-[65%]">
-                <h3 className="font-bold font-inter text-6xl">INTERNATIONAL CONFERENCE ON <span className="bg-primary text-white"> ADVANCES IN PHYSICS</span></h3>
+                <h3 className="font-bold font-inter text-6xl">INTERNATIONAL CONFERENCE ON <br/> <span className="bg-primary text-white"> ADVANCES IN PHYSICS</span></h3>
 
               </div>
               {/* desc */}
