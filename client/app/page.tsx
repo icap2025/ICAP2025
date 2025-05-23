@@ -1,110 +1,34 @@
-import {
-  default as ScrollUp,
-} from "@/components/Landingpage-components/Common/ScrollUp";
+import { default as ScrollUp } from "@/components/Landingpage-components/Common/ScrollUp";
 import { Metadata } from "next";
 import Carousel from "@/components/Landingpage-components/Carousel/Carousel";
 
 export const metadata: Metadata = {
   title: "ICAP2025 | International Conference on Advances in Physics, SUST",
-  description: "Join us for the premier global gathering of researchers and scholars in Physical Science.",
+  description:
+    "Join us for the premier global gathering of researchers and scholars in Physical Science.",
 };
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="min-h-screen bg-white dark:bg-gray-950">
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center px-6 py-24 bg-gradient-to-br from-gray-100 to-white dark:from-gray-900 dark:to-gray-950 text-center">
-        <img
-          src="/programming.png"
-          alt="Conference Logo"
-          width={250}
-          height={250}
-          className="mb-8"
-        />
-        
-        <h1 className="text-4xl sm:text-6xl font-bold mb-4 text-gray-800 dark:text-white">
-          ICAP <span className="text-blue-600 dark:text-blue-400">2025</span>
-        </h1>
-        
-        <h2 className="text-xl sm:text-3xl font-medium mb-8 text-gray-600 dark:text-gray-300">
-          International Conference on Advances in Physics
-        </h2>
-        
-        <p className="text-lg max-w-2xl mx-auto mb-10 text-gray-500 dark:text-gray-400">
-          Join us for the premier global gathering of researchers and scholars in Physical Science.
-          <br className="hidden sm:block" />
-          <span className="font-medium">June 15-18, 2025 • Virtual & In-Person</span>
-        </p>
-        
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors">
-            Register Interest
-          </button>
-          <button className="px-8 py-3 bg-transparent border border-blue-600 text-blue-600 dark:text-blue-400 font-medium rounded-md hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors">
-            Learn More
-          </button>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="py-16 px-6 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center text-gray-800 dark:text-white">About The Conference</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 max-w-3xl mx-auto text-center">
-            The International Conference on Advances in Physics brings together leading researchers, 
-            scientists, and scholars to exchange ideas, present discoveries, and discuss the future of physics.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Keynote Speakers</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                World-renowned physicists and researchers will share cutting-edge discoveries and insights.
-              </p>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Research Presentations</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Showcase your work through oral presentations, poster sessions, and interactive workshops.
-              </p>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Networking Events</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Connect with peers, potential collaborators, and industry leaders in specialized networking sessions.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stay Updated Section */}
-      <section className="py-16 px-6 bg-blue-50 dark:bg-gray-800">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Stay Updated</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            Subscribe to receive the latest news about ICAP 2025, including speaker announcements and important deadlines.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              className="px-4 py-3 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 sm:min-w-[300px]"
+    <div className="flex min-h-screen flex-col">
+      <main className="min-h-screen bg-white">
+        {/* Hero Section */}
+        <section className="relative w-full">
+          <div className="min-h-[50vh] md:h-[70vh] lg:h-[85vh] w-full overflow-hidden mt-16 md:mt-20 lg:mt-24">
+            <img
+              src="/hero_image.svg"
+              alt="Conference Cover Photo"
+              className="h-full w-full object-cover object-center"
+              loading="eager"
+              sizes="100vw"
             />
-            <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors">
-              Subscribe
-            </button>
           </div>
-        </div>
-      </section>
-      <Carousel />
-    </main>
-      <ScrollUp />
+        </section>
 
+        
+        <Carousel />
+      </main>
+      <ScrollUp />
     </div>
   );
 }
