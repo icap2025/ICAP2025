@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <>
       <footer
-        className="wow fadeInUp relative bg-white pt-16 md:pt-20 lg:pt-24"
+        className="wow fadeInUp relative bg-white border border-gray-200 shadow-sm pt-16 md:pt-20 lg:pt-24"
         data-wow-delay=".1s"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -239,7 +239,7 @@ const Footer = () => {
                   >
                     <span className="relative flex items-center gap-2 font-medium text-body-color transition-all duration-300 group-hover:translate-x-1 group-hover:text-primary">
                       <span className="hidden sm:inline">Developed by</span>
-                      <span className="sm:hidden">By</span>
+                      <span className="sm:hidden">Developed by</span>
                       SWE-20
                       <svg
                         className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1 sm:h-4 sm:w-4"

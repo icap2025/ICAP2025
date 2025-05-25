@@ -18,7 +18,7 @@ export default function RootLayout({
   const showHeaderFooter = !pathname.startsWith("/dashboard");
   return (
     <html suppressHydrationWarning lang="en">
-      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
+      <body className={`bg-[#FCFCFC] ${inter.className}`}>
           {showHeaderFooter && <Header />}
           {children}
           <div id="modal-root" />
