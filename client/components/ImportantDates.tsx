@@ -92,7 +92,7 @@ const ImportantDates: React.FC = () => {
                                         return `${day}`;
                                     })()}
                                 </span>
-                                
+
                                 <span className="text-xs text-center font-semibold">
                                     {(() => {
                                         const d = new Date(date.date);
