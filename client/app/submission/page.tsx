@@ -63,7 +63,7 @@ function ScopePage() {
                         Microsoft CMT
                       </a>{" "}
                       account to submit both abstract and full paper online. If
-                      you don't have an account, please{" "}
+                      you don&apos;t have an account, please{" "}
                       <a
                         href="https://cmt3.research.microsoft.com/User/Login?ReturnUrl=%2F"
                         className="font-semibold text-green-700 underline decoration-2 underline-offset-2 transition-colors duration-200 hover:text-green-800 hover:decoration-green-800"
