@@ -1,6 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import { FaRegSadTear } from "react-icons/fa";
+import { SlCalender } from "react-icons/sl";
+import { Button } from "@/components/ui/button"
+import { CiLocationOn } from "react-icons/ci";
 
 type TimeLeft = {
     days: number;
@@ -79,6 +82,25 @@ export default function RegistrationTimer(): JSX.Element {
                 ) : (
                     <h2 className="text-red-500 font-bold text-2xl flex flex-col justify-center items-center gap-5 mt-4"><FaRegSadTear className="h-20 w-20" />Registration has ended.</h2>
                 )}
+
+                <div className="flex mx-auto items-center gap-10 justify-center my-10">
+                    <p className="flex gap-2"><SlCalender className="w-7 h-7" /> 17-18 December,2025</p>
+
+                    <p className="flex gap-2"><CiLocationOn className="w-7 h-7" />Shahjalal University of Science and Technology,<br />
+                        Sylhet-3114, Bangladesh</p>
+                </div>
+
+
+                <h1 className="text-primary font-semibold mt-20 text-center"> <sup>**</sup>Registration Starts Soon!</h1>
+
+                <div className="flex items-center gap-10 justify-center mt-10">
+                    <Button className="bg-primary text-white hover:bg-primary/90">Submit Abstract Online</Button>
+                    <Button variant="outline">Submission Details</Button>
+                </div>
+
+
+
+
 
             </div>
 

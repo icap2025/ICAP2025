@@ -191,16 +191,9 @@ const Footer = () => {
 
             {/* Map Section */}
             <div className="flex justify-center lg:col-span-2 lg:justify-end xl:col-span-2">
-              <div className="w-full max-w-[200px] sm:max-w-[220px] lg:max-w-[180px] xl:max-w-[200px]">
-                <div className="relative aspect-square w-full overflow-hidden rounded-lg border-4 border-primary shadow-lg">
-                  {!isMapLoaded && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-100">
-                      <div className="mb-2 h-6 w-6 animate-spin rounded-full border-4 border-gray-300 border-t-primary sm:h-8 sm:w-8"></div>
-                      <div className="text-xs font-medium text-gray-600">
-                        Loading map...
-                      </div>
-                    </div>
-                  )}
+              <div className="w-full max-w-[250px] sm:max-w-[220px] lg:max-w-[180px] xl:max-w-[200px]">
+                <div className="relative aspect-square w-full overflow-hidden rounded-lg border-2 border-primary shadow-lg">
+    
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.435552561316!2d91.82933827436678!3d24.91722804298561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3750556002144eab%3A0xe277e14dbca9f2ab!2sShahjalal%20University%20of%20Science%20and%20Technology!5e0!3m2!1sen!2sbd!4v1721041724355!5m2!1sen!2sbd"
                     className={`h-full w-full transition-opacity duration-300 ${
@@ -218,7 +211,7 @@ const Footer = () => {
           </div>
 
           {/* Footer Bottom */}
-          <div className="mt-12 lg:mt-16">
+          <div>
             <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D2D8E183] to-transparent"></div>
             <div className="py-6 sm:py-8">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
