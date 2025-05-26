@@ -9,41 +9,35 @@ const menuData: Menu[] = [
   },
   {
     id: 2,
-    title: "Tracks",
+    title: "Scope",
+    path: "/scope",
     newTab: false,
-    submenu: [
-      {
-        id: 21,
-        title: "A",
-        path: "/",
-        newTab: false,
-      },
-      {
-        id: 22,
-        title: "B",
-        path: "/",
-        newTab: false,
-      },
-      {
-        id: 23,
-        title: "C",
-        path: "/",
-        newTab: false,
-      },
-
-    ]
   },
   {
     id: 3,
     title: "For-Authors",
-    path: "/for-authors",
     newTab: false,
+    submenu: [
+      {
+        id: 21,
+        title: "Submission Guidelines",
+        path: "/submission",
+        newTab: false,
+      }
+    ]
   },
   {
     id: 4,
     title: "Registration",
-    path: "/registration",
     newTab: false,
+    submenu: [
+      {
+        id: 21,
+        title: "Registration Fees",
+        path: "/registration-fees",
+        newTab: false,
+      }
+    ]
   },
   {
     id: 5,
@@ -53,8 +47,8 @@ const menuData: Menu[] = [
   },
   {
     id: 6,
-    title: "Gallery",
-    path: "/gallery",
+    title: "Committee",
+    path: "/committee",
     newTab: false,
   },
   {

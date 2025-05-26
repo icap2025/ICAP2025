@@ -94,8 +94,8 @@ export default function RegistrationTimer(): JSX.Element {
                 <h1 className="text-primary font-semibold mt-20 text-center"> <sup>**</sup>Registration Starts Soon!</h1>
 
                 <div className="flex items-center gap-10 justify-center mt-10">
-                    <Button className="bg-primary text-white hover:bg-primary/90">Submit Abstract Online</Button>
-                    <Button variant="outline">Submission Details</Button>
+                    <Button className="bg-primary hover:bg-primary/90 text-white">Submit Abstract Online</Button>
+                    <Button variant="outline"><a href="/submission">Submission Details</a></Button>
                 </div>
 
 

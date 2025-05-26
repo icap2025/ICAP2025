@@ -7,5 +7,3 @@ export const metadata = {
     return <>{children}</>;
   }
   
-
-  
