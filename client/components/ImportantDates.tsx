@@ -67,7 +67,7 @@ const ImportantDates: React.FC = () => {
     }, []);
 
     return (
-        <div className=" w-1/2  my-10 h-auto md:h-[400px]  bg-white ">
+        <div className=" md:w-1/2 w-full  my-10 h-auto md:h-[400px]  bg-white ">
             <div className="flex items-center  mb-4">
                 <h2 className="md:text-xl  text-xl font-semibold mr-2">
                     Important Dates

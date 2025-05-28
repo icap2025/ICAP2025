@@ -17,7 +17,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <main className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="relative w-full  md:px-24">
+        <section className="relative w-full ">
           <div className="min-h-[50vh] md:h-[70vh] lg:h-[85vh] w-full overflow-hidden mt-16 md:mt-20 lg:mt-24">
             <img
               src="/hero_image.svg"
@@ -29,13 +29,13 @@ export default function Home() {
           </div>
 
 
-          {/* body */}
-          <div className="w-full min-h-screen md:px-24 px-10 py-5">
+          {/* ===================body================== */}
+          <div className="w-full min-h-screen md:px-24  px-10  md:py-5">
             {/* Title and Desc */}
             <div className="w-full flex md:flex-row flex-col items-center justify-center">
               {/* title */}
-              <div className="title md:w-[65%] my-10">
-                <h3 className="font-bold font-inter text-6xl">INTERNATIONAL CONFERENCE ON <br /> <span className="bg-primary text-white"> ADVANCES IN PHYSICS</span></h3>
+              <div className="title md:w-[65%] my-2 md:my-10">
+                <h3 className="font-bold font-inter text-3xl md:text-6xl">INTERNATIONAL CONFERENCE ON <br /> <span className="bg-primary text-white"> ADVANCES IN PHYSICS</span></h3>
 
               </div>
               {/* desc */}
@@ -56,7 +56,11 @@ export default function Home() {
 
 
 
+            <div className="w-full flex  flex-col md:flex-row items-center justify-between mt-20">
+              <ImportantDates />
+              <Notice />
 
+            </div>
 
 
 
@@ -65,11 +69,7 @@ export default function Home() {
 
 
 
-     <div className="w-full flex  flex-col md:flex-row items-center justify-between mt-20">
-        <ImportantDates/>
-        <Notice/>
 
-     </div>
 
         </section>
 

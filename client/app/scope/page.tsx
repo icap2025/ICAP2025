@@ -212,10 +212,10 @@ function ScopePage() {
           className="w-full mt-16 md:mt-20 lg:mt-24 py-8 px-4 bg-[#0B8175]"
         >
           <div className="mx-auto max-w-7xl">
-            <h1 className="mb-4 text-xl font-extrabold uppercase leading-tight text-white sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+            <h1 className="mb-4 text-2xl font-extrabold uppercase leading-tight text-white">
               SCOPE OF THE CONFERENCE
             </h1>
-            <p className="max-w-7xl text-xs font-extrabold uppercase leading-relaxed text-white sm:text-sm md:text-base lg:text-lg xl:text-xl">
+            <p className="max-w-7xl text-base font-semibold uppercase leading-relaxed text-white">
               ICAP 2025 COVERS A WIDE RANGE OF CONTEMPORARY AND EMERGING TOPICS
               IN PHYSICS, INCLUDING BUT NOT LIMITED TO
             </p>
@@ -224,24 +224,24 @@ function ScopePage() {
 
         <section className="bg-white px-4 py-12 sm:px-6 sm:py-16 md:px-8 md:py-20 lg:py-24">
           <div className="mx-auto max-w-6xl">
-            <div className="space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-32">
+            <div className="space-y-12">
               {scope.map((section, index) => (
                 <div key={`${section.title}-${index}`}>
 
-                  <div className="mb-8 sm:mb-10 md:mb-12 lg:mb-14">
-                    <h2 className="text-lg font-bold uppercase leading-tight text-black sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+                  <div className="mb-6">
+                    <h2 className="text-xl font-bold uppercase leading-tight text-black">
                       {section.title}
                     </h2>
                   </div>
 
-                  <div className="mb-12 space-y-4 sm:mb-16 sm:space-y-5 md:mb-20 md:space-y-6 lg:mb-24 lg:space-y-7">
+                  <div className="mb-8 space-y-3">
                     {section.items.map((item, itemIndex) => (
                       <div
                         key={`${item}-${itemIndex}`}
-                        className="flex items-start space-x-3 sm:space-x-4"
+                        className="flex items-start space-x-3"
                       >
-                        <div className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-black sm:mt-1.5 sm:h-2.5 sm:w-2.5 md:mt-2 md:h-3 md:w-3"></div>
-                        <span className="text-xs font-semibold uppercase leading-tight text-black sm:text-sm md:text-base lg:text-lg xl:text-xl">
+                        <div className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
+                        <span className="text-base font-medium uppercase leading-tight text-black">
                           {item}
                         </span>
                       </div>
@@ -251,7 +251,7 @@ function ScopePage() {
                   {index < scope.length - 1 && (
                     <div className="mx-auto w-full max-w-6xl">
                       <div
-                        className="h-1 w-full shadow-lg sm:h-1.5 md:h-2"
+                        className="h-1 w-full shadow-lg"
                         style={{
                           backgroundColor: "#0B812E",
                           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
