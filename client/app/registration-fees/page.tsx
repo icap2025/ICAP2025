@@ -35,28 +35,28 @@ function RegistrationPage() {
           {/* Header Section */}
           <div className="mb-8 text-center sm:mb-12 lg:mb-16">
             <div className="inline-block">
-              <h1 className="mb-2 mt-14 text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl">
+              <h1 className="mb-2 mt-14 text-4xl font-bold text-gray-900">
                 Registration
               </h1>
               <div className="h-1 rounded-full bg-[#0B8175]"></div>
             </div>
-            <p className="mx-auto mt-4 max-w-2xl px-4 text-base text-gray-600 sm:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl px-4 text-lg text-gray-600">
               Secure your spot at the conference by registering today
             </p>
           </div>
 
-          <div className="space-y-6 sm:space-y-8 lg:space-y-12">
+          <div className="space-y-6 sm:space-y-8 lg:space-y-12 px-4 md:px-12 lg:px-24">
             {/* Registration Fees */}
-            <div className="mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-20">
+            <div className="mx-0 md:mx-8 lg:mx-12 xl:mx-20">
               <div className="overflow-hidden rounded-2xl border border-green-100 bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
                 <div className="bg-[#0B8175] p-4 sm:p-6">
-                  <h2 className="flex items-center text-xl font-bold text-white sm:text-2xl md:text-3xl">
+                  <h2 className="flex items-center text-xl font-bold text-white">
                     <div className="mr-3 h-8 w-2 rounded-full bg-white"></div>
                     Registration Fees
                   </h2>
                 </div>
 
-                <div className="p-6 sm:p-8 md:p-10">
+                <div className="p-4 sm:p-8 md:p-10">
                   {/* Desktop Table */}
                   <div className="hidden overflow-hidden rounded-lg border border-gray-200 md:block">
                     <table className="w-full">
@@ -81,13 +81,13 @@ function RegistrationPage() {
                               index % 2 === 0 ? "bg-white" : "bg-gray-50"
                             } transition-colors duration-200 hover:bg-green-50`}
                           >
-                            <td className="px-6 py-4 text-base font-semibold text-gray-900 sm:text-lg">
+                            <td className="px-6 py-4 text-base font-semibold text-gray-900">
                               {fee.category}
                             </td>
-                            <td className="px-6 py-4 text-center text-base font-semibold text-gray-700 sm:text-lg">
+                            <td className="px-6 py-4 text-center text-base font-semibold text-gray-700">
                               {fee.earlyBird}
                             </td>
-                            <td className="px-6 py-4 text-center text-base font-semibold text-gray-700 sm:text-lg">
+                            <td className="px-6 py-4 text-center text-base font-semibold text-gray-700">
                               {fee.regular}
                             </td>
                           </tr>
@@ -129,7 +129,7 @@ function RegistrationPage() {
                   </div>
 
                   {/* Registration Deadlines */}
-                  <div className="mt-8 rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                  <div className="mt-8 rounded-lg border border-gray-200 bg-white p-4 md:p-5 shadow-sm">
                     <h3 className="mb-4 text-lg font-medium text-gray-900">
                       Registration Deadlines
                     </h3>
@@ -137,7 +137,7 @@ function RegistrationPage() {
                       <div className="flex items-center">
                         <div className="mr-3 h-4 w-1 bg-[#0B8175]"></div>
                         <div>
-                          <p className="text-sm font-semibold text-gray-800 md:text-base">
+                          <p className="text-sm font-semibold text-gray-800">
                             Early Bird Registration
                           </p>
                           <p className="text-sm text-gray-600">
@@ -148,7 +148,7 @@ function RegistrationPage() {
                       <div className="flex items-center">
                         <div className="mr-3 h-4 w-1 bg-[#0B8175]"></div>
                         <div>
-                          <p className="text-sm font-semibold text-gray-800 md:text-base">
+                          <p className="text-sm font-semibold text-gray-800">
                             Regular Registration
                           </p>
                           <p className="text-sm text-gray-600">
@@ -163,16 +163,16 @@ function RegistrationPage() {
             </div>
 
             {/* Registration Process */}
-            <div className="mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-20">
+            <div className="mx-0 md:mx-8 lg:mx-12 xl:mx-20">
               <div className="overflow-hidden rounded-2xl border border-green-100 bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
                 <div className="bg-[#0B8175] p-4 sm:p-6">
-                  <h2 className="flex items-center text-xl font-bold text-white sm:text-2xl md:text-3xl">
+                  <h2 className="flex items-center text-xl font-bold text-white">
                     <div className="mr-3 h-8 w-2 rounded-full bg-white"></div>
                     How to Register
                   </h2>
                 </div>
 
-                <div className="space-y-6 p-6 sm:p-8 md:p-10">
+                <div className="space-y-6 p-4 sm:p-8 md:p-10">
                   <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
                     <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-center sm:p-6">
                       <div className="mb-4 flex justify-center">
@@ -180,10 +180,10 @@ function RegistrationPage() {
                           1
                         </div>
                       </div>
-                      <h3 className="mb-3 text-lg font-semibold text-green-800">
+                      <h3 className="mb-3 text-base md:text-lg font-semibold text-green-800">
                         Fill Registration Form
                       </h3>
-                      <p className="text-base text-gray-700">
+                      <p className="text-sm md:text-base text-gray-700">
                         Complete the online registration form with all required
                         information.
                       </p>
@@ -195,10 +195,10 @@ function RegistrationPage() {
                           2
                         </div>
                       </div>
-                      <h3 className="mb-3 text-lg font-semibold text-green-800">
+                      <h3 className="mb-3 text-base md:text-lg font-semibold text-green-800">
                         Make Payment
                       </h3>
-                      <p className="text-base text-gray-700">
+                      <p className="text-sm md:text-base text-gray-700">
                         Pay the registration fee through our secure payment
                         system.
                       </p>
@@ -210,17 +210,17 @@ function RegistrationPage() {
                           3
                         </div>
                       </div>
-                      <h3 className="mb-3 text-lg font-semibold text-green-800">
+                      <h3 className="mb-3 text-base md:text-lg font-semibold text-green-800">
                         Receive Confirmation
                       </h3>
-                      <p className="text-base text-gray-700">
+                      <p className="text-sm md:text-base text-gray-700">
                         Get your registration confirmation and Payment receipt.
                       </p>
                     </div>
                   </div>
 
                   <div className="rounded-lg bg-gray-50 p-4 text-center sm:p-6">
-                    <p className="mb-4 text-base leading-relaxed text-gray-700 sm:text-lg">
+                    <p className="mb-4 text-sm md:text-base leading-relaxed text-gray-700">
                       <span className="font-semibold text-gray-900">
                         Ready to Register?
                       </span>{" "}
@@ -228,7 +228,7 @@ function RegistrationPage() {
                     </p>
                     <a
                       href="#register"
-                      className="group inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-primary/90"
+                      className="group inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-base md:text-lg font-semibold text-white transition-colors duration-300 hover:bg-primary/90"
                     >
                       Register Now
                       <svg
@@ -251,22 +251,22 @@ function RegistrationPage() {
             </div>
 
             {/* Important Information */}
-            <div className="mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-20">
+            <div className="mx-0 md:mx-8 lg:mx-12 xl:mx-20">
               <div className="overflow-hidden rounded-2xl border border-green-100 bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
                 <div className="bg-[#0B8175] p-4 sm:p-6">
-                  <h2 className="flex items-center text-xl font-bold text-white sm:text-2xl md:text-3xl">
+                  <h2 className="flex items-center text-lg md:text-2xl font-bold text-white">
                     <div className="mr-3 h-8 w-2 rounded-full bg-white"></div>
                     Important Information
                   </h2>
                 </div>
 
-                <div className="space-y-6 p-6 sm:p-8 md:p-10">
+                <div className="space-y-6 p-4 sm:p-8 md:p-10">
                   <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
                     <div className="space-y-4">
-                      <h3 className="text-lg font-semibold text-green-800">
+                      <h3 className="text-base md:text-lg font-semibold text-green-800">
                         Registration Includes:
                       </h3>
-                      <ul className="space-y-2 text-base text-gray-700">
+                      <ul className="space-y-2 text-sm md:text-base text-gray-700">
                         <li className="flex items-start">
                           <span className="mr-2 mt-2 h-2 w-2 rounded-full bg-primary"></span>
                           Access to all conference sessions
@@ -291,10 +291,10 @@ function RegistrationPage() {
                     </div>
 
                     <div className="space-y-4">
-                      <h3 className="text-lg font-semibold text-green-800">
+                      <h3 className="text-base md:text-lg font-semibold text-green-800">
                         Payment Methods:
                       </h3>
-                      <ul className="space-y-2 text-base text-gray-700">
+                      <ul className="space-y-2 text-sm md:text-base text-gray-700">
                         <li className="flex items-start">
                           <span className="mr-2 mt-2 h-2 w-2 rounded-full bg-primary"></span>
                           Online bank transfer
@@ -327,7 +327,7 @@ function RegistrationPage() {
                   </div> */}
 
                   <div className="rounded-lg p-4 sm:p-6">
-                    <p className="text-base leading-relaxed text-gray-700 sm:text-lg">
+                    <p className="text-sm md:text-base leading-relaxed text-gray-700">
                       <span className="font-semibold text-gray-900">
                         Need Assistance?
                       </span>{" "}

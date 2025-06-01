@@ -53,7 +53,7 @@ function CommitteePage() {
           </div>
 
           {/* Advisory Committee Members */}
-          <div className="space-y-6 sm:space-y-8 lg:space-y-12">
+          <div className="space-y-6 sm:space-y-8 lg:space-y-12 px-2 md:px-24">
             {/* Registration Fees */}
             <div className="mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-20">
               <div className="overflow-hidden rounded-2xl border border-green-100 bg-white shadow-lg transition-all duration-300 hover:shadow-xl">

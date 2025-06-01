@@ -15,6 +15,7 @@ function ScopePage() {
             <p className="mx-auto mt-4 max-w-2xl px-2 text-sm text-gray-600 sm:text-base">
               Please follow these guidelines carefully for successful submission
             </p>
+           <h1 className="my-2 text-base font-semibold text-green-800"><span className="text-4xl animate-pulse">*</span>Templates/Details will be announced soon</h1>
           </div>
 
           <div className="space-y-4 sm:space-y-6 lg:space-y-8">
@@ -72,6 +73,16 @@ function ScopePage() {
                       </a>{" "}
                       before submitting.
                     </p>
+                    <div className="rounded-xl border border-green-200 bg-green-50 p-3 sm:p-4">
+                      <h3 className="mb-2 text-base font-semibold text-green-800">
+                        "The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support."
+                      </h3>
+                    </div>
+
+
+
+
+
 
                     <div className="rounded-lg p-3 sm:p-4">
                       <p className="text-sm leading-relaxed text-gray-700 sm:text-base md:text-lg">
@@ -88,6 +99,7 @@ function ScopePage() {
                         </a>
                       </p>
                     </div>
+
                   </div>
                 </div>
               </div>
