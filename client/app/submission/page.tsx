@@ -75,7 +75,7 @@ function ScopePage() {
                     </p>
                     <div className="rounded-xl border border-green-200 bg-green-50 p-3 sm:p-4">
                       <h3 className="mb-2 text-base font-semibold text-green-800">
-                        &quot;he Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.&quot;
+                        &quot;The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.&quot;
                       </h3>
                     </div>
 
