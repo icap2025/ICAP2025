@@ -33,7 +33,7 @@ function ScopePage() {
                   <div className="rounded-r-lg border-l-4 border-green-700 bg-green-50 p-3 sm:p-4">
                     <p className="text-sm leading-relaxed text-gray-800 sm:text-base md:text-lg">
                       <a
-                        href="https://cmt3.research.microsoft.com/docs/help/author/author-submission-form.html"
+                        href="https://cmt3.research.microsoft.com/ICAP2025"
                         className="inline-flex items-center font-semibold text-green-700 underline decoration-2 underline-offset-2 transition-colors duration-200 hover:text-green-800 hover:decoration-green-800"
                       >
                         Submit your extended abstract and full paper here

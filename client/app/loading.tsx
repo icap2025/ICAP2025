@@ -13,7 +13,7 @@ export default function Loading() {
       // className='border-2 border-primary rounded-lg shadow-lg'
       style={{ width: 800, height: 400, padding: '0px',  }}
     />
-    <h1 className='text-2xl absolute mt-20 pt-10 text-primary font-bold '>ICAP 2025</h1>
+    <h1 className='text-2xl absolute mt-20 pt-10 text-primary font-bold '> <span className='text-white bg-primary px-2 '>ICAP</span> 2025</h1>
     </div>
     
   );

@@ -18,7 +18,7 @@ export default function Home() {
       <main className="min-h-screen bg-white">
         {/* Hero Section */}
         <section className="relative w-full ">
-          <div className="min-h-[50vh] md:h-[70vh] lg:h-[85vh] w-full overflow-hidden mt-16 md:mt-20 lg:mt-24">
+          <div className="min-h-[20vh] md:h-[70vh] lg:h-[85vh] w-full overflow-hidden mt-16 md:mt-20 lg:mt-24">
             <img
               src="/hero_image.svg"
               alt="Conference Cover Photo"
@@ -30,7 +30,7 @@ export default function Home() {
 
 
           {/* ===================body================== */}
-          <div className="w-full min-h-screen md:px-24  px-10  md:py-5">
+          <div className="w-full md:px-24  px-10  md:py-5">
             {/* Title and Desc */}
             <div className="w-full flex md:flex-row flex-col items-center justify-center">
               {/* title */}

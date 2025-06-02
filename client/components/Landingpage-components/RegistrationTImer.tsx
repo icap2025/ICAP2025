@@ -50,11 +50,11 @@ export default function RegistrationTimer(): JSX.Element {
 
 
     return (
-        <div className="w-full my-36">
-            <div className="text-center">
-                <h1 className="text-xl text-center">Join The Conference - Registration Ends In</h1>
+        <div className="w-full my-20 md:my-36">
+            <div className="text-center px-4">
+                <h1 className="text-lg sm:text-xl text-center">Join The Conference - Registration Ends In</h1>
                 <div>
-                    <hr className="w-96 shadow-xl border-primary border-t-2 mx-auto" />
+                    <hr className="w-full max-w-xs sm:max-w-md md:max-w-lg shadow-xl border-primary border-t-2 mx-auto" />
                 </div>
             </div>
             <div>
@@ -111,7 +111,7 @@ export default function RegistrationTimer(): JSX.Element {
 
                 <h1 className="text-primary font-semibold mt-20 text-center"> <sup>**</sup>Registration Starts Soon!</h1>
 
-                <div className="flex items-center gap-10 justify-center mt-10">
+                <div className="flex  flex-col md:flex-row  items-center gap-2 md:gap-10 justify-center mt-10">
                     <Button
                         className="bg-primary hover:bg-primary/90 text-white"
                         asChild
