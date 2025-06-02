@@ -13,13 +13,23 @@ interface Notice {
 
 const Notice: React.FC = () => {
     const [Notices, setNotices] = useState<Notice[]>([
-        {
+         {
             id: "1",
-            title: "Abstract Submission Deadline",
-            description: "The deadline for submitting abstracts is September 20, 2025.",
-            createdAt: "2025-09-20T00:00:00Z",
+            title: "Abstract Submission CMT Link Added",
+            description: "https://cmt3.research.microsoft.com/ICAP2025",
+            createdAt: "2025-06-02T00:00:00Z",
             show: true,
         },
+        {
+            id: "2",
+            title: "Abstract Submission Deadline",
+            description: "The deadline for submitting abstracts is September 20, 2025.",
+            createdAt: "2025-04-31T00:00:00Z",
+            show: true,
+        },
+       
+
+
       
     ]);
     const [isLoading, setIsLoading] = useState(true);
@@ -49,15 +59,16 @@ const Notice: React.FC = () => {
 
 
     return (
-        <div className="md:w-1/2 w-full px-autor my-10 h-auto md:h-[400px] p-4 bg-white ">
+        <div className="md:w-1/2 w-full md:px-auto my-10 h-auto md:h-[400px] md:p-4 bg-white ">
             <div className="flex items-center  mb-4">
-                <h2 className="md:text-xl  text-xl font-semibold mr-2">
-                    Notices
-                    <hr className=" shadow-xl border-primary border-t-2 mx-auto" />
+                <h2 className=" w-full md:text-xl text-xl font-semibold mr-2">
+                   <div className="flex justify-between items-center"><p>Notices
+                    <hr className=" shadow-xl border-primary border-t-2 mx-auto" /> </p><span className="bg-primary rounded-full text-xs px-2 py-1 text-white animate-bounce mx-4">New</span></div> 
+                
                 </h2>
 
             </div>
-            <ul className="overflow-y-scroll w-full h-[320px] scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-red-100">
+            <ul className="overflow-y-scroll w-full h-[320px]  scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-red-100">
 
                 {
                     Notices.length > 0 ? (
@@ -67,16 +78,21 @@ const Notice: React.FC = () => {
                                 <li key={notice.id} className="flex items-start mb-4">
 
 
-                                    <div className="group cursor-pointer  hover:bg-slate-200 ml-5">
-                                        <p className="md:text-md font-semibold  group-hover:bg-slate-200 ">
+                                    <div className="group  ml-5">
+                                        <p className="md:text-md font-semibold    ">
                                             {notice.title}
                                         </p>
-                                        <p className="md:text-md   group-hover:bg-slate-200 text-gray-600">
+                                        {notice.description.includes("http") ? (
+                                            <a href={notice.description} className="md:text-md  underline cursor-pointer  text-blue-600">
+                                            {notice.description}
+                                        </a> ): (
+                                        <p className="md:text-md    text-gray-600">
                                             {notice.description}
                                         </p>
+                                        )}
 
-                                        <p className="md:text-xs w-full flex gap-2 items-center  text-md font-semibold group-hover:bg-slate-200 text-primary">
-                                            <AiOutlineFieldTime className="w-5 h-5 text-black" />
+                                        <p className="md:text-xs w-full flex gap-2 items-center  text-md font-semibold  text-primary">
+                                            <AiOutlineFieldTime className="w-5 h-5 " />
                                             {new Date(notice.createdAt).toLocaleString("en-US", {
                                                 day: "2-digit",
                                                 month: "long",

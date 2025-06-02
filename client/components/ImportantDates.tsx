@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { SlCalender } from "react-icons/sl";
 
 // Define the types for the date data
 interface ImportantDates {
@@ -108,8 +109,8 @@ const ImportantDates: React.FC = () => {
                                 <p className="md:text-md   group-hover:bg-slate-200 text-gray-600">
                                     {date.title}
                                 </p>
-                                <p className="md:text-sm w-full  text-md font-semibold group-hover:bg-slate-200 text-primary">
-                                    {new Date(date.date).toLocaleDateString("en-US", {
+                                <p className="md:text-sm w-full  flex items-center gap-2 text-md font-semibold group-hover:bg-slate-200 text-primary">
+                                    <SlCalender  /> {new Date(date.date).toLocaleDateString("en-US", {
                                         day: "2-digit",
                                         month: "long",
                                         year: "numeric",
