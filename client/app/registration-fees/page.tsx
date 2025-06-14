@@ -277,7 +277,7 @@ function RegistrationPage() {
                         </li>
                         <li className="flex items-start">
                           <span className="mr-2 mt-2 h-2 w-2 rounded-full bg-primary"></span>
-                          Lunch and refreshments
+                          Refreshments
                         </li>
                         <li className="flex items-start">
                           <span className="mr-2 mt-2 h-2 w-2 rounded-full bg-primary"></span>

@@ -15,17 +15,17 @@ function ScopePage() {
             <p className="mx-auto mt-4 max-w-2xl px-2 text-sm text-gray-600 sm:text-base">
               Please follow these guidelines carefully for successful submission
             </p>
-           <h1 className="my-2 text-base font-semibold text-green-800"><span className="text-4xl animate-pulse">*</span>Templates/Details will be announced soon</h1>
+            <h1 className="my-2 text-base font-semibold text-green-800"><span className="text-4xl animate-pulse">*</span>Templates/Details will be announced soon</h1>
           </div>
 
           <div className="space-y-4 sm:space-y-6 lg:space-y-8">
-            {/* Extended Abstract and Full Paper Submission */}
+            {/* Extended Abstract and  Submission */}
             <div className="mx-2 sm:mx-4 md:mx-6 lg:mx-10 xl:mx-16">
               <div className="overflow-hidden rounded-2xl border border-green-100 bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
                 <div className="bg-[#0B8175] p-3 sm:p-4">
                   <h2 className="flex items-center text-lg font-bold text-white sm:text-xl md:text-2xl">
                     <div className="mr-3 h-7 w-2 rounded-full bg-white"></div>
-                    Extended Abstract and Full Paper Submission
+                    Extended Abstract Submission
                   </h2>
                 </div>
 
@@ -36,7 +36,7 @@ function ScopePage() {
                         href="https://cmt3.research.microsoft.com/ICAP2025"
                         className="inline-flex items-center font-semibold text-green-700 underline decoration-2 underline-offset-2 transition-colors duration-200 hover:text-green-800 hover:decoration-green-800"
                       >
-                        Submit your extended abstract and full paper here
+                        Submit your extended abstract here
                         <svg
                           className="ml-2 h-4 w-4"
                           fill="none"
@@ -63,7 +63,7 @@ function ScopePage() {
                       >
                         Microsoft CMT
                       </a>{" "}
-                      account to submit both abstract and full paper online. If
+                      account to submit both abstract online. If
                       you don&apos;t have an account, please{" "}
                       <a
                         href="https://cmt3.research.microsoft.com/User/Login?ReturnUrl=%2F"
@@ -117,12 +117,12 @@ function ScopePage() {
 
                 <div className="space-y-4 p-4 sm:p-6  md:px-24">
                   <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
-                    <div className="rounded-xl border border-green-200 bg-green-50 p-3 sm:p-4">
+                    {/* <div className="rounded-xl border border-green-200 bg-green-50 p-3 sm:p-4">
                       <h3 className="mb-2 text-base font-semibold text-green-800">
                         Paper Requirements
                       </h3>
                       <p className="mb-3 text-sm leading-relaxed text-gray-700 sm:text-base">
-                        Full papers should be{" "}
+                        s should be{" "}
                         <span className="font-semibold text-gray-900">
                           4-6 pages
                         </span>{" "}
@@ -134,7 +134,7 @@ function ScopePage() {
                         download
                       >
                         <span className="mr-2 text-sm font-semibold md:text-base">
-                          Full Paper Template (.docx)
+                           Template (.docx)
                         </span>
                         <TfiDownload className="text-xs group-hover:animate-bounce md:text-sm" />
                       </a>
@@ -157,7 +157,7 @@ function ScopePage() {
                         </span>
                         <TfiDownload className="text-xs group-hover:animate-bounce md:text-sm" />
                       </a>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="rounded-lg p-3 text-center sm:p-4">
@@ -192,7 +192,7 @@ function ScopePage() {
                 </div>
 
                 <div className="space-y-4 p-4 sm:p-6 md:p-8">
-                  <div className="rounded-r-lg border-l-4 border-green-700 bg-green-50 p-3 sm:p-4">
+                  {/* <div className="rounded-r-lg border-l-4 border-green-700 bg-green-50 p-3 sm:p-4">
                     <h3 className="mb-2 text-base font-semibold text-green-800">
                       Poster Specifications
                     </h3>
@@ -236,9 +236,9 @@ function ScopePage() {
                       . Ensure readability with appropriate font sizes and
                       high-quality visuals following the provided template.
                     </p>
-                  </div>
+                  </div> */}
 
-                  <div className="grid gap-3 sm:grid-cols-1 lg:grid-cols-2">
+                  {/* <div className="grid gap-3 sm:grid-cols-1 lg:grid-cols-2">
                     <a
                       href="/doc/Flyer_ICERIE 2025_SUST.pdf"
                       className="group flex items-center justify-center rounded-md border border-gray-300 px-3 py-2 transition-colors duration-300 hover:border-primary hover:bg-green-50 hover:text-primary"
@@ -260,9 +260,15 @@ function ScopePage() {
                       </span>
                       <TfiDownload className="text-xs group-hover:animate-bounce md:text-sm" />
                     </a>
-                  </div>
+                  </div> */}
+              
+              <p>
+                &ldquo;<span className="font-semibold text-primary">Poster specifications</span>&rdquo; will be announced later.
+              </p>
                 </div>
-              </div>
+
+
+                            </div>
             </div>
           </div>
 

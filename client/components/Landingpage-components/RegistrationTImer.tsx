@@ -91,25 +91,7 @@ export default function RegistrationTimer(): JSX.Element {
                     <h2 className="text-red-500 font-bold text-2xl flex flex-col justify-center items-center gap-5 mt-4"><FaRegSadTear className="h-20 w-20" />Registration has ended.</h2>
                 )}
 
-                <div className="flex mx-auto items-center md:gap-10 justify-center my-10">
-                    <div className="flex flex-col md:flex-row gap-4 md:gap-10 items-center text-center">
-                        <p className="flex items-center gap-2">
-                            <SlCalender className="w-7 h-7" />
-                            <span>17-18 December, 2025</span>
-                        </p>
-                        <p className="flex items-center md:gap-2">
-                            <CiLocationOn className=" w-12 h-12 md:w-7 md:h-7 " />
-                            <span className="text-sm md:text-base">
-                                Shahjalal University of Science and Technology,
-                                <br className="hidden md:block" />
-                                Sylhet-3114, Bangladesh
-                            </span>
-                        </p>
-                    </div>
-                </div>
-
-
-                <h1 className="text-primary font-semibold mt-20 text-center"> <sup>**</sup>Registration Starts Soon!</h1>
+                {/* <h1 className="text-primary font-semibold mt-10 text-center"> <sup>**</sup>Registration Starts Soon!</h1> */}
 
                 <div className="flex  flex-col md:flex-row  items-center gap-2 md:gap-10 justify-center mt-10">
                     <Button

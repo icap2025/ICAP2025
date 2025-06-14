@@ -117,90 +117,90 @@
 function ScopePage() {
   const scope = [
     {
-      title: "THEORETICAL, MATHEMATICAL, AND HIGH-ENERGY PHYSICS",
+      title: "Theoretical, Mathematical, and High-Energy Physics",
       items: [
-        "QUANTUM FIELD THEORY, GAUGE SYMMETRIES, AND UNIFIED MODELS",
-        "PRECISION TESTS OF THE STANDARD MODEL",
-        "BEYOND THE STANDARD MODEL PHYSICS AND COLLIDER PHENOMENOLOGY",
-        "STRING THEORY, SUPERSYMMETRY, AND QUANTUM GRAVITY",
-        "MATHEMATICAL FOUNDATIONS AND COMPUTATIONAL MODELING IN THEORETICAL PHYSICS",
+        "Quantum field theory, gauge symmetries, and unified models",
+        "Precision tests of the Standard Model",
+        "Beyond the Standard Model physics and collider phenomenology",
+        "String theory, supersymmetry, and quantum gravity",
+        "Mathematical foundations and computational modeling in theoretical physics",
       ],
     },
     {
-      title: "NUCLEAR, PARTICLE, AND REACTOR PHYSICS",
+      title: "Nuclear, Particle, and Reactor Physics",
       items: [
-        "NUCLEAR STRUCTURE, REACTIONS, AND NUCLEAR ASTROPHYSICS",
-        "NEUTRINO PHYSICS, DETECTORS, AND RARE EVENT SEARCHES",
-        "PARTICLE DETECTORS, INSTRUMENTATION, AND ACCELERATOR TECHNOLOGY",
-        "REACTOR PHYSICS, NUCLEAR ENERGY TECHNOLOGIES, AND SAFETY MODELING"
+        "Nuclear structure, reactions, and nuclear astrophysics",
+        "Neutrino physics, detectors, and rare event searches",
+        "Particle detectors, instrumentation, and accelerator technology",
+        "Reactor physics, nuclear energy technologies, and safety modeling"
       ],
     },
     {
-      title: "PHOTONICS, OPTICS, AND LASER SCIENCE",
+      title: "Photonics, Optics, and Laser Science",
       items: [
-        "NONLINEAR OPTICS, QUANTUM OPTICS, AND OPTOELECTRONICS",
-        "PHOTONIC MATERIALS, DEVICES, AND INTEGRATED OPTICS",
-        "HIGH-INTENSITY LASER-MATTER INTERACTION AND ULTRAFAST OPTICS",
-        "LASER DIAGNOSTICS, SPECTROSCOPY, AND APPLICATIONS IN SCIENCE AND MEDICINE",
+        "Nonlinear optics, quantum optics, and optoelectronics",
+        "Photonic materials, devices, and integrated optics",
+        "High-intensity laser-matter interaction and ultrafast optics",
+        "Laser diagnostics, spectroscopy, and applications in science and medicine",
       ],
     },
     {
-      title: "NANOSCIENCE, MICROELECTRONICS, AND QUANTUM TECHNOLOGIES",
+      title: "Nanoscience, Microelectronics, and Quantum Technologies",
       items: [
-        "NANOSTRUCTURES, NANOFABRICATION, AND QUANTUM CONFINEMENT",
-        "NANOSCALE MEASUREMENT TECHNIQUES",
-        "SEMICONDUCTOR PHYSICS, MICRO/NANOELECTRONIC DEVICES, AND ORGANIC ELECTRONICS",
-        "QUANTUM COMPUTING, SIMULATION, AND QUANTUM INFORMATION SCIENCE",
+        "Nanostructures, nanofabrication, and quantum confinement",
+        "Nanoscale measurement techniques",
+        "Semiconductor physics, micro/nanoelectronic devices, and organic electronics",
+        "Quantum computing, simulation, and quantum information science",
       ],
     },
     {
-      title: "ATOMIC, MOLECULAR, AND PLASMA PHYSICS",
+      title: "Atomic, Molecular, and Plasma Physics",
       items: [
-        "COLD ATOMS, BOSE-EINSTEIN CONDENSATES, AND QUANTUM GASES",
-        "ATOMIC COLLISIONS, MOLECULAR DYNAMICS, AND PRECISION SPECTROSCOPY",
-        "PLASMA PHYSICS, FUSION TECHNOLOGY, AND ASTROPHYSICAL PLASMAS"
+        "Cold atoms, Bose-Einstein condensates, and quantum gases",
+        "Atomic collisions, molecular dynamics, and precision spectroscopy",
+        "Plasma physics, fusion technology, and astrophysical plasmas"
       ],
     },
     {
-      title: "ASTROPHYSICS, COSMOLOGY, AND SPACE PHYSICS",
+      title: "Astrophysics, Cosmology, and Space Physics",
       items: [
-        "BLACK HOLES, COMPACT OBJECTS, AND GRAVITATIONAL WAVES",
-        "DARK MATTER, DARK ENERGY, COSMIC INFLATION, AND LARGE-SCALE STRUCTURE",
-        "STELLAR EVOLUTION, COSMOLOGICAL OBSERVATIONS, AND SPACE PLASMAS",
-        "MULTI-MESSENGER ASTRONOMY AND OBSERVATIONAL INSTRUMENTATION",
+        "Black holes, compact objects, and gravitational waves",
+        "Dark matter, dark energy, cosmic inflation, and large-scale structure",
+        "Stellar evolution, cosmological observations, and space plasmas",
+        "Multi-messenger astronomy and observational instrumentation",
       ],
     },
     {
-      title: "EARTH, ATMOSPHERIC, AND ENVIRONMENTAL PHYSICS",
+      title: "Earth, Atmospheric, and Environmental Physics",
       items: [
-        "ATMOSPHERIC DYNAMICS, METEOROLOGY, AND GEOPHYSICS",
-        "CLIMATE MODELING, RADIATION TRANSPORT, AND ENVIRONMENTAL MONITORING",
-        "REMOTE SENSING, EARTH OBSERVATION, AND SUSTAINABLE TECHNOLOGIES"
+        "Atmospheric dynamics, meteorology, and geophysics",
+        "Climate modeling, radiation transport, and environmental monitoring",
+        "Remote sensing, earth observation, and sustainable technologies"
       ],
     },
     {
-      title: "COMPUTATIONAL PHYSICS",
+      title: "Computational Physics",
       items: [
-        "MODELING AND SIMULATION OF COMPLEX PHYSICAL SYSTEMS",
-        "HIGH-PERFORMANCE COMPUTING AND NUMERICAL METHODS",
-        "MACHINE LEARNING AND AI APPLICATIONS IN PHYSICS RESEARCH",
+        "Modeling and simulation of complex physical systems",
+        "High-performance computing and numerical methods",
+        "Machine learning and AI applications in physics research",
       ],
     },
     {
-      title: "MEDICAL, HEALTH AND BIOPHYSICS",
+      title: "Medical, Health and Biophysics",
       items: [
-        "MEDICAL PHYSICS, HEALTH PHYSICS, AND BIOMEDICAL IMAGING",
-        "BIOPHYSICS OF CELLS, TISSUES, AND MOLECULAR SYSTEMS",
-        "NONLINEAR BIO-OPTICS",
-        "BIO-HEAT AND HEMODYNAMICS",
+        "Medical physics, health physics, and biomedical imaging",
+        "Biophysics of cells, tissues, and molecular systems",
+        "Nonlinear bio-optics",
+        "Bio-heat and hemodynamics",
       ],
     },
     {
-      title: "PHYSICS EDUCATION, OUTREACH, AND POLICY",
+      title: "Physics Education, Outreach, and Policy",
       items: [
-        "INNOVATIVE PEDAGOGY AND CURRICULUM DEVELOPMENT IN PHYSICS",
-        "DIGITAL TOOLS, SIMULATIONS, AND E-LEARNING PLATFORMS",
-        "PUBLIC ENGAGEMENT, SCIENCE OUTREACH, AND RESEARCH POLICY FRAMEWORKS",
+        "Innovative pedagogy and curriculum development in physics",
+        "Digital tools, simulations, and e-learning platforms",
+        "Public engagement, science outreach, and research policy frameworks",
       ],
     },
   ];
@@ -209,52 +209,67 @@ function ScopePage() {
     <div className="flex min-h-screen flex-col">
       <div className="min-h-screen bg-white font-sans">
         <section
-          className="w-full mt-16 md:mt-20 lg:mt-24 py-8 px-4 bg-[#0B8175]"
+          className="w-full mt-16 md:mt-20 lg:mt-24 py-8 px-4 bg-[#0B8175] relative"
         >
-          <div className="mx-auto max-w-7xl">
+          {/* Triangle at the bottom */}
+          <div
+            className="absolute left-0 right-0 -bottom-8 h-8 w-full overflow-hidden"
+            aria-hidden="true"
+          >
+            <div
+              className="mx-auto w-full"
+              style={{
+          width: "100%",
+          height: "100%",
+          clipPath: "polygon(0 0, 50% 100%, 100% 0)",
+          background: "#0B8175",
+              }}
+            />
+          </div>
+          <div className="mx-auto max-w-7xl relative z-10">
             <h1 className="mb-4 text-2xl font-extrabold uppercase leading-tight text-white">
               SCOPE OF THE CONFERENCE
             </h1>
-            <p className="max-w-7xl text-base font-semibold uppercase leading-relaxed text-white">
-              ICAP 2025 COVERS A WIDE RANGE OF CONTEMPORARY AND EMERGING TOPICS
-              IN PHYSICS, INCLUDING BUT NOT LIMITED TO
+            <p className="max-w-7xl text-base font-semibold leading-relaxed text-white">
+              ICAP 2025 covers a wide range of contemporary and emerging topics
+              in physics, including but not limited to
             </p>
           </div>
         </section>
 
-        <section className="bg-white px-4 py-12 sm:px-6 sm:py-16 md:px-8 md:py-20 lg:py-24">
-          <div className="mx-auto max-w-6xl">
-            <div className="space-y-12">
+        <section className="bg-gradient-to-b from-white via-[#F6FFFC] to-[#E9FDF7] px-4 py-16 sm:px-8 md:px-12 lg:py-28">
+          <div className="mx-auto max-w-5xl">
+            <div className="space-y-16">
               {scope.map((section, index) => (
-                <div key={`${section.title}-${index}`}>
-
-                  <div className="mb-6">
-                    <h2 className="text-xl font-bold uppercase leading-tight text-black">
+                <div
+                  key={`${section.title}-${index}`}
+                  className="rounded-xl bg-white/80 shadow-xl ring-1 ring-[#0B8175]/10 transition-all duration-300 hover:scale-[1.015] hover:shadow-2xl"
+                >
+                  <div className="mb-6 flex items-center gap-3 px-6 pt-8">
+                    <div className="h-8 w-1 rounded-full bg-gradient-to-b from-[#0B8175] to-[#0B812E]" />
+                    <h2 className="text-2xl font-extrabold tracking-tight text-[#0B8175] drop-shadow-sm">
                       {section.title}
                     </h2>
                   </div>
-
-                  <div className="mb-8 space-y-3">
+                  <div className="mb-8 space-y-4 px-10 pb-8">
                     {section.items.map((item, itemIndex) => (
                       <div
                         key={`${item}-${itemIndex}`}
-                        className="flex items-start space-x-3"
+                        className="group flex items-start space-x-4"
                       >
-                        <div className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
-                        <span className="text-base font-medium uppercase leading-tight text-black">
+                        <div className="mt-2 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-gradient-to-br from-[#0B8175] to-[#0B812E] group-hover:scale-125 transition-transform" />
+                        <span className="text-base font-medium leading-relaxed text-gray-800 group-hover:text-[#0B8175] transition-colors">
                           {item}
                         </span>
                       </div>
                     ))}
                   </div>
-
                   {index < scope.length - 1 && (
-                    <div className="mx-auto w-full max-w-6xl">
+                    <div className="mx-auto w-11/12 pb-2">
                       <div
-                        className="h-1 w-full shadow-lg"
+                        className="h-1 w-full rounded-full bg-gradient-to-r from-transparent via-[#0B8175]/40 to-transparent"
                         style={{
-                          backgroundColor: "#0B812E",
-                          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                          boxShadow: "0px 2px 8px 0px #0B817540",
                         }}
                       ></div>
                     </div>

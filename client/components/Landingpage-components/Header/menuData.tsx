@@ -9,13 +9,13 @@ const menuData: Menu[] = [
   },
   {
     id: 2,
-    title: "Scope",
+    title: "Conference Scope",
     path: "/scope",
     newTab: false,
   },
   {
     id: 3,
-    title: "For-Authors",
+    title: "Authors Guidelines",
     newTab: false,
     submenu: [
       {

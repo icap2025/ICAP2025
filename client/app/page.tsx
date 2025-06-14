@@ -5,6 +5,13 @@ import Message from "@/components/Landingpage-components/Message";
 import RegistrationTimer from "@/components/Landingpage-components/RegistrationTImer";
 import ImportantDates from "@/components/ImportantDates";
 import Notice from "@/components/Notice";
+import { SlCalender } from "react-icons/sl";
+import { Button } from "@/components/ui/button"
+import { CiLocationOn } from "react-icons/ci";
+import { BsFillPersonLinesFill } from "react-icons/bs";
+import { BorderBeam } from "@/components/magicui/border-beam";
+import { BlurFade } from "@/components/magicui/blur-fade";
+import { GoPin } from "react-icons/go";
 
 export const metadata: Metadata = {
   title: "ICAP2025 | International Conference on Advances in Physics, SUST",
@@ -26,6 +33,7 @@ export default function Home() {
               loading="eager"
               sizes="100vw"
             />
+
           </div>
 
 
@@ -34,16 +42,71 @@ export default function Home() {
             {/* Title and Desc */}
             <div className="w-full flex md:flex-row flex-col items-center justify-center">
               {/* title */}
-              <div className="title md:w-[65%] my-2 md:my-10">
-                <h3 className="font-bold font-inter text-3xl md:text-6xl">INTERNATIONAL CONFERENCE ON <br /> <span className="bg-primary text-white"> ADVANCES IN PHYSICS</span></h3>
 
+              <div className="title md:w-[65%] my-2 md:my-10">
+                <h3 className="font-bold font-inter text-3xl md:text-6xl">
+                  <BlurFade delay={0.25} inView>
+                    INTERNATIONAL CONFERENCE ON
+                  </BlurFade>
+
+                  <BlurFade delay={0.5}>
+                    <span className="bg-primary text-white"> ADVANCES IN PHYSICS</span>
+                  </BlurFade>
+                </h3>
               </div>
-              {/* desc */}
-              <div className="desc md:w-[35%]">
-                <p className="text-xl font-roboto text-gray-900">ICAP 2025 is an international physics conference hosted by the Department of Physics, SUST, Bangladesh, on 17–18 December 2025. Held in hybrid mode, it brings together global researchers to share advances and foster collaboration in physics.</p>
+
+
+              {/* date/venue/mode box */}
+
+
+              <div className="desc md:w-[35%] relative">
+
+                <div className=" flex flex-col gap-6 items-center text-center rounded-xl shadow-lg p-8 md:p-10">
+                  <div className="absolute -top-2 z-10  -translate-x left-0">
+                  
+                  </div>
+                  <BorderBeam
+                  duration={6}
+                  size={400}
+                  className="from-transparent via-primary to-transparent"
+                  />
+                  <BorderBeam
+                  duration={6}
+                  delay={3}
+                  size={400}
+                  className="from-transparent via-black to-transparent"
+                  />
+                  <div className="flex items-center gap-3 text-primary font-semibold text-base md:text-lg">
+                    <SlCalender className="w-6 h-6 md:w-7 md:h-7" aria-hidden="true" />
+                    <time dateTime="2025-12-17">17–18 December 2025</time>
+                  </div>
+                  <div className="flex items-center gap-3 text-gray-800">
+                    <CiLocationOn className="w-6 h-6 md:w-8 md:h-8 text-primary" aria-hidden="true" />
+                    <address className="not-italic text-sm md:text-xs font-medium">
+                      Shahjalal University of Science and Technology,
+                      <br className="hidden md:text-base md:block" />
+                      Sylhet-3114, Bangladesh
+                    </address>
+                  </div>
+                  <div className="flex items-center gap-3 text-gray-800">
+                    <BsFillPersonLinesFill className="w-6 h-6 md:w-7 md:h-7 text-primary" aria-hidden="true" />
+                    <span className="text-sm md:text-base font-medium">
+                      <span className="text-primary font-semibold">Hybrid</span> (online and in-person)
+                    </span>
+                  </div>
+                </div>
 
               </div>
             </div>
+            {/* desc */}
+
+            <p className="text-xl font-light text-gray-900 mt-10">The Department of Physics, Shahjalal University of Science and Technology (SUST), Sylhet-3114, Bangladesh, is pleased to announce the International Conference on Advances in Physics (ICAP 2025) to be held on 17–18 December 2025.
+              This conference will serve as a vibrant platform for physicists, researchers, technologists, educators, and students to exchange knowledge, present breakthrough research, and foster interdisciplinary collaborations. The event will be conducted in a hybrid mode—offering both online and in-person participation for greater accessibility and global reach.
+              We invite researchers, educators, and professionals to submit extended abstracts for oral and poster presentations that reflect original research, emerging innovations, or significant developments in the field of physics
+
+            </p>
+
+
             {/* Registration Timer */}
             <RegistrationTimer />
 
