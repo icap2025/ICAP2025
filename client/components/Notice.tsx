@@ -62,8 +62,8 @@ const Notice: React.FC = () => {
         <div className="md:w-1/2 w-full md:px-auto my-10 h-auto md:h-[400px] md:p-4 bg-white ">
             <div className="flex items-center  mb-4">
                 <h2 className=" w-full md:text-xl text-xl font-semibold mr-2">
-                   <div className="flex justify-between items-center"><p>Notices
-                    <hr className=" shadow-xl border-primary border-t-2 mx-auto" /> </p><span className="bg-primary rounded-full text-xs px-2 py-1 text-white animate-bounce mx-4">New</span></div> 
+                   <div className="flex justify-between items-center"><div>Notices
+                    <hr className=" shadow-xl border-primary border-t-2 mx-auto" /> </div><span className="bg-primary rounded-full text-xs px-2 py-1 text-white animate-bounce mx-4">New</span></div> 
                 
                 </h2>
 

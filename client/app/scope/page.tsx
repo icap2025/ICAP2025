@@ -213,28 +213,28 @@ function ScopePage() {
         >
           {/* Triangle at the bottom */}
           <div
-            className="absolute left-0 right-0 -bottom-8 h-8 w-full overflow-hidden"
+            className="absolute left-0 right-0 -bottom-4 sm:-bottom-6 md:-bottom-8 h-4 sm:h-6 md:h-8 w-full overflow-hidden"
             aria-hidden="true"
           >
             <div
               className="mx-auto w-full"
               style={{
-          width: "100%",
-          height: "100%",
-          clipPath: "polygon(0 0, 50% 100%, 100% 0)",
-          background: "#0B8175",
+                width: "100%",
+                height: "100%",
+                clipPath: "polygon(0 0, 50% 100%, 100% 0)",
+                background: "#0B8175",
               }}
             />
           </div>
-          <div className="mx-auto max-w-7xl relative z-10">
+            <div className="mx-auto max-w-7xl relative z-10 text-center">
             <h1 className="mb-4 text-2xl font-extrabold uppercase leading-tight text-white">
               SCOPE OF THE CONFERENCE
             </h1>
-            <p className="max-w-7xl text-base font-semibold leading-relaxed text-white">
+            <p className="mx-auto max-w-7xl text-base font-semibold leading-relaxed text-white">
               ICAP 2025 covers a wide range of contemporary and emerging topics
               in physics, including but not limited to
             </p>
-          </div>
+            </div>
         </section>
 
         <section className="bg-gradient-to-b from-white via-[#F6FFFC] to-[#E9FDF7] px-4 py-16 sm:px-8 md:px-12 lg:py-28">
@@ -247,7 +247,7 @@ function ScopePage() {
                 >
                   <div className="mb-6 flex items-center gap-3 px-6 pt-8">
                     <div className="h-8 w-1 rounded-full bg-gradient-to-b from-[#0B8175] to-[#0B812E]" />
-                    <h2 className="text-2xl font-extrabold tracking-tight text-[#0B8175] drop-shadow-sm">
+                    <h2 className="md:text-2xl text-xl font-extrabold tracking-tight text-[#0B8175] drop-shadow-sm">
                       {section.title}
                     </h2>
                   </div>
