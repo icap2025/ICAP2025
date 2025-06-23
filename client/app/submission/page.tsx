@@ -16,7 +16,6 @@ function ScopePage() {
             <p className="mx-auto mt-4 max-w-2xl px-2 text-sm text-gray-600 sm:text-base">
               Please follow these guidelines carefully for successful submission
             </p>
-            <p className="mt-4 text-sm sm:text-base font-semibold text-green-800"><span className="text-xl sm:text-2xl animate-pulse">*</span> Templates/Details will be announced soon</p>
           </div>
 
           <div className="space-y-4 sm:space-y-6 lg:space-y-8">
