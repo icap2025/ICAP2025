@@ -23,15 +23,8 @@ const menuData: Menu[] = [
         title: "Submission Guidelines",
         path: "/submission",
         newTab: false,
-      }
-    ]
-  },
-  {
-    id: 4,
-    title: "Registration",
-    newTab: false,
-    submenu: [
-      {
+      },
+       {
         id: 21,
         title: "Registration Fees",
         path: "/registration-fees",
@@ -39,6 +32,7 @@ const menuData: Menu[] = [
       }
     ]
   },
+  
   {
     id: 5,
     title: "Schedule",
@@ -49,12 +43,6 @@ const menuData: Menu[] = [
     id: 6,
     title: "Committee",
     path: "/committee",
-    newTab: false,
-  },
-  {
-    id: 6,
-    title: "About",
-    path: "/about",
     newTab: false,
   },
   {

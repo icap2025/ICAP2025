@@ -23,6 +23,7 @@
     "clsx": "^2.1.1",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
+    "framer-motion": "^12.19.1",
     "js-cookie": "^3.0.5",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.511.0",
