@@ -19,7 +19,7 @@ export default function ContactPage() {
         <div className="max-w-5xl mx-auto px-6 pt-20 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold">Contact</h1>
           <p className="mt-4 text-lg max-w-2xl mx-auto">
-            Stay connected with us. We're here to help you with any questions or participation details.
+            Stay connected with us. We&apos;re here to help you with any questions or participation details.
           </p>
         </div>
 
