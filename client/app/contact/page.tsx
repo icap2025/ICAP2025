@@ -12,10 +12,10 @@ const contacts = [
 
 export default function ContactPage() {
   return (
-    <div className="relative w-full">
+    <div className="relative pt-24  w-full">
 
       {/* Top Orange Gradient Wave Section */}
-      <div className="relative bg-gradient-to-r from-primary to-green-400 text-white pb-24 overflow-hidden">
+      <div className=" relative bg-gradient-to-r from-primary to-green-400 text-white pb-24 overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 pt-20 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold">Contact</h1>
           <p className="mt-4 text-lg max-w-2xl mx-auto">
