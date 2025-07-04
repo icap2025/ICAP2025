@@ -16,11 +16,31 @@ export const metadata: Metadata = {
     "Join ICAP 2025, the International Conference on Advanceds in Physics, showcasing the latest advances and research in physics and related fields.",
   keywords: [
     "ICAP 2025",
+    "ICAP SUST",
+    "International Conference on Advances in Physics",
+
+    "ICAP Conference",
+    "ICAP 2025 Conference",
+    "ICAP 2025 SUST",
+    "ICAP 2025 Shahjalal University",
+    "ICAP 2025 Physics",
+    "ICAP 2025 Physics Conference",
+    "ICAP Physics Conference",
+    "ICAP 2025 International Conference",
+    "ICAP 2025 Physics Research",
+    "ICAP 2025 Advanced Physics",
+    "ICAP 2025 Research Conference",
+    "ICAP 2025 Technology Advancements",
+    "ICAP 2025 Academic Conference",
+    "ICAP 2025 Global Physics Conference",
     "Physics Conference 2025",
+    "Physics Conference",
     "Advanced Physics",
     "Physics Research",
     "International Conference",
     "ICAP",
+    "icap2025",
+    "icap",
     "Physics Innovation",
     "Research Conference",
     "Conference 2025",
@@ -111,10 +131,10 @@ export default function RootLayout({
         <meta name="twitter:image" content="https://icap2025.sust.edu/ICAPicon.svg" />
       </head>
       <body className={`bg-[#FCFCFC] ${inter.className}`}>
-        { <Header />}
+        {<Header />}
         {children}
         <div id="modal-root" />
-        { <Footer />}
+        {<Footer />}
         <ScrollToTop />
       </body>
     </html>
