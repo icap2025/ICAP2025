@@ -39,14 +39,15 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://icap2025.sust.edu/ICAPicon.svg",
-        width: 1200,
-        height: 630,
+        width: 128,
+        height: 128,
         alt: "ICAP 2025 Conference Logo",
       },
     ],
   },
-  verification: {
-    google: 'YOUR_GOOGLE_VERIFICATION_CODE', // ✅ Add this line
+  robots: {
+    index: true,
+    follow: true,
   },
   twitter: {
     card: "summary_large_image",
@@ -57,8 +58,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://icap2025.sust.edu/ICAPicon.svg",
-        width: 1200,
-        height: 630,
+        width: 128,
+        height: 128,
         alt: "ICAP 2025 Conference",
       },
     ],
