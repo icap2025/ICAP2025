@@ -18,7 +18,6 @@ export const metadata: Metadata = {
     "ICAP 2025",
     "ICAP SUST",
     "International Conference on Advances in Physics",
-
     "ICAP Conference",
     "ICAP 2025 Conference",
     "ICAP 2025 SUST",
@@ -129,6 +128,19 @@ export default function RootLayout({
         <meta name="twitter:title" content="ICAP 2025 | International Conference on Advanced Physics" />
         <meta name="twitter:description" content="Join the ICAP 2025 conference for groundbreaking discussions on advanced physics research and innovation." />
         <meta name="twitter:image" content="https://icap2025.sust.edu/ICAPicon.svg" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "ICAP 2025",
+              url: "https://icap2025.sust.edu",
+              logo: "https://icap2025.sust.edu/ICAPicon.svg",
+            }),
+          }}
+        />
       </head>
       <body className={`bg-[#FCFCFC] ${inter.className}`}>
         {<Header />}
