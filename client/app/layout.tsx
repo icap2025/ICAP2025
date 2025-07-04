@@ -136,8 +136,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Event",
               name: "International Conference on Advances in Physics 2025",
-              startDate: "2025-12-10T09:00:00+06:00",
-              endDate: "2025-12-12T17:00:00+06:00",
+              startDate: "2025-12-17T09:00:00+06:00",
+              endDate: "2025-12-18T17:00:00+06:00",
               eventStatus: "https://schema.org/EventScheduled",
               eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
               location: {
