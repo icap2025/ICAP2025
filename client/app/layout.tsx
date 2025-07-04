@@ -128,16 +128,39 @@ export default function RootLayout({
         <meta name="twitter:title" content="ICAP 2025 | International Conference on Advanced Physics" />
         <meta name="twitter:description" content="Join the ICAP 2025 conference for groundbreaking discussions on advanced physics research and innovation." />
         <meta name="twitter:image" content="https://icap2025.sust.edu/ICAPicon.svg" />
-
+        {/* for Richer Search Result */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "ICAP 2025",
-              url: "https://icap2025.sust.edu",
-              logo: "https://icap2025.sust.edu/ICAPicon.svg",
+              "@type": "Event",
+              name: "International Conference on Advances in Physics 2025",
+              startDate: "2025-12-10T09:00:00+06:00",
+              endDate: "2025-12-12T17:00:00+06:00",
+              eventStatus: "https://schema.org/EventScheduled",
+              eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+              location: {
+                "@type": "Place",
+                name: "SUST Campus Auditorium",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "University Avenue",
+                  addressLocality: "Sylhet",
+                  postalCode: "3114",
+                  addressCountry: "BD"
+                }
+              },
+              image: [
+                "https://icap2025.sust.edu/hero_image.svg"
+              ],
+              description: "International Conference on Advances in Physics 2025, hosted by SUST Department of Physics.",
+              organizer: {
+                "@type": "Organization",
+                name: "Department of Physics, SUST",
+                logo: "https://icap2025.sust.edu/ICAPicon.svg",
+                url: "https://icap2025.sust.edu"
+              }
             }),
           }}
         />
