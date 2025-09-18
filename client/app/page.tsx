@@ -135,7 +135,7 @@ export default function Home() {
                 <a
                 href="/Brochure.pdf"
                 download="Brochure.pdf"
-                className="group inline-flex max-w-full items-center justify-center rounded-sm bg-gradient-to-r from-primary to-[#0B8175] px-4 py-3 font-semibold text-white shadow-md transition-all animate-bounce duration-600 hover:from-[#0A6B61] hover:to-primary hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                className="group inline-flex max-w-full items-center justify-center rounded-sm bg-gradient-to-r from-primary to-[#0B8175] px-4 py-3 font-semibold text-white shadow-md transition-all animate-bounce duration-600 hover:from-[#0A6B61] hover:to-primary hover:shadow-lg hover:animate-none hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 >
                 <span className="mr-2 text-sm sm:text-base">
                   Download Brochure
