@@ -15,9 +15,9 @@ const ImportantDates: React.FC = () => {
     const [dates, setDates] = useState<ImportantDates[]>([
         {
             id: "1",
-            title: "Abstract Submission Deadline",
-            description: "The deadline for submitting abstracts is September 20, 2025.",
-            date: "2025-09-20",
+            title: "Abstract Submission Deadline (Extended)",
+            description: "The deadline for submitting abstracts has been extended to October 9, 2025.",
+            date: "2025-10-09",
             show: true,
         },
         {

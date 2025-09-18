@@ -13,24 +13,33 @@ interface Notice {
 
 const Notice: React.FC = () => {
     const [Notices, setNotices] = useState<Notice[]>([
-         {
-            id: "1",
-            title: "Abstract Submission CMT Link Added",
-            description: "https://cmt3.research.microsoft.com/ICAP2025",
-            createdAt: "2025-06-02T00:00:00Z",
-            show: true,
-        },
         {
-            id: "2",
+            id: "1",
             title: "Abstract Submission Deadline",
             description: "The deadline for submitting abstracts is September 20, 2025.",
             createdAt: "2025-04-31T00:00:00Z",
             show: true,
         },
-       
+
+        {
+            id: "2",
+            title: "Abstract Submission CMT Link Added",
+            description: "https://cmt3.research.microsoft.com/ICAP2025",
+            createdAt: "2025-06-02T00:00:00Z",
+            show: true,
+        },
+
+        {
+            id: "3",
+            title: "Abstract Submission Deadline Extended",
+            description: "The deadline for submitting abstracts has been extended to October 9, 2025.",
+            createdAt: "2025-09-19T00:00:00Z",
+            show: true,
+        }
 
 
-      
+
+
     ]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -62,9 +71,9 @@ const Notice: React.FC = () => {
         <div className="md:w-1/2 w-full md:px-auto my-10 h-auto md:h-[400px] md:p-4 bg-white ">
             <div className="flex items-center  mb-4">
                 <h2 className=" w-full md:text-xl text-xl font-semibold mr-2">
-                   <div className="flex justify-between items-center"><div>Notices
-                    <hr className=" shadow-xl border-primary border-t-2 mx-auto" /> </div><span className="bg-primary rounded-full text-xs px-2 py-1 text-white animate-bounce mx-4">New</span></div> 
-                
+                    <div className="flex justify-between items-center"><div>Notices
+                        <hr className=" shadow-xl border-primary border-t-2 mx-auto" /> </div><span className="bg-primary rounded-full text-xs px-2 py-1 text-white animate-bounce mx-4">New</span></div>
+
                 </h2>
 
             </div>
@@ -72,7 +81,7 @@ const Notice: React.FC = () => {
 
                 {
                     Notices.length > 0 ? (
-                        Notices
+                        Notices.slice().reverse()
                             .filter((notice) => notice.show)
                             .map((notice) => (
                                 <li key={notice.id} className="flex items-start mb-4">
@@ -84,11 +93,11 @@ const Notice: React.FC = () => {
                                         </p>
                                         {notice.description.includes("http") ? (
                                             <a href={notice.description} className="md:text-md  underline cursor-pointer  text-blue-600">
-                                            {notice.description}
-                                        </a> ): (
-                                        <p className="md:text-md    text-gray-600">
-                                            {notice.description}
-                                        </p>
+                                                {notice.description}
+                                            </a>) : (
+                                            <p className="md:text-md    text-gray-600">
+                                                {notice.description}
+                                            </p>
                                         )}
 
                                         <p className="md:text-xs w-full flex gap-2 items-center  text-md font-semibold  text-primary">

@@ -11,7 +11,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { BlurFade } from "@/components/magicui/blur-fade";
-import { GoPin } from "react-icons/go";
+import { TfiDownload } from "react-icons/tfi";
 
 export const metadata: Metadata = {
   title: "ICAP2025 | International Conference on Advances in Physics, SUST",
@@ -33,6 +33,7 @@ export default function Home() {
               loading="eager"
               sizes="100vw"
             />
+
           </div>
 
           {/* ===================body================== */}
@@ -103,7 +104,7 @@ export default function Home() {
             </div>
             {/* desc */}
 
-            <p className="mt-10 text-xl font-light text-gray-900">
+            <p className="my-10 text-xl font-light text-gray-900">
               The Department of Physics, Shahjalal University of Science and
               Technology (SUST), Sylhet-3114, Bangladesh, is pleased to announce
               the{" "}
@@ -130,6 +131,19 @@ export default function Home() {
               developments in the field of physics
             </p>
 
+            <div className="text-center">
+                <a
+                href="/Brochure.pdf"
+                download="Brochure.pdf"
+                className="group inline-flex max-w-full items-center justify-center rounded-sm bg-gradient-to-r from-primary to-[#0B8175] px-4 py-3 font-semibold text-white shadow-md transition-all animate-bounce duration-600 hover:from-[#0A6B61] hover:to-primary hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                >
+                <span className="mr-2 text-sm sm:text-base">
+                  Download Brochure
+                </span>
+                <TfiDownload className="text-sm transition-transform duration-700 group-hover:animate-bounce sm:text-base" />
+                </a>
+
+            </div>
             {/* Registration Timer */}
             <RegistrationTimer />
 

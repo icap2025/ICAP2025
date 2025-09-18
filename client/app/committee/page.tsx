@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 function CommitteePage() {
   const advisoryCommittee = [
-    { name: "Dr. M. Shamsher Ali", affiliation: "Fellow, Bangladesh Academy of Sciences" },
+    { name: "*Dr. M. Shamsher Ali ", affiliation: "Fellow, Bangladesh Academy of Sciences " },
     { name: "Dr. Arun Kumar Basak", affiliation: "Professor Emeritus, Department of Physics, University of Rajshahi, Bangladesh" },
     { name: "Dr. A.K.M. Azharul Islam", affiliation: "Professor Emeritus, Department of Physics, University of Rajshahi, Bangladesh" },
     { name: "Dr. Golam Mortuza", affiliation: "Department of Physics, University of Rajshahi, Bangladesh" },
@@ -310,7 +310,9 @@ function CommitteePage() {
                           >
                             <td className="px-4 py-3 text-sm font-semibold text-gray-900 sm:px-6 sm:py-4 sm:text-base">
                               {member.name}
-                            </td>
+                             { index==0 && <span className="text-xs line-clamp-5 font-light">In fond memory of Dr. M Shamsher Ali, whose guidance and contributions to the ICAP-2025 will be remembered with deep gratitude. He passed away on 03 August 2025</span>
+}
+                           </td>
                             <td className="px-4 py-3 text-sm text-gray-700 sm:px-6 sm:py-4 sm:text-base">
                               {member.affiliation}
                             </td>
