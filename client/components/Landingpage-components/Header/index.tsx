@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import menuData from "./menuData";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 const Header = () => {
   // Navbar toggle
@@ -57,7 +58,7 @@ const Header = () => {
       window.removeEventListener("scroll", handleStickyNavbar);
       window.removeEventListener("toggleStickyNavbar", handleStickyToggle);
     };
-  }, [stickyEnabled]);
+  }, [stickyEnabled, handleStickyNavbar]);
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
@@ -91,10 +92,13 @@ const Header = () => {
               >
                 <div className="flex items-center">
                   <div className="relative h-10 w-auto md:h-12">
-                    <img
+                    <Image
                       src="/ICAPicon.svg"
                       alt="ICAP 2025 Logo"
+                      fill
                       className="h-full w-auto object-contain"
+                      sizes="(max-width: 768px) 100vw, 120px"
+                      priority
                     />
                   </div>
                   <span className="ml-2 text-lg font-semibold text-black md:text-xl">

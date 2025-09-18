@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useEffect, useState } from "react";
 
 export default function Message() {
@@ -8,8 +9,8 @@ export default function Message() {
     return(
         <div className="w-full flex items-center justify-center mt-20">
             {/* Avatar */}
-            <div className="avatar w-[30%]">
-                <img src="/avatar.png" alt="Avatar" className="w-full h-full object-cover rounded-full" />
+            <div className="avatar w-[30%] relative aspect-square">
+                <Image src="/avatar.png" alt="Avatar" fill className="w-full h-full object-cover rounded-full" sizes="30vw" priority />
             </div>
             {/* Message */}
             <div className="message w-[70%]">

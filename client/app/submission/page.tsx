@@ -35,6 +35,7 @@ function ScopePage() {
                       <a
                         href="https://cmt3.research.microsoft.com/User/Login?ReturnUrl=%2FICAP2025"
                         target="_blank"
+                        rel="noreferrer"
                         className="inline-flex items-center font-semibold text-green-700 underline decoration-2 underline-offset-2 transition-colors duration-200 hover:text-green-800 hover:decoration-green-800"
                       >
                         Submit your extended abstract here

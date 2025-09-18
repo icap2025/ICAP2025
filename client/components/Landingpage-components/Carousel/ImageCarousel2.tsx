@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface SlideItem {
   imageUrl: string;
@@ -81,11 +82,15 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                             h-full`}
                     >
                         <div className="relative w-full h-full overflow-hidden rounded-lg shadow-lg">
-                            <img 
-                                src={slides[slideIndex].imageUrl} 
-                                alt={slides[slideIndex].title} 
-                                className={`w-full h-full object-cover transition-transform duration-1000 ${isCurrent ? 'scale-105 hover:scale-110' : 'scale-100'}`}
-                            />
+              <Image
+                src={slides[slideIndex].imageUrl}
+                alt={slides[slideIndex].title}
+                fill
+                style={{ objectFit: 'cover' }}
+                className={`w-full h-full rounded-lg transition-transform duration-1000 ${isCurrent ? 'scale-105 hover:scale-110' : 'scale-100'}`}
+                sizes="(max-width: 640px) 100vw, 33vw"
+                priority={isCurrent}
+              />
                             
                             <div className={`absolute inset-0 bg-black transition-opacity duration-700 ${isCurrent ? 'opacity-0' : 'opacity-30'}`} />
                             

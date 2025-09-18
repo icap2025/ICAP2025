@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface SlideItem {
   imageUrl: string;
@@ -53,19 +54,27 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
       <div className="flex items-center justify-center gap-2 md:gap-4">
         {/* Previous slide (left side) */}
         <div className="hidden sm:block w-1/6 h-32 md:h-48 lg:h-56 relative overflow-hidden rounded-lg shadow-md opacity-50 hover:opacity-70 transition-opacity duration-300">
-          <img 
-            src={prevSlide.imageUrl} 
-            alt={prevSlide.title} 
-            className="w-full h-full object-cover transform scale-105 transition-transform duration-500"
+          <Image
+            src={prevSlide.imageUrl}
+            alt={prevSlide.title}
+            fill
+            style={{ objectFit: 'cover', transform: 'scale(1.05)' }}
+            className="w-full h-full rounded-lg transition-transform duration-500"
+            sizes="(max-width: 640px) 100vw, 16vw"
+            priority={false}
           />
         </div>
         
         {/* Current/active slide (center) */}
         <div className="w-full sm:w-2/3 h-56 md:h-64 lg:h-80 relative overflow-hidden rounded-lg shadow-xl transition-all duration-500 ease-in-out">
-          <img 
-            src={currentSlide.imageUrl} 
-            alt={currentSlide.title} 
-            className="w-full h-full object-cover transform transition-transform duration-700"
+          <Image
+            src={currentSlide.imageUrl}
+            alt={currentSlide.title}
+            fill
+            style={{ objectFit: 'cover' }}
+            className="w-full h-full rounded-lg transition-transform duration-700"
+            sizes="(max-width: 640px) 100vw, 66vw"
+            priority={true}
           />
           
           {/* Title and location with gradient background */}
@@ -77,10 +86,14 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         
         {/* Next slide (right side) */}
         <div className="hidden sm:block w-1/6 h-32 md:h-48 lg:h-56 relative overflow-hidden rounded-lg shadow-md opacity-50 hover:opacity-70 transition-opacity duration-300">
-          <img 
-            src={nextSlide.imageUrl} 
-            alt={nextSlide.title} 
-            className="w-full h-full object-cover transform scale-105 transition-transform duration-500"
+          <Image
+            src={nextSlide.imageUrl}
+            alt={nextSlide.title}
+            fill
+            style={{ objectFit: 'cover', transform: 'scale(1.05)' }}
+            className="w-full h-full rounded-lg transition-transform duration-500"
+            sizes="(max-width: 640px) 100vw, 16vw"
+            priority={false}
           />
         </div>
       </div>
