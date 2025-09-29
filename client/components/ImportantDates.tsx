@@ -68,49 +68,44 @@ const ImportantDates: React.FC = () => {
     }, []);
 
     return (
-        <div className=" md:w-1/2 w-full  my-10 h-auto md:h-[400px]  bg-white ">
-            <div className="flex items-center  mb-4">
-                <h2 className="md:text-xl  text-xl font-semibold mr-2">
+        <div className="my-6 h-auto w-full bg-white sm:my-8 md:my-10 md:h-[400px] md:w-1/2">
+            <div className="mb-3 flex items-center sm:mb-4">
+                <h2 className="text-lg font-semibold sm:text-xl md:text-2xl">
                     Important Dates
-                    <hr className=" shadow-xl border-primary border-t-2 mx-auto" />
+                    <hr className="mx-auto border-t-2 border-primary shadow-xl" />
                 </h2>
-
             </div>
-            <ul className="overflow-y-scroll w-full   h-[320px] scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-red-100">
+            <ul className="scrollbar-thin scrollbar-track-red-100 scrollbar-thumb-green-500 h-[280px] w-full overflow-y-scroll sm:h-[300px] md:h-[320px]">
                 {dates
                     .filter((dates) => dates.show)
                     .map((date) => (
-                        <li key={date.id} className="flex items-start mb-4">
-
-
+                        <li key={date.id} className="mb-3 flex items-start transition-all duration-300 sm:mb-4">
                             {/* Date Circle */}
-                            <div className="flex items-center flex-col justify-center w-14 h-14 border-2 border-primary rounded-full mr-3">
-                                <span className="text-md text-center font-semibold">
+                            <div className="mr-2 flex h-12 w-12 flex-shrink-0 flex-col items-center justify-center rounded-full border-2 border-primary transition-all duration-300 hover:scale-110 hover:border-[3px] hover:shadow-lg sm:mr-3 sm:h-14 sm:w-14 md:h-16 md:w-16">
+                                <span className="text-center text-sm font-semibold sm:text-base md:text-lg">
                                     {(() => {
                                         const d = new Date(date.date);
                                         const day = d.toLocaleDateString("en-US", { day: "2-digit" });
-
                                         return `${day}`;
                                     })()}
                                 </span>
 
-                                <span className="text-xs text-center font-semibold">
+                                <span className="text-center text-[10px] font-semibold sm:text-xs">
                                     {(() => {
                                         const d = new Date(date.date);
-
                                         const month = d.toLocaleDateString("en-US", { month: "short" });
                                         return `${month}`;
                                     })()}
                                 </span>
-
                             </div>
 
-                            <div className="group cursor-pointer  hover:bg-slate-200 ml-5">
-                                <p className="md:text-md   group-hover:bg-slate-200 text-gray-600">
+                            <div className="group ml-2 cursor-pointer rounded-md px-2 py-1 transition-all duration-300 hover:bg-slate-100 hover:shadow-md sm:ml-3 sm:px-3 sm:py-2 md:ml-5">
+                                <p className="text-sm text-gray-700 transition-colors duration-300 group-hover:text-gray-900 sm:text-base md:text-lg">
                                     {date.title}
                                 </p>
-                                <p className="md:text-sm w-full  flex items-center gap-2 text-md font-semibold group-hover:bg-slate-200 text-primary">
-                                    <SlCalender  /> {new Date(date.date).toLocaleDateString("en-US", {
+                                <p className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-primary transition-all duration-300 group-hover:gap-2 sm:gap-2 sm:text-sm md:text-base">
+                                    <SlCalender className="h-3 w-3 flex-shrink-0 transition-transform duration-300 group-hover:scale-110 sm:h-4 sm:w-4" />
+                                    {new Date(date.date).toLocaleDateString("en-US", {
                                         day: "2-digit",
                                         month: "long",
                                         year: "numeric",
@@ -122,17 +117,17 @@ const ImportantDates: React.FC = () => {
                 {!isLoading && (
                     <div
                         role="status"
-                        className="max-w-sm px-5 w-full h-full animate-pulse"
+                        className="h-full w-full max-w-sm animate-pulse px-3 sm:px-5"
                     >
-                        <div className="h-1  my-8 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[180px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[140px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[200px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                        <div className="my-4 h-1 w-36 rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:w-48 md:my-8"></div>
+                        <div className="my-4 h-1 max-w-[280px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[320px] md:my-8 md:max-w-[360px]"></div>
+                        <div className="my-4 h-1 rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 md:my-8"></div>
+                        <div className="my-4 h-1 max-w-[250px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[290px] md:my-8 md:max-w-[330px]"></div>
+                        <div className="my-4 h-1 max-w-[140px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[160px] md:my-8 md:max-w-[180px]"></div>
+                        <div className="my-4 h-1 max-w-[280px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[320px] md:my-8 md:max-w-[360px]"></div>
+                        <div className="my-4 h-1 max-w-[110px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[125px] md:my-8 md:max-w-[140px]"></div>
+                        <div className="my-4 h-1 max-w-[160px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[180px] md:my-8 md:max-w-[200px]"></div>
+                        <div className="my-4 h-1 max-w-[280px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[320px] md:my-8 md:max-w-[360px]"></div>
                         <span className="sr-only">Loading...</span>
                     </div>
                 )}

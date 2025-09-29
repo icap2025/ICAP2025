@@ -36,10 +36,6 @@ const Notice: React.FC = () => {
             createdAt: "2025-09-19T00:00:00Z",
             show: true,
         }
-
-
-
-
     ]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -66,42 +62,50 @@ const Notice: React.FC = () => {
         // fetchNotices();
     }, []);
 
-
     return (
-        <div className="md:w-1/2 w-full md:px-auto my-10 h-auto md:h-[400px] md:p-4 bg-white ">
-            <div className="flex items-center  mb-4">
-                <h2 className=" w-full md:text-xl text-xl font-semibold mr-2">
-                    <div className="flex justify-between items-center"><div>Notices
-                        <hr className=" shadow-xl border-primary border-t-2 mx-auto" /> </div><span className="bg-primary rounded-full text-xs px-2 py-1 text-white animate-bounce mx-4">New</span></div>
-
+        <div className="my-6 h-auto w-full bg-white sm:my-8 md:my-10 md:h-[400px] md:w-1/2 md:p-4">
+            <div className="mb-3 flex items-center sm:mb-4">
+                <h2 className="mr-2 w-full text-lg font-semibold sm:text-xl md:text-2xl">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            Notices
+                            <hr className="mx-auto border-t-2 border-primary shadow-xl" />
+                        </div>
+                        <span className="mx-1 rounded-full bg-primary px-3 text-[10px] text-white transition-all duration-300 hover:scale-110 hover:shadow-lg sm:mx-2 sm:px-3 sm:py-1 sm:text-[11px] md:mx-3 md:px-4 md:py-1 md:text-xs lg:mx-4 lg:px-5 lg:py-1 lg:text-sm">
+                            New
+                        </span>
+                    </div>
                 </h2>
-
             </div>
-            <ul className="overflow-y-scroll w-full h-[320px]  scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-red-100">
-
-                {
-                    Notices.length > 0 ? (
-                        Notices.slice().reverse()
-                            .filter((notice) => notice.show)
-                            .map((notice) => (
-                                <li key={notice.id} className="flex items-start mb-4">
-
-
-                                    <div className="group  ml-5">
-                                        <p className="md:text-md font-semibold    ">
-                                            {notice.title}
+            <ul className="scrollbar-thin scrollbar-track-red-100 scrollbar-thumb-green-500 h-[280px] w-full overflow-y-scroll sm:h-[300px] md:h-[320px]">
+                {Notices.length > 0 ? (
+                    Notices.slice()
+                        .reverse()
+                        .filter((notice) => notice.show)
+                        .map((notice) => (
+                            <li key={notice.id} className="mb-3 flex items-start transition-all duration-300 sm:mb-4">
+                                <div className="group ml-2 w-full rounded-md px-2 py-2 transition-all duration-300 hover:bg-slate-50 hover:shadow-md sm:ml-3 sm:px-3 sm:py-3 md:ml-5">
+                                    <p className="text-sm font-semibold text-gray-900 transition-colors duration-300 group-hover:text-primary sm:text-base md:text-lg">
+                                        {notice.title}
+                                    </p>
+                                    {notice.description.includes("http") ? (
+                                        <a
+                                            href={notice.description}
+                                            className="mt-1 block cursor-pointer break-all text-xs text-blue-600 underline transition-all duration-300 hover:text-blue-800 hover:underline-offset-2 sm:text-sm md:text-base"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {notice.description}
+                                        </a>
+                                    ) : (
+                                        <p className="mt-1 text-xs text-gray-600 transition-colors duration-300 group-hover:text-gray-800 sm:text-sm md:text-base">
+                                            {notice.description}
                                         </p>
-                                        {notice.description.includes("http") ? (
-                                            <a href={notice.description} className="md:text-md  underline cursor-pointer  text-blue-600">
-                                                {notice.description}
-                                            </a>) : (
-                                            <p className="md:text-md    text-gray-600">
-                                                {notice.description}
-                                            </p>
-                                        )}
+                                    )}
 
-                                        <p className="md:text-xs w-full flex gap-2 items-center  text-md font-semibold  text-primary">
-                                            <AiOutlineFieldTime className="w-5 h-5 " />
+                                    <p className="mt-2 flex w-full items-center gap-1.5 text-xs font-semibold text-primary transition-all duration-300 group-hover:gap-2 sm:gap-2 sm:text-sm">
+                                        <AiOutlineFieldTime className="h-4 w-4 flex-shrink-0 transition-transform duration-300 group-hover:scale-110 sm:h-5 sm:w-5" />
+                                        <span className="text-[10px] sm:text-xs">
                                             {new Date(notice.createdAt).toLocaleString("en-US", {
                                                 day: "2-digit",
                                                 month: "long",
@@ -110,31 +114,30 @@ const Notice: React.FC = () => {
                                                 minute: "2-digit",
                                                 hour12: true,
                                             })}
-                                        </p>
-                                    </div>
-                                </li>
-                            ))) : (
-                        <li className="flex items-center justify-center h-full">
-                            <p className="text-gray-500">No notices available at the moment.</p>
-                        </li>
-                    )
-
-
-                }
+                                        </span>
+                                    </p>
+                                </div>
+                            </li>
+                        ))
+                ) : (
+                    <li className="flex h-full items-center justify-center">
+                        <p className="text-sm text-gray-500 sm:text-base">No notices available at the moment.</p>
+                    </li>
+                )}
                 {!isLoading && (
                     <div
                         role="status"
-                        className="max-w-sm px-5 w-full h-full animate-pulse"
+                        className="h-full w-full max-w-sm animate-pulse px-3 sm:px-5"
                     >
-                        <div className="h-1  my-8 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[180px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[140px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[200px] mb-2.5"></div>
-                        <div className="h-1 my-8 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                        <div className="my-4 h-1 w-36 rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:w-48 md:my-8"></div>
+                        <div className="my-4 h-1 max-w-[280px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[320px] md:my-8 md:max-w-[360px]"></div>
+                        <div className="my-4 h-1 rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 md:my-8"></div>
+                        <div className="my-4 h-1 max-w-[250px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[290px] md:my-8 md:max-w-[330px]"></div>
+                        <div className="my-4 h-1 max-w-[140px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[160px] md:my-8 md:max-w-[180px]"></div>
+                        <div className="my-4 h-1 max-w-[280px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[320px] md:my-8 md:max-w-[360px]"></div>
+                        <div className="my-4 h-1 max-w-[110px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[125px] md:my-8 md:max-w-[140px]"></div>
+                        <div className="my-4 h-1 max-w-[160px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[180px] md:my-8 md:max-w-[200px]"></div>
+                        <div className="my-4 h-1 max-w-[280px] rounded-full bg-gray-200 dark:bg-gray-700 sm:my-6 sm:max-w-[320px] md:my-8 md:max-w-[360px]"></div>
                         <span className="sr-only">Loading...</span>
                     </div>
                 )}

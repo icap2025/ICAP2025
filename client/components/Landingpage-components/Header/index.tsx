@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import menuData from "./menuData";
 import Cookies from "js-cookie";
+import ClickOutside from "@/components/ClickOutSide";
 
 
 const Header = () => {
@@ -74,6 +75,7 @@ const Header = () => {
 
   return (
     <>
+    <ClickOutside onClick={() => setNavbarOpen(false)} className="relative">
       <header
         className={`header left-0 top-0 z-40 flex w-full items-center ${sticky
             ? "fixed z-9999 bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition border-shadow border border-gray-200"
@@ -203,8 +205,9 @@ const Header = () => {
       </header>
       <ScrollProgress
         className={`top-[63px] md:top-[70px] ${sticky ? "fixed" : "absolute"
-          } z-[9999] w-full`}
-      />
+        } z-[9999] w-full`}
+        />
+        </ClickOutside>
     </>
   );
 };
