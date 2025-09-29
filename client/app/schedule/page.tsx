@@ -36,7 +36,7 @@ function Schedule() {
                                 </div>
                                 
                                 <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
-                                    We're working hard to finalize the conference schedule. 
+                                    We&apos;re working hard to finalize the conference schedule. 
                                     The detailed program with session times, speakers, and venues 
                                     will be published very soon.
                                 </p>

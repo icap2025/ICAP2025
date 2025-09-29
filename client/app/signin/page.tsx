@@ -36,7 +36,7 @@ function Signin() {
                     </div>
                     
                     <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
-                        We're working on implementing the sign-in functionality. 
+                        We&apos;re working on implementing the sign-in functionality. 
                         User authentication and account management features 
                         will be available very soon.
                     </p>
