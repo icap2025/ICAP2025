@@ -165,7 +165,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`bg-[#FCFCFC] ${inter.className}`}>
+      <body className={` ${inter.className}`}>
         {<Header />}
         {children}
         <div id="modal-root" />

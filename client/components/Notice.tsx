@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { AiOutlineFieldTime } from "react-icons/ai";
-import { Button } from "@/components/ui/button"
 
 interface Notice {
     show: unknown;

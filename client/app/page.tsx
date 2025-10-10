@@ -12,6 +12,7 @@ import { BsFillPersonLinesFill } from "react-icons/bs";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { TfiDownload } from "react-icons/tfi";
+import InvitedTalkSlider from "@/components/InvitedTalk";
 
 export const metadata: Metadata = {
   title: "ICAP2025 | International Conference on Advances in Physics, SUST",
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <main className="min-h-screen bg-white">
+    <div className="flex flex-col">
+      <main className="w-full bg-white">
         {/* Hero Section */}
         <section className="relative w-full">
           <div className="mt-14 min-h-[20vh] w-full overflow-hidden sm:mt-16 md:mt-20 md:h-[70vh] lg:mt-24 lg:h-[85vh]">
@@ -143,13 +144,13 @@ export default function Home() {
             {/* Registration Timer */}
             <RegistrationTimer />
 
-            {/* Avater and Message */}
-
-            {/* <Message /> */}
-
             <div className="mt-12 flex w-full flex-col items-start justify-between gap-8 sm:mt-16 md:mt-20 lg:flex-row lg:items-center">
               <ImportantDates />
               <Notice />
+            </div>
+            {/* Invited Talks Slider */}
+            <div className="my-2 sm:my-4 md:my-6 lg:my-8">
+              <InvitedTalkSlider />
             </div>
           </div>
         </section>
