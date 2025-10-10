@@ -2,7 +2,7 @@ import { TfiDownload } from "react-icons/tfi";
 
 function ScopePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white px-4 md:px-24">
+    <div className="flex min-h-screen flex-col bg-gradient-to-b from-white via-[#F6FFFC] to-[#E9FDF7] px-4 md:px-24">
       <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20">
         <main className="flex-grow">
           {/* Header Section */}

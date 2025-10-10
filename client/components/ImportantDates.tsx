@@ -15,23 +15,23 @@ const ImportantDates: React.FC = () => {
     const [dates, setDates] = useState<ImportantDates[]>([
         {
             id: "1",
-            title: "Abstract Submission Deadline (Extended)",
-            description: "The deadline for submitting abstracts has been extended to October 9, 2025.",
-            date: "2025-10-09",
+            title: "Extended abstract submission deadline (final)",
+            description: "The deadline for submitting abstracts has been extended to October 16, 2025.",
+            date: "2025-10-16",
             show: true,
         },
         {
             id: "2",
-            title: "Notification of Acceptance",
-            description: "Notifications of acceptance will be sent by October 20, 2025.",
-            date: "2025-10-20",
+            title: "Updated Notification of Acceptance",
+            description: "Notifications of acceptance will be sent by October 30, 2025.",
+            date: "2025-10-30",
             show: true,
         },
         {
             id: "3",
-            title: "Early Bird Registration Deadline",
-            description: "Early bird registration ends on November 5, 2025.",
-            date: "2025-11-05",
+            title: "Updated Early Bird Registration",
+            description: "Early bird registration ends on November 15, 2025.",
+            date: "2025-11-15",
             show: true,
         },
         {
