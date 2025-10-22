@@ -1,0 +1,17 @@
+GMAIL=hxzjrkulzbhrfzof
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+EMAIL_FROM=gsasust2005@gmail.com
+SMTP_PASSWORD=hxzjrkulzbhrfzof
+SMTP_USER=gsasust2005@gmail.com
+NEXT_PUBLIC_APP_FRONTEND_URL=http://localhost:3000
+NEXT_PUBLIC_APP_BACKEND_URL=http://localhost:5000
+SECRET_KEY=Farzine2020831007
+MONGO_URI=mongodb+srv://gsasust2005:gsasust123abc@cluster0.glolqry.mongodb.net/Gaibandha_Student_Association_SUST?retryWrites=true&w=majority&appName=Cluster0
+CLOUDINARY_CLOUD_NAME=dj7ckifsy
+CLOUDINARY_API_KEY=143639342217372
+CLOUDINARY_API_SECRET=gP9X8JvWjZuNDchBEQS8fuSej_s
+CLOUDINARY_URL=cloudinary://143639342217372:gP9X8JvWjZuNDchBEQS8fuSej_s@dj7ckifsy
+PORT=5000
+NODE_ENV=development
+NEXT_PUBLIC_ADMIN_FRONTEND_URL=https://localhost:3001

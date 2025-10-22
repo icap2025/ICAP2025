@@ -17,10 +17,14 @@ export const createAuthSchemas = (validationT: (key: string) => string) => {
                 .min(1, validationT("Full name is required"))
                 .min(2, validationT("Full name must be at least 2 characters"))
                 .max(50, validationT("Full name must be no more than 50 characters")),
-            companyName: z
+            university: z
                 .string()
-                .min(1, validationT("Company name is required"))
-                .max(100, validationT("Company name must be no more than 100 characters")),
+                .min(1, validationT("University name is required"))
+                .max(200, validationT("University name must be no more than 200 characters")),
+            phone: z
+                .string()
+                .min(1, validationT("Phone number is required"))
+                .max(14, validationT("Phone number must be no more than 14 characters")),
             email: z
                 .string()
                 .min(1, validationT("Email is required"))

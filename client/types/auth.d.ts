@@ -13,7 +13,8 @@ export interface LoginFormTouched {
 
 export interface SignupFormData {
   fullName: string;
-  companyName: string;
+  university: string;
+  phone: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -26,7 +27,8 @@ export interface SignupFormErrors {
 }
 export interface SignupFormTouched {
   fullName: boolean;
-  companyName: boolean;
+  university: boolean;
+  phone: boolean;
   email: boolean;
   password: boolean;
   confirmPassword: boolean;

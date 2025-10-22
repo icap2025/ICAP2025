@@ -30,7 +30,8 @@ export const SignupForm = () => {
     mode: "onChange",
     defaultValues: {
       fullName: "",
-      companyName: "",
+      university: "",
+      phone: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -42,8 +43,7 @@ export const SignupForm = () => {
       const response = await signupApi(data);
 
       if (response.success) {
-        toast.success(response.message);
-        console.log("Signup successful:", response);
+        toast.success("Account created successfully! Please verify your email. Check your inbox(spam also) for a verification link.");
       } else {
         toast.error(response.message);
       }
@@ -95,27 +95,51 @@ export const SignupForm = () => {
         />
 
         <Controller
-          name="companyName"
+          name="university"
           control={control}
           render={({ field }) => (
             <TextInput
-              id="companyName"
+              id="university"
               type="text"
-              placeholder="Enter your company name"
+              placeholder="Enter your university name"
               value={field.value || ""}
               onChange={(e) => {
                 field.onChange(e);
               }}
               onBlur={() => {
                 field.onBlur();
-                trigger("companyName");
+                trigger("university");
               }}
-              label="Company Name"
+              label="University Name"
               error={
-                touchedFields.companyName
-                  ? errors.companyName?.message
+                touchedFields.university
+                  ? errors.university?.message
                   : undefined
               }
+              className="w-full"
+            />
+          )}
+        />
+
+        <Controller
+          name="phone"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              id="phone"
+              type="tel"
+              placeholder="Enter your phone number"
+              value={field.value}
+              onChange={(e) => {
+                field.onChange(e);
+              }}
+              onBlur={() => {
+                field.onBlur();
+                trigger("phone");
+              }}
+              label="Phone Number"
+              required
+              error={touchedFields.phone ? errors.phone?.message : undefined}
               className="w-full"
             />
           )}

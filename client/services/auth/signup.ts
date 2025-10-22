@@ -5,10 +5,10 @@ export const signupApi = async (
   data: SignupFormData
 ): Promise<AuthResponse> => {
   try {
-    const response = await PUBLIC_AXIOS_CLIENT.post("/company/register", data);
+    const response = await PUBLIC_AXIOS_CLIENT.post("/api/auth/register", data);
     return {
       success: true,
-      message: "Signup successful",
+      message: "Account created successfully! Please verify your email. Check your inbox(spam also) for a verification link.",
       token: response.data.token,
       data: response.data,
     };
