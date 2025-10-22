@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, MotionStyle, Transition } from "motion/react";
+import { motion, Transition } from "framer-motion";
+import { CSSProperties } from "react";
 
 interface BorderBeamProps {
   /**
@@ -35,7 +36,7 @@ interface BorderBeamProps {
   /**
    * The style of the border beam.
    */
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   /**
    * Whether to reverse the animation direction.
    */
@@ -73,7 +74,7 @@ export const BorderBeam = ({
             "--color-from": colorFrom,
             "--color-to": colorTo,
             ...style,
-          } as MotionStyle
+          } as CSSProperties & { [key: string]: any }
         }
         initial={{ offsetDistance: `${initialOffset}%` }}
         animate={{

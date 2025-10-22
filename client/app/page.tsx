@@ -1,12 +1,9 @@
 import { default as ScrollUp } from "@/components/Landingpage-components/Common/ScrollUp";
 import { Metadata } from "next";
-import Carousel from "@/components/Landingpage-components/Carousel/Carousel";
-import Message from "@/components/Landingpage-components/Message";
 import RegistrationTimer from "@/components/Landingpage-components/RegistrationTImer";
 import ImportantDates from "@/components/ImportantDates";
 import Notice from "@/components/Notice";
 import { SlCalender } from "react-icons/sl";
-import { Button } from "@/components/ui/button";
 import { CiLocationOn } from "react-icons/ci";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { BorderBeam } from "@/components/magicui/border-beam";

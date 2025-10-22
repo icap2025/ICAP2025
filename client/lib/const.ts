@@ -1,0 +1,1 @@
+export const BACKEND_URL = "https://api.icap2025.org/api/v1";
