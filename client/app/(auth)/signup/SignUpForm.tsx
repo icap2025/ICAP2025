@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { TextInput } from "@/components/common/input_text_field/default";
 import { Button } from "@/components/common/button/default";
 import { SignupFormData } from "@/types/auth";
-import { signupApi } from "@/services/auth/signup/signup";
+import { signupApi } from "@/services/auth/signup";
 import { createAuthSchemas } from "@/lib/auth_functions/AuthValidations";
 
 export const SignupForm = () => {
@@ -246,7 +246,7 @@ export const SignupForm = () => {
           <p className="text-gray-500 dark:text-gray-400">
             Already have an account?{" "}
             <Link
-              href="/auth/login"
+              href="/login"
               className="text-green-600 hover:text-green-700 hover:underline transition-colors font-medium"
             >
               Log in here

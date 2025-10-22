@@ -192,7 +192,7 @@ const Header = () => {
                   // <DropdownUser />
                 ) : (
                   <Link
-                    href="/signin"
+                    href="/login"
                     className="ease-in-up hidden rounded-xl border border-[#cbd5e1] bg-primary px-5 py-2 shadow-xl backdrop-blur-sm text-base font-medium text-white transform transition duration-500 hover:scale-105 hover:bg-opacity-90 hover:shadow-btn-hover md:block "
                   >
                     Sign In

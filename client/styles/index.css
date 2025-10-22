@@ -132,3 +132,11 @@
     rgba(255, 255, 255, 0.1) 100%
   );
 }
+
+
+@custom-variant hxl (@media (max-height: 900px));
+@custom-variant hlg (@media (max-height: 800px));
+@custom-variant hmd (@media (max-height: 700px));
+@custom-variant hsm (@media (max-height: 600px));
+@custom-variant hxs (@media (max-height: 500px));
+@custom-variant hxxs (@media (max-height: 400px));

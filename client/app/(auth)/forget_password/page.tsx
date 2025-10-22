@@ -1,12 +1,12 @@
 import React from 'react'
-import { LogInForm } from './LogInForm'
+import { ForgetPasswordForm } from './ForgetPasswordForm'
 
-const LoginPage = () => {
+const ForgetPass = () => {
   return (
     <div className='bg-gradient-to-b from-white via-[#F6FFFC] to-[#E9FDF7] flex-grow flex flex-col justify-center hsm:justify-start items-center overflow-auto'>
-      <LogInForm/>
+      <ForgetPasswordForm/>
     </div>
   )
 }
 
-export default LoginPage
+export default ForgetPass

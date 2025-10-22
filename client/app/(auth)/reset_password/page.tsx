@@ -1,12 +1,12 @@
 import React from 'react'
-import { LogInForm } from './LogInForm'
+import { ResetPasswordForm } from './ResetPasswordForm'
 
-const LoginPage = () => {
+function ResetAdminPassword() {
   return (
     <div className='bg-gradient-to-b from-white via-[#F6FFFC] to-[#E9FDF7] flex-grow flex flex-col justify-center hsm:justify-start items-center overflow-auto'>
-      <LogInForm/>
+        <ResetPasswordForm/>
     </div>
   )
 }
 
-export default LoginPage
+export default ResetAdminPassword
