@@ -6,16 +6,32 @@ import React, { useState, useEffect } from "react";
 
 const InvitedTalk = [
     {
+        name: "Professor Emeritus Dr. A.K.M. Azharul Islam",
+        university: "Rajshahi University, Bangladesh",
+        image: "/guest/AKM-Azharul.png",
+        bio: `Professor Emeritus Dr. A.K.M. Azharul Islam, Fellow of the Bangladesh Academy of Sciences and the Institute of Physics (London), is a distinguished physicist renowned for his pioneering research in superconductivity and condensed matter physics, with scholarly contributions that have profoundly influenced modern physical science in Bangladesh and beyond.`,
+        status: 'Plenary Speaker'
+    },
+    {
         name: "Prof. Dr. Abul Kalam Azad",
         university: "Universiti Brunei Darussalam, Brunei",
         image: "/guest/AbulKalamAzad.png",
         bio: `Prof. Dr. Abul Kalam Azad, a globally recognized researcher in advanced energy materials and fuel cell technologies from Universiti Brunei Darussalam, whose pioneering research on sustainable energy systems continues to make significant international impact.`,
+        status: 'Distinguished Speaker'
     },
     {
         name: "Professor Dr. Ismail Rahman",
         university: "Fukushima University, Japan",
         image: "/guest/IsmailRahman.png",
         bio: `Professor Dr. Ismail Rahman, an eminent scholar in environmental radioactivity and analytical chemistry from Fukushima University, Japan, whose research on radionuclide separation and environmental remediation has made significant contributions to the advancement of environmental and radiochemical sciences.`,
+        status: 'Distinguished Speaker'
+    },
+    {
+        name: "Prof. Dr. Masashi Ohashi",
+        university: "Kanazawa University, Japan",
+        image: "/guest/MasashiOhashi.png",
+        bio: `Professor Dr. Masashi Ohashi, a distinguished physicist from Kanazawa University, Japan, whose pioneering research in low-temperature physics and functional materials has made significant contributions to the advancement of thermophysical and magnetic materials science.`,
+        status: 'Distinguished Speaker'
     },
 ];
 
@@ -24,13 +40,14 @@ interface Speaker {
     university: string;
     image: string;
     bio: string;
+    status: string;
 }
 
 const SpeakerCard: React.FC<{ speaker: Speaker }> = ({ speaker }) => {
     return (
         <div className="flex flex-col items-center">
             <div className="relative mb-4 sm:mb-6 md:mb-8">
-                <div className="sm:border-6 relative h-28 w-28 overflow-hidden rounded-full border-4 border-primary shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl xs:h-32 xs:w-32 sm:h-40 sm:w-40 md:h-48 md:w-48 lg:h-56 lg:w-56 lg:border-8">
+                <div className="sm:border-6 relative h-28 w-28 overflow-hidden rounded-full border-4 border-primary shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl xs:h-32 xs:w-32 sm:h-40 sm:w-40 md:h-48 md:w-48 lg:h-56 lg:w-56 lg:border-6">
                     <Image
                         src={speaker.image}
                         alt={speaker.name}
@@ -39,8 +56,8 @@ const SpeakerCard: React.FC<{ speaker: Speaker }> = ({ speaker }) => {
                         sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, (max-width: 1024px) 192px, 224px"
                     />
                 </div>
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 transform whitespace-nowrap rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase text-white shadow-lg xs:-bottom-3 xs:px-4 xs:py-1.5 xs:text-xs sm:-bottom-4 sm:px-6 sm:py-2 sm:text-sm">
-                    SPEAKER
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 transform whitespace-nowrap rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase text-white shadow-lg xs:-bottom-3 xs:px-4 xs:py-1.5 xs:text-xs sm:-bottom-4 sm:px-6 sm:py-1.5 sm:text-sm">
+                    {speaker.status}
                 </div>
             </div>
 
