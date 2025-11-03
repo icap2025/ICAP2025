@@ -42,7 +42,7 @@ export const LogInForm = () => {
       if (response.success) {
         toast.success(response.message);
         console.log("Login successful:", response);
-        router.push("/admin/dashboard");
+        router.push("/dashboard");
       } else {
         toast.error(response.message);
       }
