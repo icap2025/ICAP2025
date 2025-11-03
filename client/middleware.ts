@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
   );
   
   if (isProtectedRoute) {
-    const userToken = request.cookies.get("token")?.value;
+    const userToken = request.cookies.get("use_token")?.value;
     const adminToken = request.cookies.get("adminToken")?.value;
     
     if (pathname.startsWith("/admin")) {
@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
     }
     else if (pathname.startsWith("/dashboard")) {
       if (!userToken) {
-        const signInUrl = new URL("/signin", request.url);
+        const signInUrl = new URL("/login", request.url);
         return NextResponse.redirect(signInUrl);
       }
     }
