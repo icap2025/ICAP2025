@@ -6,24 +6,22 @@ export const resetPasswordApi = async (
     userType: "admin" | "user" = "user"
 ): Promise<AuthResponse> => {
     try {
-        const endpoint = userType === "admin"
-            ? "/api/admin/reset-password"
-            : "/api/user/reset-password";
+        const endpoint = `/api/auth/reset-password/${data.token}`;
 
         const response = await PUBLIC_AXIOS_CLIENT.post(
             `${endpoint}?userType=${userType}`,
-            data
+            { newPassword: data.newPassword }
         );
 
         return {
             success: true,
-            message: "Password has been reset successfully.",
+            message: response.data.message || "Password has been reset successfully! You can now log in.",
             data: response.data,
         };
     } catch (error: any) {
         return {
             success: false,
-            message: error.response?.data?.message || "An unexpected error occurred.",
+            message: error.response?.data?.message || "Failed to reset password. The link may have expired.",
         };
     }
 };

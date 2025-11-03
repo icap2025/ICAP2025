@@ -1,20 +1,22 @@
 "use client";
-import React, { useState, useMemo } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Link from "next/link";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-import { TextInput } from "@/components/common/input_text_field/default";
 import { Button } from "@/components/common/button/default";
-import { SignupFormData } from "@/types/auth";
-import { signupApi } from "@/services/auth/signup";
+import { TextInput } from "@/components/common/input_text_field/default";
 import { createAuthSchemas } from "@/lib/auth_functions/AuthValidations";
+import { signupApi } from "@/services/auth/signup";
+import { SignupFormData } from "@/types/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "sonner";
 
 export const SignupForm = () => {
   const validationT = (key: string) => key;
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const router = useRouter();
 
   const { signupSchema } = useMemo(() => {
     return createAuthSchemas((key: string) => validationT(key));
@@ -43,9 +45,19 @@ export const SignupForm = () => {
       const response = await signupApi(data);
 
       if (response.success) {
-        toast.success("Account created successfully! Please verify your email. Check your inbox(spam also) for a verification link.");
+        toast.success(
+          response.message ||
+            "Account created successfully! Please check your email for verification link.",
+        );
+        console.log("Signup successful:", response);
+        // Redirect to login page after 2 seconds
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
       } else {
-        toast.error(response.message);
+        toast.error(
+          response.message || "Registration failed. Please try again.",
+        );
       }
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again.");
@@ -54,19 +66,19 @@ export const SignupForm = () => {
   };
 
   return (
-    <div className="w-full max-w-sm my-10 flex flex-col justify-start bg-transparent p-4 overflow-auto">
-      <div className="text-left mb-4">
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-white mb-2">
+    <div className="my-10 flex w-full max-w-sm flex-col justify-start overflow-auto bg-transparent p-4">
+      <div className="mb-4 text-left">
+        <h1 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl lg:text-3xl">
           Create Your Account
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 text-md sm:text-base lg:text-lg">
+        <p className="text-md text-gray-600 dark:text-gray-300 sm:text-base lg:text-lg">
           Please fill in the details below to create your account.
         </p>
       </div>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 flex-1"
+        className="flex flex-1 flex-col gap-4"
       >
         <Controller
           name="fullName"
@@ -197,7 +209,7 @@ export const SignupForm = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="text-gray-500 hover:text-green-600 transition-colors"
+                    className="text-gray-500 transition-colors hover:text-green-600"
                   >
                     {showPassword ? (
                       <FaEye size={18} />
@@ -240,7 +252,7 @@ export const SignupForm = () => {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="text-gray-500 hover:text-green-600 transition-colors"
+                    className="text-gray-500 transition-colors hover:text-green-600"
                   >
                     {showConfirmPassword ? (
                       <FaEye size={18} />
@@ -260,18 +272,18 @@ export const SignupForm = () => {
             variant="primary"
             size="lg"
             disabled={isSubmitting || !isValid}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-green-700"
+            className="w-full border border-green-700 bg-green-600 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? "Creating account..." : "Sign Up"}
           </Button>
         </div>
 
-        <div className="text-center pt-2">
+        <div className="pt-2 text-center">
           <p className="text-gray-500 dark:text-gray-400">
             Already have an account?{" "}
             <Link
               href="/login"
-              className="text-green-600 hover:text-green-700 hover:underline transition-colors font-medium"
+              className="font-medium text-green-600 transition-colors hover:text-green-700 hover:underline"
             >
               Log in here
             </Link>

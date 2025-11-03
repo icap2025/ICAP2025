@@ -19,7 +19,7 @@ const createSendToken = (user, statusCode, res) => {
 
   // Cookie options
   const cookieOptions = {
-    expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), // 90 days
+    expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), // 1 day
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
@@ -36,6 +36,7 @@ const createSendToken = (user, statusCode, res) => {
     data: {
       user,
     },
+    message: 'Authentication successful',
   });
 };
 
@@ -144,6 +145,11 @@ exports.userLogin = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email or password', 401));
   }
 
+  // Check if email is verified
+  if (!user.isEmailVerified) {
+    return next(new AppError('Please verify your email before logging in. Check your inbox and spam folder.', 401));
+  }
+
   // Check if user is active
   if (!user.isActive) {
     return next(new AppError('Your account has been deactivated', 401));
@@ -208,8 +214,17 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 // Reset Password
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  const { token, newPassword } = req.body;
+  const { token } = req.params;
+  const { newPassword } = req.body;
   const { userType } = req.query; // 'admin' or 'user'
+
+  if (!token) {
+    return next(new AppError('Reset token is required', 400));
+  }
+
+  if (!newPassword) {
+    return next(new AppError('New password is required', 400));
+  }
 
   // Get user based on the token
   const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
@@ -230,13 +245,19 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetExpires = undefined;
   await user.save();
 
-  // Log the user in, send JWT
-  createSendToken(user, 200, res);
+  res.status(200).json({
+    status: 'success',
+    message: 'Password has been reset successfully! You can now log in with your new password.',
+  });
 });
 
 // Verify Email
 exports.verifyEmail = catchAsync(async (req, res, next) => {
-  const { token } = req.body;
+  const { token } = req.params;
+
+  if (!token) {
+    return next(new AppError('Verification token is required', 400));
+  }
 
   // Get user based on the token
   const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
@@ -257,6 +278,6 @@ exports.verifyEmail = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    message: 'Email verified successfully!',
+    message: 'Email verified successfully! You can now log in.',
   });
 });

@@ -8,14 +8,14 @@ export const signupApi = async (
     const response = await PUBLIC_AXIOS_CLIENT.post("/api/auth/register", data);
     return {
       success: true,
-      message: "Account created successfully! Please verify your email. Check your inbox(spam also) for a verification link.",
+      message: response.data.message || "Account created successfully! Please verify your email. Check your inbox (and spam folder) for a verification link.",
       token: response.data.token,
       data: response.data,
     };
   } catch (error: any) {
     return {
       success: false,
-      message: error.response?.data?.message || "Unexpected error",
+      message: error.response?.data?.message || "Registration failed. Please try again.",
     };
   }
 };

@@ -1,23 +1,24 @@
 "use client";
-import React, { useMemo } from "react";
-import { FaUser } from "react-icons/fa";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-import { TextInput } from "@/components/common/input_text_field/default";
 import { Button } from "@/components/common/button/default";
+import { TextInput } from "@/components/common/input_text_field/default";
 import { createAuthSchemas } from "@/lib/auth_functions/AuthValidations";
-import { ForgetPasswordFormData } from "@/types/auth";
 import { forgetPasswordApi } from "@/services/auth/forgetPassword";
+import { ForgetPasswordFormData } from "@/types/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useMemo } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { FaUser } from "react-icons/fa";
+import { toast } from "sonner";
 
 export const ForgetPasswordForm = () => {
   const validationT = (key: string) => key;
+  const router = useRouter();
 
   const { forgetPasswordSchema } = useMemo(() => {
     return createAuthSchemas((key: string) => validationT(key));
   }, [validationT]);
 
-  
   const {
     control,
     handleSubmit,
@@ -34,12 +35,21 @@ export const ForgetPasswordForm = () => {
   const onSubmit = async (data: ForgetPasswordFormData) => {
     try {
       const response = await forgetPasswordApi(data);
-      
+
       if (response.success) {
-        toast.success(response.message);
+        toast.success(
+          response.message ||
+            "Password reset link sent! Please check your email.",
+        );
         console.log("Forget password successful:", response);
+        // Redirect to login after 2 seconds
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
       } else {
-        toast.error(response.message);
+        toast.error(
+          response.message || "Failed to send reset link. Please try again.",
+        );
       }
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again.");
@@ -48,17 +58,20 @@ export const ForgetPasswordForm = () => {
   };
 
   return (
-    <div className="w-full max-w-sm my-10 flex flex-col justify-start bg-transparent p-4 overflow-auto">
-      <div className="text-left mb-4">
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-white mb-2">
+    <div className="my-10 flex w-full max-w-sm flex-col justify-start overflow-auto bg-transparent p-4">
+      <div className="mb-4 text-left">
+        <h1 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl lg:text-3xl">
           Forgot Your Password?
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 text-md sm:text-base lg:text-lg">
+        <p className="text-md text-gray-600 dark:text-gray-300 sm:text-base lg:text-lg">
           Please enter your email to receive a password reset link.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-1 flex-col gap-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-1 flex-col gap-4"
+      >
         <Controller
           name="email"
           control={control}
@@ -90,7 +103,7 @@ export const ForgetPasswordForm = () => {
             variant="primary"
             size="lg"
             disabled={isSubmitting || !isValid}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-green-700"
+            className="w-full border border-green-700 bg-green-600 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? "Sending email..." : "Send Password Reset Link"}
           </Button>

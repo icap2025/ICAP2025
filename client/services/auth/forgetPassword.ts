@@ -6,9 +6,7 @@ export const forgetPasswordApi = async (
     userType: "admin" | "user" = "user"
 ): Promise<AuthResponse> => {
     try {
-        const endpoint = userType === "admin"
-            ? "/api/admin/forgot-password"
-            : "/api/user/forgot-password";
+        const endpoint = "/api/auth/forgot-password";
 
         const response = await PUBLIC_AXIOS_CLIENT.post(
             `${endpoint}?userType=${userType}`,
@@ -17,13 +15,13 @@ export const forgetPasswordApi = async (
 
         return {
             success: true,
-            message: response.data.message || "Password reset link sent successfully.",
+            message: response.data.message || "Password reset link sent to your email. Please check your inbox and spam folder.",
             data: response.data,
         };
     } catch (error: any) {
         return {
             success: false,
-            message: error.response?.data?.message || "An unexpected error occurred.",
+            message: error.response?.data?.message || "Failed to send password reset email. Please try again.",
         };
     }
 };

@@ -19,7 +19,12 @@ router.post(
   authController.userLogin
 );
 
-router.post('/verify-email', authController.verifyEmail);
+// Email verification - GET request with token in URL
+router.get('/verify-email/:token', authController.verifyEmail);
+
+// Password reset routes
+router.post('/forgot-password', authController.forgotPassword);
+router.post('/reset-password/:token', authController.resetPassword);
 
 // Logout
 router.post('/logout', authController.logout);
