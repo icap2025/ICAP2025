@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
   );
   
   if (isProtectedRoute) {
-    const userToken = request.cookies.get("use_token")?.value;
+    const userToken = request.cookies.get("user_token")?.value;
     const adminToken = request.cookies.get("adminToken")?.value;
     
     if (pathname.startsWith("/admin")) {

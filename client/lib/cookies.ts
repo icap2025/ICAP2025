@@ -9,5 +9,6 @@ export const COOKIE_KEYS = {
     FULL_NAME: "user_full_name",
     EMAIL: "user_email",
     PROFILE_PIC: "user_profile_pic",
+    PAYMENT_STATUS: "user_payment_status",
   },
 };

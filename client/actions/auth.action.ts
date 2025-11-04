@@ -26,7 +26,7 @@ export async function loginAction(data: LoginFormData) {
     // Set cookies
     const cookieStore = await cookies();
     const user = result.data.user;
-
+    // store token and full user object in two cookies only
     cookieStore.set(COOKIE_KEYS.USER.TOKEN, result.token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -34,35 +34,15 @@ export async function loginAction(data: LoginFormData) {
       maxAge: 60 * 60 * 24 * 90, // 90 days
     });
 
-    cookieStore.set(COOKIE_KEYS.USER.ID, user._id, {
+    // store serialized user object under COOKIE_KEYS.USER.DATA if present, otherwise fallback to "user"
+    const userCookieKey = ((COOKIE_KEYS.USER as any).DATA as string) ?? "user";
+    cookieStore.set(userCookieKey, JSON.stringify(user), {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 60 * 60 * 24 * 90,
     });
 
-    cookieStore.set(COOKIE_KEYS.USER.EMAIL, user.email, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 90,
-    });
-
-    cookieStore.set(COOKIE_KEYS.USER.FULL_NAME, user.fullName, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 90,
-    });
-
-    if (user.profilePic) {
-      cookieStore.set(COOKIE_KEYS.USER.PROFILE_PIC, user.profilePic, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 60 * 60 * 24 * 90,
-      });
-    }
 
     return {
       success: true,
