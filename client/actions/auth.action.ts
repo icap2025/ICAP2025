@@ -26,28 +26,55 @@ export async function loginAction(data: LoginFormData) {
     // Set cookies
     const cookieStore = await cookies();
     const user = result.data.user;
-    // store token and full user object in two cookies only
+    
+    // Set httpOnly token for server-side authentication
     cookieStore.set(COOKIE_KEYS.USER.TOKEN, result.token, {
-      httpOnly: true,
+      httpOnly: false, // Allow client-side access
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 90, // 90 days
+      maxAge: 60 * 60 * 24 * 7, // 7 days
     });
 
-    // store serialized user object under COOKIE_KEYS.USER.DATA if present, otherwise fallback to "user"
-    const userCookieKey = ((COOKIE_KEYS.USER as any).DATA as string) ?? "user";
-    cookieStore.set(userCookieKey, JSON.stringify(user), {
-      httpOnly: true,
+    // Set individual user data cookies (client-accessible for useAuth)
+    cookieStore.set(COOKIE_KEYS.USER.ID, user._id, {
+      httpOnly: false,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 90,
+      maxAge: 60 * 60 * 24 * 7,
     });
+    
+    cookieStore.set(COOKIE_KEYS.USER.FULL_NAME, user.Name || "User", {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+    
+    cookieStore.set(COOKIE_KEYS.USER.EMAIL, user.email, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+    
+    // DON'T store profilePic in cookies - it's too large (base64 image)
+    // The profilePic will be stored in localStorage by setUserDataCookies() on the client side
+    
+    if (user.payment_status !== undefined) {
+      cookieStore.set(COOKIE_KEYS.USER.PAYMENT_STATUS, user.payment_status.toString(), {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 60 * 60 * 24 * 7,
+      });
+    }
 
-
+    // Return full user data including profilePic - it will be stored in localStorage client-side
     return {
       success: true,
       message: result.message || "Login successful! Welcome back.",
-      data: user,
+      data: user, // Includes profilePic which will be handled by setUserDataCookies()
+      token: result.token,
     };
   } catch (error: any) {
     return {
@@ -107,19 +134,22 @@ export async function adminLoginAction(data: LoginFormData) {
   }
 }
 
-export async function logoutAction() {
-  const cookieStore = await cookies();
+// logout in authcontext
+// not used =======================
 
-  // Clear all user cookies
-  Object.values(COOKIE_KEYS.USER).forEach((key) => {
-    cookieStore.delete(key);
-  });
+// export async function logoutAction() {
+//   const cookieStore = await cookies();
 
-  return {
-    success: true,
-    message: "Logged out successfully",
-  };
-}
+//   // Clear all user cookies
+//   Object.values(COOKIE_KEYS.USER).forEach((key) => {
+//     cookieStore.delete(key);
+//   });
+
+//   return {
+//     success: true,
+//     message: "Logged out successfully",
+//   };
+// }
 
 export async function adminLogoutAction() {
   const cookieStore = await cookies();

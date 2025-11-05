@@ -5,6 +5,8 @@ import Header from "@/components/Landingpage-components/Header";
 import ScrollToTop from "@/components/Landingpage-components/ScrollToTop";
 import { Inter } from "next/font/google";
 import "../styles/index.css";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -154,11 +156,14 @@ export default function RootLayout({
         />
       </head>
       <body className={` ${inter.className}`}>
-        {<Header />}
-        {children}
-        <div id="modal-root" />
-        {<Footer />}
-        <ScrollToTop />
+        <AuthProvider>
+          <Toaster position="top-right" richColors />
+          {<Header />}
+          {children}
+          <div id="modal-root" />
+          {<Footer />}
+          <ScrollToTop />
+        </AuthProvider>
       </body>
     </html>
   );

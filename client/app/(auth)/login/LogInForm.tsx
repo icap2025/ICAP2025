@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
@@ -11,11 +11,21 @@ import { createAuthSchemas } from "@/lib/auth_functions/AuthValidations";
 import { LoginFormData } from "@/types/auth";
 import { useRouter } from "next/navigation";
 import { loginAction } from "@/actions/auth.action";
+import { useAuth } from "@/contexts/AuthContext";
+import { setUserDataCookies } from "@/lib/auth";
 
 export const LogInForm = () => {
   const validationT = (key: string) => key;
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const { isLoggedIn, refreshAuth } = useAuth();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/dashboard");
+    }
+  }, [isLoggedIn, router]);
 
   const { loginSchema } = useMemo(() => {
     return createAuthSchemas((key: string) => validationT(key));
@@ -39,10 +49,20 @@ export const LogInForm = () => {
     try {
       const response = await loginAction(data);
 
-      if (response.success) {
+      if (response.success && response.data && response.token) {
+        // Ensure client-side cookies are also set
+        setUserDataCookies(response.data, response.token);
+        
         toast.success(response.message);
-        console.log("Login successful:", response);
-        router.push("/dashboard");
+        
+        // Small delay to ensure cookies are set before navigation
+        setTimeout(() => {
+          // Refresh auth context to update state
+          refreshAuth();
+          // Navigate to dashboard
+          router.push("/dashboard");
+          router.refresh();
+        }, 100);
       } else {
         toast.error(response.message);
       }

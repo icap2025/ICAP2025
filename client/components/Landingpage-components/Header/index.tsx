@@ -1,14 +1,10 @@
 "use client";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-// import DropdownUser from "@/components/Dashboard-components/Header/DropdownUser";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import menuData from "./menuData";
-import Cookies from "js-cookie";
 import ClickOutside from "@/components/ClickOutSide";
-import { COOKIE_KEYS } from "@/lib/cookies";
-import { getCookieValue } from "@/actions/getCookieValue";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -18,6 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/AuthContext";
+
 
 const Header = () => {
   // Navbar toggle
@@ -26,35 +24,10 @@ const Header = () => {
     setNavbarOpen(!navbarOpen);
   };
 
-  // Authentication state
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState<any>(null);
+  // Use Auth Context
+  const { isLoggedIn, userData, logout } = useAuth();
 
-  // Check if user is logged in
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const userCookieKey = ((COOKIE_KEYS?.USER as any)?.DATA as string) ?? "user";
-        const user = (await getCookieValue(userCookieKey)) ?? {};
-
-
-        const token = Cookies.get("token");
-        if (!mounted) return;
-        setUserData(user);
-        setIsLoggedIn(true);
-      } catch {
-        if (mounted) {
-          setIsLoggedIn(false);
-          setUserData(null);
-        }
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
+ 
   // Sticky Navbar
   const [sticky, setSticky] = useState(false);
   const [stickyEnabled, setStickyEnabled] = useState(true);
@@ -65,6 +38,7 @@ const Header = () => {
       setSticky(false);
     }
   };
+
 
   useEffect(() => {
     window.addEventListener("scroll", handleStickyNavbar);
@@ -104,6 +78,7 @@ const Header = () => {
 
   return (
     <>
+   
       <ClickOutside onClick={() => setNavbarOpen(false)} className="relative">
         <header
           className={`header left-0 top-0 z-40 flex w-full items-center ${sticky
@@ -224,11 +199,11 @@ const Header = () => {
                             <Avatar className="h-9 w-9 border-2 border-primary/20">
                               <AvatarImage
                                 src={userData?.profilePic}
-                                alt={userData?.fullName || "User"}
+                                alt={userData?.Name || "User"}
                               />
                               <AvatarFallback className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-semibold">
-                                {userData?.fullName
-                                  ? userData.fullName
+                                {userData?.Name
+                                  ? userData.Name
                                     .split(" ")
                                     .map((n: string) => n[0])
                                     .join("")
@@ -238,8 +213,8 @@ const Header = () => {
                               </AvatarFallback>
                             </Avatar>
                             <span className="hidden truncate text-sm font-medium md:block">
-                              {userData?.fullName
-                                ? userData.fullName.trim().split(/\s+/).slice(0, 2).join(" ")
+                              {userData?.Name
+                                ? userData.Name.trim().split(/\s+/).slice(0, 2).join(" ")
                                 : "User"}
                             </span>
                           </button>
@@ -247,7 +222,7 @@ const Header = () => {
                         <DropdownMenuContent align="end" className="w-56">
                           <DropdownMenuLabel className="py-2">
                             <div className="flex flex-col space-y-1">
-                              <span className="text-sm font-medium">{userData?.fullName || "User"}</span>
+                              <span className="text-sm font-medium">{userData?.Name || "User"}</span>
                               <span className="text-xs text-muted-foreground truncate">
                                 {userData?.email || "user@example.com"}
                               </span>
@@ -271,14 +246,7 @@ const Header = () => {
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem
-                            onClick={() => {
-                              Cookies.remove("token");
-                              const userCookieKey = ((COOKIE_KEYS?.USER as any)?.DATA as string) ?? "user";
-                              Cookies.remove(userCookieKey);
-                              setIsLoggedIn(false);
-                              setUserData(null);
-                              window.location.href = "/login";
-                            }}
+                            onClick={logout}
                             className="cursor-pointer text-red-600 focus:text-red-600"
                           >
                             Logout

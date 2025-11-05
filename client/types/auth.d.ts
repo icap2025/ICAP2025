@@ -12,26 +12,46 @@ export interface LoginFormTouched {
 }
 
 export interface SignupFormData {
-  fullName: string;
-  university: string;
+  Name: string;
+  affiliation: string;
+  designation: string;
   phone: string;
   email: string;
   password: string;
   confirmPassword: string;
+  profilePic?: string; // base64 encoded image
+  abstractID: string;
+  abstractTitle: string;
+  participationCategory: 'Oral' | 'Poster' | 'Only Attendee' |'Online/Virtual';
+  presenterName: string;
 }
 export interface SignupFormErrors {
-  fullName?: string;
+  Name?: string;
+  affiliation?: string;
+  designation?: string;
+  phone?: string;
   email?: string;
   password?: string;
   confirmPassword?: string;
+  profilePic?: string;
+  abstractID?: string;
+  abstractTitle?: string;
+  participationCategory?: string;
+  presenterName?: string;
 }
 export interface SignupFormTouched {
-  fullName: boolean;
-  university: boolean;
+  Name: boolean;
+  affiliation: boolean;
+  designation: boolean;
   phone: boolean;
   email: boolean;
   password: boolean;
   confirmPassword: boolean;
+  profilePic: boolean;
+  abstractID: boolean;
+  abstractTitle: boolean;
+  participationCategory: boolean;
+  presenterName: boolean;
 }
 
 export interface ForgetPasswordFormData {

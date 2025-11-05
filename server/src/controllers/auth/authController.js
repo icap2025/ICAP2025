@@ -36,13 +36,25 @@ const createSendToken = (user, statusCode, res) => {
     data: {
       user,
     },
-    message: 'Authentication successful',
+    message: 'Authentication successful !',
   });
 };
 
 // User Registration
 exports.userRegister = catchAsync(async (req, res, next) => {
-    const { fullName, university, phone, email, password } = req.body;
+    const { 
+        Name, 
+        affiliation, 
+        designation, 
+        abstractID, 
+        abstractTitle, 
+        participationCategory, 
+        presenterName,
+        phone, 
+        email, 
+        password,
+        profilePic
+    } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -70,13 +82,25 @@ exports.userRegister = catchAsync(async (req, res, next) => {
         }
     }
 
+    // Check if abstractID already exists
+    const existingAbstractID = await User.findOne({ abstractID });
+    if (existingAbstractID) {
+        return next(new AppError('Abstract ID already registered', 400));
+    }
+
     // Create new user
     const newUser = await User.create({
-        fullName,
-        university,
+        Name,
+        affiliation,
+        designation,
+        abstractID,
+        abstractTitle,
+        participationCategory,
+        presenterName,
         phone,
         email,
         password,
+        profilePic,
     });
 
     // Create email verification token
@@ -89,7 +113,7 @@ exports.userRegister = catchAsync(async (req, res, next) => {
         
         await emailService.sendVerificationEmail(
             newUser.email,
-            newUser.fullName,
+            newUser.Name,
             verificationURL
         );
 
@@ -193,7 +217,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     await emailService.sendPasswordResetEmail(
       user.email,
-      user.fullName,
+      user.Name || user.fullName,
       resetURL
     );
 

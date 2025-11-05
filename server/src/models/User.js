@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema(
     },
     participationCategory: {
       type: String,
-      enum: ['Oral', 'Poster', 'Only Attendee'],
+      enum: ['Oral', 'Poster', 'Only Attendee','Online/Virtual'],
       required: [true, 'Please select a participation category'],
     },
     presenterName: {
@@ -49,12 +49,10 @@ const userSchema = new mongoose.Schema(
     transactionDetails: {
       transactionID: {
         type: String,
-        required: [true, 'Please provide the transaction ID'],
         trim: true,
       },
       dateTime: {
         type: String,
-        required: [true, 'Please provide the transaction date/time'],
         trim: true,
       },
       senderBank: {

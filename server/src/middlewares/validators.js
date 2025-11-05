@@ -13,18 +13,45 @@ exports.validate = (req, res, next) => {
 
 // User registration validation
 exports.userRegisterValidation = [
-  body('fullName')
+  body('Name')
     .trim()
     .notEmpty()
     .withMessage('Full name is required')
     .isLength({ min: 2, max: 50 })
     .withMessage('Full name must be between 2 and 50 characters'),
-  body('university')
+  body('affiliation')
     .trim()
     .notEmpty()
-    .withMessage('University name is required')
-    .isLength({ max: 200 })
-    .withMessage('University name must be no more than 200 characters'),
+    .withMessage('Affiliation (institution/organization) is required')
+    .isLength({ max: 150 })
+    .withMessage('Affiliation must be no more than 150 characters'),
+  body('designation')
+    .trim()
+    .notEmpty()
+    .withMessage('Designation/Position is required')
+    .isLength({ max: 100 })
+    .withMessage('Designation must be no more than 100 characters'),
+  body('abstractID')
+    .trim()
+    .notEmpty()
+    .withMessage('Abstract ID is required'),
+  body('abstractTitle')
+    .trim()
+    .notEmpty()
+    .withMessage('Abstract title is required')
+    .isLength({ max: 300 })
+    .withMessage('Abstract title must be no more than 300 characters'),
+  body('participationCategory')
+    .notEmpty()
+    .withMessage('Participation category is required')
+    .isIn(['Oral', 'Poster', 'Only Attendee', 'Online/Virtual'])
+    .withMessage('Invalid participation category'),
+  body('presenterName')
+    .trim()
+    .notEmpty()
+    .withMessage('Presenter name is required')
+    .isLength({ max: 100 })
+    .withMessage('Presenter name must be no more than 100 characters'),
   body('phone')
     .trim()
     .notEmpty()
@@ -41,16 +68,12 @@ exports.userRegisterValidation = [
   body('password')
     .notEmpty()
     .withMessage('Password is required')
-    .isLength({ min: 8, max: 32 })
-    .withMessage('Password must be between 8 and 32 characters')
-    .matches(/[a-z]/)
-    .withMessage('Password must contain at least one lowercase letter')
-    .matches(/[A-Z]/)
-    .withMessage('Password must contain at least one uppercase letter')
-    .matches(/[0-9]/)
-    .withMessage('Password must contain at least one number')
-    .matches(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)
-    .withMessage('Password must contain at least one special character')
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters'),
+  body('profilePic')
+    .optional()
+    .isString()
+    .withMessage('Profile picture must be a string'),
 ];
 
 // Login validation
@@ -82,16 +105,8 @@ exports.resetPasswordValidation = [
   body('newPassword')
     .notEmpty()
     .withMessage('New password is required')
-    .isLength({ min: 8, max: 32 })
-    .withMessage('Password must be between 8 and 32 characters')
-    .matches(/[a-z]/)
-    .withMessage('Password must contain at least one lowercase letter')
-    .matches(/[A-Z]/)
-    .withMessage('Password must contain at least one uppercase letter')
-    .matches(/[0-9]/)
-    .withMessage('Password must contain at least one number')
-    .matches(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)
-    .withMessage('Password must contain at least one special character'),
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters'),
   body('confirmNewPassword')
     .notEmpty()
     .withMessage('Please confirm your new password')

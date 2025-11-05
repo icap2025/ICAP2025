@@ -17,11 +17,28 @@ exports.getProfile = catchAsync(async (req, res, next) => {
 
 // Update user profile
 exports.updateProfile = catchAsync(async (req, res, next) => {
-  const { fullName, companyName } = req.body;
+  const { 
+    Name, 
+    affiliation, 
+    designation, 
+    phone, 
+    abstractTitle,
+    participationCategory,
+    presenterName
+  } = req.body;
+
+  const updateData = {};
+  if (Name) updateData.Name = Name;
+  if (affiliation) updateData.affiliation = affiliation;
+  if (designation) updateData.designation = designation;
+  if (phone) updateData.phone = phone;
+  if (abstractTitle) updateData.abstractTitle = abstractTitle;
+  if (participationCategory) updateData.participationCategory = participationCategory;
+  if (presenterName) updateData.presenterName = presenterName;
 
   const updatedUser = await User.findByIdAndUpdate(
     req.user.id,
-    { fullName, companyName },
+    updateData,
     {
       new: true,
       runValidators: true,
