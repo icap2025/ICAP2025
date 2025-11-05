@@ -4,18 +4,67 @@ const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema(
   {
-    fullName: {
+    Name: {
       type: String,
       required: [true, 'Please provide your full name'],
       trim: true,
       minlength: [2, 'Full name must be at least 2 characters'],
       maxlength: [50, 'Full name must be no more than 50 characters'],
     },
-    university: {
+      affiliation: {
       type: String,
-      required: [true, 'Please provide your university name'],
+      required: [true, 'Please provide your affiliation (institution/organization)'],
       trim: true,
-      maxlength: [200, 'University name must be no more than 200 characters'],
+      maxlength: [150, 'Affiliation must be no more than 150 characters'],
+    },
+     designation: {
+      type: String,
+      required: [true, 'Please provide your position/designation'],
+      trim: true,
+      maxlength: [100, 'Designation must be no more than 100 characters'],
+    },
+    abstractID: {
+      type: String,
+      required: [true, 'Please provide the Abstract ID or Serial (from CMT)'],
+      trim: true,
+      unique: true,
+    },
+    abstractTitle: {
+      type: String,
+      required: [true, 'Please provide the Abstract Title'],
+      trim: true,
+      maxlength: [300, 'Abstract title must be no more than 300 characters'],
+    },
+    participationCategory: {
+      type: String,
+      enum: ['Oral', 'Poster', 'Only Attendee'],
+      required: [true, 'Please select a participation category'],
+    },
+    presenterName: {
+      type: String,
+      required: [true, 'Please provide the presenter’s name'],
+      trim: true,
+      maxlength: [100, 'Presenter name must be no more than 100 characters'],
+    },
+    transactionDetails: {
+      transactionID: {
+        type: String,
+        required: [true, 'Please provide the transaction ID'],
+        trim: true,
+      },
+      dateTime: {
+        type: String,
+        required: [true, 'Please provide the transaction date/time'],
+        trim: true,
+      },
+      senderBank: {
+        type: String,
+        trim: true,
+      },
+      foreignRemittance: {
+        type: String,
+        trim: true,
+      },
     },
     phone:{
         type: String,

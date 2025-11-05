@@ -7,7 +7,17 @@ import { useEffect, useState } from "react";
 import menuData from "./menuData";
 import Cookies from "js-cookie";
 import ClickOutside from "@/components/ClickOutSide";
-
+import { COOKIE_KEYS } from "@/lib/cookies";
+import { getCookieValue } from "@/actions/getCookieValue";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   // Navbar toggle
@@ -18,12 +28,31 @@ const Header = () => {
 
   // Authentication state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState<any>(null);
 
   // Check if user is logged in
   useEffect(() => {
-    const token = Cookies.get("token");
-    const userData = localStorage.getItem("userData");
-    setIsLoggedIn(!!(token && userData));
+    let mounted = true;
+    (async () => {
+      try {
+        const userCookieKey = ((COOKIE_KEYS?.USER as any)?.DATA as string) ?? "user";
+        const user = (await getCookieValue(userCookieKey)) ?? {};
+
+
+        const token = Cookies.get("token");
+        if (!mounted) return;
+        setUserData(user);
+        setIsLoggedIn(true);
+      } catch {
+        if (mounted) {
+          setIsLoggedIn(false);
+          setUserData(null);
+        }
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   // Sticky Navbar
@@ -75,139 +104,206 @@ const Header = () => {
 
   return (
     <>
-    <ClickOutside onClick={() => setNavbarOpen(false)} className="relative">
-      <header
-        className={`header left-0 top-0 z-40 flex w-full items-center ${sticky
+      <ClickOutside onClick={() => setNavbarOpen(false)} className="relative">
+        <header
+          className={`header left-0 top-0 z-40 flex w-full items-center ${sticky
             ? "fixed z-9999 bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition border-shadow border border-gray-200"
             : "absolute bg-transparent"
-          }`}
-      >
-        <div className="container">
-          <div className="relative -mx-4 flex items-center justify-between">
-            <div className="w-full md:w-60 px-4 xl:mr-12">
-              <Link
-                href="/"
-                className={`header-logo block w-full ${sticky ? "py-3 lg:py-2" : "py-5 lg:py-8"
-                  }`}
-              >
-                <div className="flex items-center">
-                  <div className="relative h-10 w-auto md:h-12">
-                    <img
-                      src="./ICAPicon.svg"
-                      alt="ICAP 2025 Logo"
-                      className="h-full w-auto object-contain"
-                      sizes="(max-width: 768px) 100vw, 120px"
-
-                    />
-                  </div>
-                  <span className="ml-2 text-lg font-semibold text-black md:text-xl">
-                    ICAP2025
-                  </span>
-                </div>
-              </Link>
-            </div>
-            <div className="flex w-full items-center justify-between px-4">
-              <div>
-                <button
-                  onClick={navbarToggleHandler}
-                  id="navbarToggler"
-                  aria-label="Mobile Menu"
-                  className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
-                >
-                  <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-primary transition-all duration-300  ${navbarOpen ? " top-[7px] rotate-45" : " "
-                      }`}
-                  />
-                  <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-primary transition-all duration-300  ${navbarOpen ? "opacity-0 " : " "
-                      }`}
-                  />
-                  <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-primary transition-all duration-300  ${navbarOpen ? " top-[-8px] -rotate-45" : " "
-                      }`}
-                  />
-                </button>
-                <nav
-                  id="navbarCollapse"
-                  className={`navbar absolute right-0 z-30 w-[250px] rounded border-[.5px] bg-white px-6 py-4 duration-300 lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${navbarOpen
-                      ? "visibility top-full opacity-100"
-                      : "invisible top-[120%] opacity-0"
+            }`}
+        >
+          <div className="container">
+            <div className="relative -mx-4 flex items-center justify-between">
+              <div className="w-full md:w-60 px-4 xl:mr-12">
+                <Link
+                  href="/"
+                  className={`header-logo block w-full ${sticky ? "py-3 lg:py-2" : "py-5 lg:py-8"
                     }`}
                 >
-                  <ul className="block lg:flex lg:space-x-12">
-                    {menuData.map((menuItem, index) => (
-                      <li key={index} className="group relative">
-                        {menuItem.path ? (
-                          <Link
-                            href={menuItem.path}
-                            className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${usePathName === menuItem.path
+                  <div className="flex items-center">
+                    <div className="relative h-10 w-auto md:h-12">
+                      <img
+                        src="./ICAPicon.svg"
+                        alt="ICAP 2025 Logo"
+                        className="h-full w-auto object-contain"
+                        sizes="(max-width: 768px) 100vw, 120px"
+
+                      />
+                    </div>
+                    <span className="ml-2 text-lg font-semibold text-black md:text-xl">
+                      ICAP2025
+                    </span>
+                  </div>
+                </Link>
+              </div>
+              <div className="flex w-full items-center justify-between px-4">
+                <div>
+                  <button
+                    onClick={navbarToggleHandler}
+                    id="navbarToggler"
+                    aria-label="Mobile Menu"
+                    className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+                  >
+                    <span
+                      className={`relative my-1.5 block h-0.5 w-[30px] bg-primary transition-all duration-300  ${navbarOpen ? " top-[7px] rotate-45" : " "
+                        }`}
+                    />
+                    <span
+                      className={`relative my-1.5 block h-0.5 w-[30px] bg-primary transition-all duration-300  ${navbarOpen ? "opacity-0 " : " "
+                        }`}
+                    />
+                    <span
+                      className={`relative my-1.5 block h-0.5 w-[30px] bg-primary transition-all duration-300  ${navbarOpen ? " top-[-8px] -rotate-45" : " "
+                        }`}
+                    />
+                  </button>
+                  <nav
+                    id="navbarCollapse"
+                    className={`navbar absolute right-0 z-30 w-[250px] rounded border-[.5px] bg-white px-6 py-4 duration-300 lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${navbarOpen
+                      ? "visibility top-full opacity-100"
+                      : "invisible top-[120%] opacity-0"
+                      }`}
+                  >
+                    <ul className="block lg:flex lg:space-x-12">
+                      {menuData.map((menuItem, index) => (
+                        <li key={index} className="group relative">
+                          {menuItem.path ? (
+                            <Link
+                              href={menuItem.path}
+                              className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${usePathName === menuItem.path
                                 ? "text-primary"
                                 : "text-dark hover:text-primary"
-                              }`}
-                          >
-                            {menuItem.title}
-                          </Link>
-                        ) : (
-                          <>
-                            <p
-                              onClick={() => handleSubmenu(index)}
-                              className="flex cursor-pointer items-center justify-between py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
-                            >
-                              {menuItem.title}
-                              <span className="pl-3">
-                                <svg width="25" height="24" viewBox="0 0 25 24">
-                                  <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M6.29289 8.8427C6.68342 8.45217 7.31658 8.45217 7.70711 8.8427L12 13.1356L16.2929 8.8427C16.6834 8.45217 17.3166 8.45217 17.7071 8.8427C18.0976 9.23322 18.0976 9.86639 17.7071 10.2569L12 15.964L6.29289 10.2569C5.90237 9.86639 5.90237 9.23322 6.29289 8.8427Z"
-                                    fill="currentColor"
-                                  />
-                                </svg>
-                              </span>
-                            </p>
-                            <div
-                              className={`submenu relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100 lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${openIndex === index ? "block" : "hidden"
                                 }`}
                             >
-                              {menuItem.submenu.map((submenuItem, index) => (
-                                <Link
-                                  href={submenuItem.path}
-                                  key={index}
-                                  className="block rounded py-2.5 text-sm text-dark hover:text-primary lg:px-3"
-                                >
-                                  {submenuItem.title}
-                                </Link>
-                              ))}
+                              {menuItem.title}
+                            </Link>
+                          ) : (
+                            <>
+                              <p
+                                onClick={() => handleSubmenu(index)}
+                                className="flex cursor-pointer items-center justify-between py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
+                              >
+                                {menuItem.title}
+                                <span className="pl-3">
+                                  <svg width="25" height="24" viewBox="0 0 25 24">
+                                    <path
+                                      fillRule="evenodd"
+                                      clipRule="evenodd"
+                                      d="M6.29289 8.8427C6.68342 8.45217 7.31658 8.45217 7.70711 8.8427L12 13.1356L16.2929 8.8427C16.6834 8.45217 17.3166 8.45217 17.7071 8.8427C18.0976 9.23322 18.0976 9.86639 17.7071 10.2569L12 15.964L6.29289 10.2569C5.90237 9.86639 5.90237 9.23322 6.29289 8.8427Z"
+                                      fill="currentColor"
+                                    />
+                                  </svg>
+                                </span>
+                              </p>
+                              <div
+                                className={`submenu relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100 lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${openIndex === index ? "block" : "hidden"
+                                  }`}
+                              >
+                                {menuItem.submenu.map((submenuItem, index) => (
+                                  <Link
+                                    href={submenuItem.path}
+                                    key={index}
+                                    className="block rounded py-2.5 text-sm text-dark hover:text-primary lg:px-3"
+                                  >
+                                    {submenuItem.title}
+                                  </Link>
+                                ))}
+                              </div>
+                            </>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                </div>
+                <div className="flex items-center justify-end pr-16 lg:pr-0">
+                  {isLoggedIn ? (
+                    <div className="relative">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <button className="flex items-center gap-3 rounded-full px-2 py-1 hover:bg-slate-100 transition-colors">
+                            <Avatar className="h-9 w-9 border-2 border-primary/20">
+                              <AvatarImage
+                                src={userData?.profilePic}
+                                alt={userData?.fullName || "User"}
+                              />
+                              <AvatarFallback className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-semibold">
+                                {userData?.fullName
+                                  ? userData.fullName
+                                    .split(" ")
+                                    .map((n: string) => n[0])
+                                    .join("")
+                                    .toUpperCase()
+                                    .slice(0, 2)
+                                  : "U"}
+                              </AvatarFallback>
+                            </Avatar>
+                            <span className="hidden truncate text-sm font-medium md:block">
+                              {userData?.fullName
+                                ? userData.fullName.trim().split(/\s+/).slice(0, 2).join(" ")
+                                : "User"}
+                            </span>
+                          </button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="w-56">
+                          <DropdownMenuLabel className="py-2">
+                            <div className="flex flex-col space-y-1">
+                              <span className="text-sm font-medium">{userData?.fullName || "User"}</span>
+                              <span className="text-xs text-muted-foreground truncate">
+                                {userData?.email || "user@example.com"}
+                              </span>
                             </div>
-                          </>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </div>
-              <div className="flex items-center justify-end pr-16 lg:pr-0">
-                {isLoggedIn ? (
-                  <div></div>
-                  // <DropdownUser />
-                ) : (
-                  <Link
-                    href="/login"
-                    className="ease-in-up hidden rounded-xl border border-[#cbd5e1] bg-primary px-5 py-2 shadow-xl backdrop-blur-sm text-base font-medium text-white transform transition duration-500 hover:scale-105 hover:bg-opacity-90 hover:shadow-btn-hover md:block "
-                  >
-                    Sign In
-                  </Link>
-                )}
+                          </DropdownMenuLabel>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem asChild>
+                            <Link href="/dashboard" className="cursor-pointer">
+                              Dashboard
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem asChild>
+                            <Link href="/registration-fees" className="cursor-pointer">
+                              Registration Fees
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem asChild>
+                            <Link href="/submission" className="cursor-pointer">
+                              Submit Paper
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem
+                            onClick={() => {
+                              Cookies.remove("token");
+                              const userCookieKey = ((COOKIE_KEYS?.USER as any)?.DATA as string) ?? "user";
+                              Cookies.remove(userCookieKey);
+                              setIsLoggedIn(false);
+                              setUserData(null);
+                              window.location.href = "/login";
+                            }}
+                            className="cursor-pointer text-red-600 focus:text-red-600"
+                          >
+                            Logout
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  ) : (
+                    <Link
+                      href="/login"
+                      className="ease-in-up hidden rounded-xl border border-[#cbd5e1] bg-primary px-5 py-2 shadow-xl backdrop-blur-sm text-base font-medium text-white transform transition duration-500 hover:scale-105 hover:bg-opacity-90 hover:shadow-btn-hover md:block "
+                    >
+                      Sign In
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </header>
-      <ScrollProgress
-        className={`top-[63px] md:top-[70px] ${sticky ? "fixed" : "absolute"
-        } z-[9999] w-full`}
+        </header>
+        <ScrollProgress
+          className={`top-[63px] md:top-[70px] ${sticky ? "fixed" : "absolute"
+            } z-[9999] w-full`}
         />
-        </ClickOutside>
+      </ClickOutside>
     </>
   );
 };
