@@ -15,8 +15,8 @@ exports.createPayment = async (req, res) => {
         }
 
         // Set redirect URL
-        const redirectUrl = process.env.REDIRECT_URL || `${process.env.NEXT_PUBLIC_APP_FRONTEND_URL}/dashboard/payment_status`;
-        const ipnUrl = process.env.IPN_URL;
+        const redirectUrl = `${process.env.NEXT_PUBLIC_APP_FRONTEND_URL}/dashboard/payment_status`;
+        const ipnUrl =`${process.env.NEXT_PUBLIC_APP_FRONTEND_URL}/api/payment/ipn`;
 
        
 
