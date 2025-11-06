@@ -200,3 +200,89 @@ export function setUserDataCookies(userData: UserData, token: string): void {
     Cookies.set(COOKIE_KEYS.USER.CREATED_AT, userData.createdAt, cookieOptions);
   }
 }
+
+/**
+ * Update specific user data fields in cookies and localStorage
+ */
+export function updateUserDataCookies(updates: Partial<UserData>): void {
+  const cookieOptions = {
+    expires: 7, // 7 days
+    sameSite: 'strict' as const,
+    secure: process.env.NODE_ENV === "production",
+  };
+
+  // Update profilePic in localStorage if provided
+  if (updates.profilePic !== undefined) {
+    if (typeof window !== 'undefined') {
+      if (updates.profilePic) {
+        localStorage.setItem('user_profile_pic', updates.profilePic);
+      } else {
+        localStorage.removeItem('user_profile_pic');
+      }
+    }
+  }
+
+  // Update cookies for other fields
+  if (updates.Name !== undefined) {
+    Cookies.set(COOKIE_KEYS.USER.FULL_NAME, updates.Name, cookieOptions);
+  }
+  if (updates.phone !== undefined) {
+    if (updates.phone) {
+      Cookies.set(COOKIE_KEYS.USER.PHONE, updates.phone, cookieOptions);
+    } else {
+      Cookies.remove(COOKIE_KEYS.USER.PHONE);
+    }
+  }
+  if (updates.affiliation !== undefined) {
+    if (updates.affiliation) {
+      Cookies.set(COOKIE_KEYS.USER.AFFILIATION, updates.affiliation, cookieOptions);
+    } else {
+      Cookies.remove(COOKIE_KEYS.USER.AFFILIATION);
+    }
+  }
+  if (updates.designation !== undefined) {
+    if (updates.designation) {
+      Cookies.set(COOKIE_KEYS.USER.DESIGNATION, updates.designation, cookieOptions);
+    } else {
+      Cookies.remove(COOKIE_KEYS.USER.DESIGNATION);
+    }
+  }
+  if (updates.abstractTitle !== undefined) {
+    if (updates.abstractTitle) {
+      Cookies.set(COOKIE_KEYS.USER.ABSTRACT_TITLE, updates.abstractTitle, cookieOptions);
+    } else {
+      Cookies.remove(COOKIE_KEYS.USER.ABSTRACT_TITLE);
+    }
+  }
+  if (updates.participationCategory !== undefined) {
+    if (updates.participationCategory) {
+      Cookies.set(COOKIE_KEYS.USER.PARTICIPATION_CATEGORY, updates.participationCategory, cookieOptions);
+    } else {
+      Cookies.remove(COOKIE_KEYS.USER.PARTICIPATION_CATEGORY);
+    }
+  }
+  if (updates.presenterName !== undefined) {
+    if (updates.presenterName) {
+      Cookies.set(COOKIE_KEYS.USER.PRESENTER_NAME, updates.presenterName, cookieOptions);
+    } else {
+      Cookies.remove(COOKIE_KEYS.USER.PRESENTER_NAME);
+    }
+  }
+  if (updates.registrationCategory !== undefined) {
+    if (updates.registrationCategory) {
+      Cookies.set(COOKIE_KEYS.USER.REGISTRATION_CATEGORY, updates.registrationCategory, cookieOptions);
+    } else {
+      Cookies.remove(COOKIE_KEYS.USER.REGISTRATION_CATEGORY);
+    }
+  }
+  if (updates.payment_status !== undefined) {
+    Cookies.set(COOKIE_KEYS.USER.PAYMENT_STATUS, updates.payment_status.toString(), cookieOptions);
+  }
+  if (updates.payment_date !== undefined) {
+    if (updates.payment_date) {
+      Cookies.set(COOKIE_KEYS.USER.PAYMENT_DATE, updates.payment_date, cookieOptions);
+    } else {
+      Cookies.remove(COOKIE_KEYS.USER.PAYMENT_DATE);
+    }
+  }
+}

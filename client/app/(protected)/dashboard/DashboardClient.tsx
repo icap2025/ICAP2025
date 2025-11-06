@@ -26,6 +26,7 @@ import { createPayment, getPaymentStatus } from "@/actions/payment.action";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { generatePayslip } from "@/lib/generatePayslip";
+import EditProfileDrawer from "@/components/EditProfileDrawer";
 
 export default function DashboardClient() {
   const { userData, loading, refreshAuth } = useAuth();
@@ -270,9 +271,15 @@ export default function DashboardClient() {
         </Card>
       )}
 
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight">Welcome back👋</h2>
-        <p className="text-muted-foreground mt-1">Here's an overview of your conference registration and activities.</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight">Welcome back👋</h2>
+          <p className="text-muted-foreground mt-1">Here's an overview of your conference registration and activities.</p>
+        </div>
+        <EditProfileDrawer 
+          userData={userData} 
+          onProfileUpdated={refreshAuth}
+        />
       </div>
   {/* <Card>
         <CardHeader>

@@ -100,3 +100,56 @@ exports.changePassword = catchAsync(async (req, res, next) => {
     message: 'Password changed successfully!',
   });
 });
+
+// Refresh user data and update cookies
+exports.refreshUserData = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    return next(new AppError('User not found', 404));
+  }
+
+  // Cookie options
+  const cookieOptions = {
+    httpOnly: false,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+  };
+
+  // Set/update all user cookies
+  res.cookie('token', req.headers.authorization?.split(' ')[1] || '', cookieOptions);
+  res.cookie('userId', user._id.toString(), cookieOptions);
+  res.cookie('Name', user.Name || '', cookieOptions);
+  res.cookie('Email', user.Email || '', cookieOptions);
+  res.cookie('phone', user.phone || '', cookieOptions);
+  res.cookie('affiliation', user.affiliation || '', cookieOptions);
+  res.cookie('designation', user.designation || '', cookieOptions);
+  res.cookie('abstractID', user.abstractID || '', cookieOptions);
+  res.cookie('abstractTitle', user.abstractTitle || '', cookieOptions);
+  res.cookie('participationCategory', user.participationCategory || '', cookieOptions);
+  res.cookie('registrationCategory', user.registrationCategory || '', cookieOptions);
+  res.cookie('presenterName', user.presenterName || '', cookieOptions);
+  res.cookie('role', user.role || '', cookieOptions);
+  res.cookie('isActive', user.isActive ? 'true' : 'false', cookieOptions);
+  res.cookie('isEmailVerified', user.isEmailVerified ? 'true' : 'false', cookieOptions);
+  res.cookie('payment_status', user.payment_status ? 'true' : 'false', cookieOptions);
+  res.cookie('userID', user.userID || '', cookieOptions);
+  
+  if (user.createdAt) {
+    res.cookie('createdAt', user.createdAt.toISOString(), cookieOptions);
+  }
+  if (user.payment_date) {
+    res.cookie('payment_date', user.payment_date, cookieOptions);
+  }
+  if (user.SuccessPaymentID) {
+    res.cookie('Payment_ID', user.SuccessPaymentID, cookieOptions);
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
