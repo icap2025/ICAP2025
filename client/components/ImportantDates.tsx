@@ -31,7 +31,7 @@ const ImportantDates: React.FC = () => {
             id: "3",
             title: "Updated Early Bird Registration",
             description: "Early bird registration ends on November 15, 2025.",
-            date: "2025-11-15",
+            date: "2025-11-20",
             show: true,
         },
         {
