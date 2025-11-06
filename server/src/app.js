@@ -41,12 +41,41 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Cookie parser
 app.use(cookieParser());
 
-// Test route
+// Test route - simple health check
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'success',
     message: 'Server is running!'
   });
+});
+
+// Database connection test route
+app.get('/api/db-test', async (req, res) => {
+  const mongoose = require('mongoose');
+  try {
+    const state = mongoose.connection.readyState;
+    const states = {
+      0: 'disconnected',
+      1: 'connected',
+      2: 'connecting',
+      3: 'disconnecting'
+    };
+    
+    res.status(200).json({
+      status: 'success',
+      database: {
+        state: states[state],
+        readyState: state,
+        host: mongoose.connection.host || 'not connected',
+        name: mongoose.connection.name || 'not connected'
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message
+    });
+  }
 });
 
 // Routes

@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
+// Disable buffering globally - critical for serverless
+mongoose.set('bufferCommands', false);
+
 // MongoDB connection options optimized for serverless
 const mongooseOptions = {
-  serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+  bufferCommands: false, // Disable mongoose buffering
+  serverSelectionTimeoutMS: 10000, // Increased to 10s
   socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
   maxPoolSize: 10, // Maintain up to 10 socket connections
-  minPoolSize: 2, // Maintain a minimum of 2 socket connections
+  minPoolSize: 1, // Minimum 1 connection
 };
 
 // Cache the MongoDB connection
@@ -22,8 +26,12 @@ const connectDB = async () => {
     // If connection is in progress, wait for it
     if (mongoose.connection.readyState === 2) {
       console.log('Database connection in progress, waiting...');
-      await new Promise((resolve) => {
-        mongoose.connection.once('connected', resolve);
+      await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('Connection timeout')), 10000);
+        mongoose.connection.once('connected', () => {
+          clearTimeout(timeout);
+          resolve();
+        });
       });
       cachedConnection = mongoose.connection;
       return cachedConnection;
