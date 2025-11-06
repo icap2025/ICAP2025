@@ -1,6 +1,7 @@
 "use client";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import menuData from "./menuData";
@@ -32,16 +33,16 @@ const Header = () => {
   // Sticky Navbar
   const [sticky, setSticky] = useState(false);
   const [stickyEnabled, setStickyEnabled] = useState(true);
-  const handleStickyNavbar = () => {
-    if (stickyEnabled && window.scrollY >= 80) {
-      setSticky(true);
-    } else {
-      setSticky(false);
-    }
-  };
-
-
+  
   useEffect(() => {
+    const handleStickyNavbar = () => {
+      if (stickyEnabled && window.scrollY >= 80) {
+        setSticky(true);
+      } else {
+        setSticky(false);
+      }
+    };
+
     window.addEventListener("scroll", handleStickyNavbar);
 
     // Listen for custom event from MasonryImageGrid component
@@ -63,7 +64,7 @@ const Header = () => {
       window.removeEventListener("scroll", handleStickyNavbar);
       window.removeEventListener("toggleStickyNavbar", handleStickyToggle);
     };
-  }, [stickyEnabled, handleStickyNavbar]);
+  }, [stickyEnabled]);
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
@@ -97,12 +98,12 @@ const Header = () => {
                 >
                   <div className="flex items-center">
                     <div className="relative h-10 w-auto md:h-12">
-                      <img
-                        src="./ICAPicon.svg"
+                      <Image
+                        src="/ICAPicon.svg"
                         alt="ICAP 2025 Logo"
+                        width={120}
+                        height={48}
                         className="h-full w-auto object-contain"
-                        sizes="(max-width: 768px) 100vw, 120px"
-
                       />
                     </div>
                     <span className="ml-2 text-lg font-semibold text-black md:text-xl">

@@ -274,7 +274,7 @@ export default function DashboardClient() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Welcome back👋</h2>
-          <p className="text-muted-foreground mt-1">Here's an overview of your conference registration and activities.</p>
+          <p className="text-muted-foreground mt-1">Here&apos;s an overview of your conference registration and activities.</p>
         </div>
         <EditProfileDrawer 
           userData={userData} 
@@ -449,7 +449,7 @@ export default function DashboardClient() {
                   <CheckCircle2 className="h-24 w-24 text-green-600" />
                 </div>
                 <h3 className="mt-4 text-2xl font-bold text-green-600">Payment Completed!</h3>
-                <p className="mt-2 text-muted-foreground text-center max-w-md">Your registration payment has been successfully processed. You're all set for the conference!</p>
+                <p className="mt-2 text-muted-foreground text-center max-w-md">Your registration payment has been successfully processed. You&apos;re all set for the conference!</p>
                 <Button 
                   onClick={handleDownloadPayslip}
                   className="mt-4 bg-green-600 hover:bg-green-700"

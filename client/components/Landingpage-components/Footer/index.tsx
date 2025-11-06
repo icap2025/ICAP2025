@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import GoogleTranslate from "@/components/ui/GoogleTranslate";
 
@@ -21,12 +22,12 @@ const Footer = () => {
                 {/* Logo and Translate */}
                 <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <Link href="/" className="inline-block">
-                    <img
+                    <Image
                       src="/ICAPicon.svg"
                       alt="logo"
+                      width={128}
+                      height={128}
                       className="h-auto w-20 sm:w-24 md:w-28 lg:w-32"
-                      width={100}
-                      height={24}
                     />
                   </Link>
                   <div className="flex-shrink-0">

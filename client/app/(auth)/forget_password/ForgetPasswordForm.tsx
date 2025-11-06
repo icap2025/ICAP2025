@@ -6,13 +6,13 @@ import { forgetPasswordApi } from "@/services/auth/forgetPassword";
 import { ForgetPasswordFormData } from "@/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaUser } from "react-icons/fa";
 import { toast } from "sonner";
 
 export const ForgetPasswordForm = () => {
-  const validationT = (key: string) => key;
+  const validationT = useCallback((key: string) => key, []);
   const router = useRouter();
 
   const { forgetPasswordSchema } = useMemo(() => {

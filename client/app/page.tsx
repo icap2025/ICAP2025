@@ -1,5 +1,6 @@
 import { default as ScrollUp } from "@/components/Landingpage-components/Common/ScrollUp";
 import { Metadata } from "next";
+import Image from "next/image";
 import RegistrationTimer from "@/components/Landingpage-components/RegistrationTImer";
 import ImportantDates from "@/components/ImportantDates";
 import Notice from "@/components/Notice";
@@ -24,12 +25,13 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative w-full">
           <div className="mt-14 min-h-[20vh] w-full overflow-hidden sm:mt-16 md:mt-20 md:h-[70vh] lg:mt-24 lg:h-[85vh]">
-            <img
+            <Image
               src="/hero_image.svg"
               alt="Conference Cover Photo"
+              width={1920}
+              height={1080}
               className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
-              loading="eager"
-              sizes="100vw"
+              priority
             />
           </div>
 

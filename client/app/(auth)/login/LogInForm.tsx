@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
@@ -15,7 +15,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { setUserDataCookies } from "@/lib/auth";
 
 export const LogInForm = () => {
-  const validationT = (key: string) => key;
+  const validationT = useCallback((key: string) => key, []);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { isLoggedIn, refreshAuth } = useAuth();

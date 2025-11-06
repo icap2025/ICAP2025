@@ -9,13 +9,13 @@ import { SignupFormData } from "@/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash, FaUser, FaBuilding, FaBriefcase, FaPhone, FaEnvelope, FaFileAlt, FaUserTie } from "react-icons/fa";
 import { toast } from "sonner";
 
 export const SignupForm = () => {
-  const validationT = (key: string) => key;
+  const validationT = useCallback((key: string) => key, []);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();

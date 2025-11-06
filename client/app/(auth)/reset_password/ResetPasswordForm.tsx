@@ -6,13 +6,13 @@ import { resetPasswordApi } from "@/services/auth/resetPassword";
 import { ResetPasswordFormData } from "@/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "sonner";
 
 export const ResetPasswordForm = () => {
-  const validationT = (key: string) => key;
+  const validationT = useCallback((key: string) => key, []);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
   const router = useRouter();
