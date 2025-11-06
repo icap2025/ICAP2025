@@ -12,6 +12,7 @@ export interface UserData {
   abstractID?: string;
   abstractTitle?: string;
   participationCategory?: 'Oral' | 'Poster' | 'Only Attendee' | 'Online/Virtual';
+  registrationCategory?: 'International Student' | 'International Professionals' | 'Local Professionals' | 'Local Student';
   presenterName?: string;
   transactionDetails?: {
     transactionID?: string;
@@ -22,6 +23,7 @@ export interface UserData {
   role?: string;
   isActive?: boolean;
   payment_status?: boolean;
+  payment_date?: string;
   isEmailVerified?: boolean;
   createdAt?: string;
   updatedAt?: string;
@@ -44,21 +46,51 @@ export function getUserData(): UserData | null {
     if (!token) return null;
 
     const userId = Cookies.get(COOKIE_KEYS.USER.ID);
-    const Name = Cookies.get(COOKIE_KEYS.USER.FULL_NAME); // Maps to Name field from User.js
+    const Name = Cookies.get(COOKIE_KEYS.USER.FULL_NAME);
     const email = Cookies.get(COOKIE_KEYS.USER.EMAIL);
-    // Get profilePic from localStorage instead of cookies (too large for cookies)
-    const profilePic = typeof window !== 'undefined' ? localStorage.getItem('user_profile_pic') : null;
-    const paymentStatus = Cookies.get(COOKIE_KEYS.USER.PAYMENT_STATUS);
+    
     if (!userId || !email) {
       return null;
     }
+
+    // Get profilePic from localStorage instead of cookies (too large for cookies)
+    const profilePic = typeof window !== 'undefined' ? localStorage.getItem('user_profile_pic') : null;
+    
+    // Get all other user data from cookies
+    const phone = Cookies.get(COOKIE_KEYS.USER.PHONE);
+    const affiliation = Cookies.get(COOKIE_KEYS.USER.AFFILIATION);
+    const designation = Cookies.get(COOKIE_KEYS.USER.DESIGNATION);
+    const abstractID = Cookies.get(COOKIE_KEYS.USER.ABSTRACT_ID);
+    const abstractTitle = Cookies.get(COOKIE_KEYS.USER.ABSTRACT_TITLE);
+    const participationCategory = Cookies.get(COOKIE_KEYS.USER.PARTICIPATION_CATEGORY);
+    const registrationCategory = Cookies.get(COOKIE_KEYS.USER.REGISTRATION_CATEGORY);
+    const presenterName = Cookies.get(COOKIE_KEYS.USER.PRESENTER_NAME);
+    const role = Cookies.get(COOKIE_KEYS.USER.ROLE);
+    const isActive = Cookies.get(COOKIE_KEYS.USER.IS_ACTIVE);
+    const isEmailVerified = Cookies.get(COOKIE_KEYS.USER.IS_EMAIL_VERIFIED);
+    const paymentStatus = Cookies.get(COOKIE_KEYS.USER.PAYMENT_STATUS);
+    const paymentDate = Cookies.get(COOKIE_KEYS.USER.PAYMENT_DATE);
+    const createdAt = Cookies.get(COOKIE_KEYS.USER.CREATED_AT);
 
     return {
       _id: userId,
       Name: Name || "User",
       email: email,
       profilePic: profilePic || undefined,
+      phone: phone || undefined,
+      affiliation: affiliation || undefined,
+      designation: designation || undefined,
+      abstractID: abstractID || undefined,
+      abstractTitle: abstractTitle || undefined,
+      participationCategory: participationCategory as 'Oral' | 'Poster' | 'Only Attendee' | 'Online/Virtual' | undefined,
+      registrationCategory: registrationCategory as 'International Student' | 'International Professionals' | 'Local Professionals' | 'Local Student' | undefined,
+      presenterName: presenterName || undefined,
+      role: role || undefined,
+      isActive: isActive === "true",
+      isEmailVerified: isEmailVerified === "true",
       payment_status: paymentStatus === "true",
+      payment_date: paymentDate || undefined,
+      createdAt: createdAt || undefined,
     };
   } catch (error) {
     console.error("Error getting user data:", error);
@@ -77,11 +109,25 @@ export function getUserToken(): string | null {
  * Clear all auth cookies and localStorage
  */
 export function clearAuthCookies(): void {
+  // Clear all user cookies
   Cookies.remove(COOKIE_KEYS.USER.TOKEN);
   Cookies.remove(COOKIE_KEYS.USER.ID);
   Cookies.remove(COOKIE_KEYS.USER.FULL_NAME);
   Cookies.remove(COOKIE_KEYS.USER.EMAIL);
+  Cookies.remove(COOKIE_KEYS.USER.PHONE);
+  Cookies.remove(COOKIE_KEYS.USER.AFFILIATION);
+  Cookies.remove(COOKIE_KEYS.USER.DESIGNATION);
+  Cookies.remove(COOKIE_KEYS.USER.ABSTRACT_ID);
+  Cookies.remove(COOKIE_KEYS.USER.ABSTRACT_TITLE);
+  Cookies.remove(COOKIE_KEYS.USER.PARTICIPATION_CATEGORY);
+  Cookies.remove(COOKIE_KEYS.USER.REGISTRATION_CATEGORY);
+  Cookies.remove(COOKIE_KEYS.USER.PRESENTER_NAME);
+  Cookies.remove(COOKIE_KEYS.USER.ROLE);
+  Cookies.remove(COOKIE_KEYS.USER.IS_ACTIVE);
+  Cookies.remove(COOKIE_KEYS.USER.IS_EMAIL_VERIFIED);
   Cookies.remove(COOKIE_KEYS.USER.PAYMENT_STATUS);
+  Cookies.remove(COOKIE_KEYS.USER.PAYMENT_DATE);
+  Cookies.remove(COOKIE_KEYS.USER.CREATED_AT);
   
   // Clear profilePic from localStorage
   if (typeof window !== 'undefined') {
@@ -99,9 +145,10 @@ export function setUserDataCookies(userData: UserData, token: string): void {
     secure: process.env.NODE_ENV === "production",
   };
 
+  // Set essential user data
   Cookies.set(COOKIE_KEYS.USER.TOKEN, token, cookieOptions);
   Cookies.set(COOKIE_KEYS.USER.ID, userData._id, cookieOptions);
-  Cookies.set(COOKIE_KEYS.USER.FULL_NAME, userData.Name, cookieOptions); // Maps to Name field from User.js
+  Cookies.set(COOKIE_KEYS.USER.FULL_NAME, userData.Name, cookieOptions);
   Cookies.set(COOKIE_KEYS.USER.EMAIL, userData.email, cookieOptions);
   
   // Store profilePic in localStorage instead of cookies (base64 is too large)
@@ -109,7 +156,47 @@ export function setUserDataCookies(userData: UserData, token: string): void {
     localStorage.setItem('user_profile_pic', userData.profilePic);
   }
   
+  // Store additional user data
+  if (userData.phone) {
+    Cookies.set(COOKIE_KEYS.USER.PHONE, userData.phone, cookieOptions);
+  }
+  if (userData.affiliation) {
+    Cookies.set(COOKIE_KEYS.USER.AFFILIATION, userData.affiliation, cookieOptions);
+  }
+  if (userData.designation) {
+    Cookies.set(COOKIE_KEYS.USER.DESIGNATION, userData.designation, cookieOptions);
+  }
+  if (userData.abstractID) {
+    Cookies.set(COOKIE_KEYS.USER.ABSTRACT_ID, userData.abstractID, cookieOptions);
+  }
+  if (userData.abstractTitle) {
+    Cookies.set(COOKIE_KEYS.USER.ABSTRACT_TITLE, userData.abstractTitle, cookieOptions);
+  }
+  if (userData.participationCategory) {
+    Cookies.set(COOKIE_KEYS.USER.PARTICIPATION_CATEGORY, userData.participationCategory, cookieOptions);
+  }
+  if (userData.registrationCategory) {
+    Cookies.set(COOKIE_KEYS.USER.REGISTRATION_CATEGORY, userData.registrationCategory, cookieOptions);
+  }
+  if (userData.presenterName) {
+    Cookies.set(COOKIE_KEYS.USER.PRESENTER_NAME, userData.presenterName, cookieOptions);
+  }
+  if (userData.role) {
+    Cookies.set(COOKIE_KEYS.USER.ROLE, userData.role, cookieOptions);
+  }
+  if (userData.isActive !== undefined) {
+    Cookies.set(COOKIE_KEYS.USER.IS_ACTIVE, userData.isActive.toString(), cookieOptions);
+  }
+  if (userData.isEmailVerified !== undefined) {
+    Cookies.set(COOKIE_KEYS.USER.IS_EMAIL_VERIFIED, userData.isEmailVerified.toString(), cookieOptions);
+  }
   if (userData.payment_status !== undefined) {
     Cookies.set(COOKIE_KEYS.USER.PAYMENT_STATUS, userData.payment_status.toString(), cookieOptions);
+  }
+  if (userData.payment_date) {
+    Cookies.set(COOKIE_KEYS.USER.PAYMENT_DATE, userData.payment_date, cookieOptions);
+  }
+  if (userData.createdAt) {
+    Cookies.set(COOKIE_KEYS.USER.CREATED_AT, userData.createdAt, cookieOptions);
   }
 }

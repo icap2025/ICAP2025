@@ -46,6 +46,11 @@ exports.userRegisterValidation = [
     .withMessage('Participation category is required')
     .isIn(['Oral', 'Poster', 'Only Attendee', 'Online/Virtual'])
     .withMessage('Invalid participation category'),
+  body('registrationCategory')
+    .notEmpty()
+    .withMessage('Registration category is required')
+    .isIn(['International Student', 'International Professionals', 'Local Professionals', 'Local Student'])
+    .withMessage('Invalid registration category'),
   body('presenterName')
     .trim()
     .notEmpty()

@@ -138,6 +138,49 @@ const Header = () => {
                       : "invisible top-[120%] opacity-0"
                       }`}
                   >
+                    {/* Mobile User Profile/Auth Section - Only visible on mobile */}
+                    <div className="mb-4 pb-4 border-b border-gray-200 lg:hidden">
+                      {isLoggedIn ? (
+                        <div className="flex items-center gap-3 mb-3">
+                          <Avatar className="h-10 w-10 border-2 border-primary/20">
+                            <AvatarImage
+                              src={userData?.profilePic}
+                              alt={userData?.Name || "User"}
+                            />
+                            <AvatarFallback className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-semibold">
+                              {userData?.Name
+                                ? userData.Name
+                                  .split(" ")
+                                  .map((n: string) => n[0])
+                                  .join("")
+                                  .toUpperCase()
+                                  .slice(0, 2)
+                                : "U"}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-dark truncate">
+                              {userData?.Name || "User"}
+                            </p>
+                            <p className="text-xs text-gray-500 truncate">
+                              {userData?.email || "user@example.com"}
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-2">
+                          <Link
+                            href="/login"
+                            onClick={() => setNavbarOpen(false)}
+                            className="w-full text-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 transition-colors"
+                          >
+                            Sign In
+                          </Link>
+                          
+                        </div>
+                      )}
+                    </div>
+
                     <ul className="block lg:flex lg:space-x-12">
                       {menuData.map((menuItem, index) => (
                         <li key={index} className="group relative">
@@ -188,9 +231,45 @@ const Header = () => {
                         </li>
                       ))}
                     </ul>
+
+                    {/* Mobile User Menu - Only visible on mobile when logged in */}
+                    {isLoggedIn && (
+                      <div className="my-4 pt-4 border-t border-gray-200 lg:hidden">
+                        <Link
+                          href="/dashboard"
+                          onClick={() => setNavbarOpen(false)}
+                          className="block py-2 text-sm text-dark hover:text-primary"
+                        >
+                          Dashboard
+                        </Link>
+                        <Link
+                          href="/registration-fees"
+                          onClick={() => setNavbarOpen(false)}
+                          className="block py-2 text-sm text-dark hover:text-primary"
+                        >
+                          Registration Fees
+                        </Link>
+                        <Link
+                          href="/submission"
+                          onClick={() => setNavbarOpen(false)}
+                          className="block py-2 text-sm text-dark hover:text-primary"
+                        >
+                          Submit Paper
+                        </Link>
+                        <button
+                          onClick={() => {
+                            setNavbarOpen(false);
+                            logout();
+                          }}
+                          className="block w-full text-left py-2 text-sm text-red-600 hover:text-red-700"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    )}
                   </nav>
                 </div>
-                <div className="flex items-center justify-end pr-16 lg:pr-0">
+                <div className="md:flex items-center justify-end pr-16 lg:pr-0 hidden">
                   {isLoggedIn ? (
                     <div className="relative">
                       <DropdownMenu>

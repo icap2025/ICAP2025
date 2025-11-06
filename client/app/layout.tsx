@@ -7,6 +7,7 @@ import { Inter } from "next/font/google";
 import "../styles/index.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { Toaster } from "sonner";
+import { Toaster as ShadcnToaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -158,6 +159,7 @@ export default function RootLayout({
       <body className={` ${inter.className}`}>
         <AuthProvider>
           <Toaster position="top-right" richColors />
+          <ShadcnToaster />
           {<Header />}
           {children}
           <div id="modal-root" />

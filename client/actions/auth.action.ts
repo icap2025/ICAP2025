@@ -27,46 +27,65 @@ export async function loginAction(data: LoginFormData) {
     const cookieStore = await cookies();
     const user = result.data.user;
     
-    // Set httpOnly token for server-side authentication
-    cookieStore.set(COOKIE_KEYS.USER.TOKEN, result.token, {
-      httpOnly: false, // Allow client-side access
+    const cookieOptions = {
+      httpOnly: false, // Allow client-side access for AuthContext
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "strict" as const,
       maxAge: 60 * 60 * 24 * 7, // 7 days
-    });
+    };
 
-    // Set individual user data cookies (client-accessible for useAuth)
-    cookieStore.set(COOKIE_KEYS.USER.ID, user._id, {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 7,
-    });
-    
-    cookieStore.set(COOKIE_KEYS.USER.FULL_NAME, user.Name || "User", {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 7,
-    });
-    
-    cookieStore.set(COOKIE_KEYS.USER.EMAIL, user.email, {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 7,
-    });
+    // Set essential user data
+    cookieStore.set(COOKIE_KEYS.USER.TOKEN, result.token, cookieOptions);
+    cookieStore.set(COOKIE_KEYS.USER.ID, user._id, cookieOptions);
+    cookieStore.set(COOKIE_KEYS.USER.FULL_NAME, user.Name || "User", cookieOptions);
+    cookieStore.set(COOKIE_KEYS.USER.EMAIL, user.email, cookieOptions);
     
     // DON'T store profilePic in cookies - it's too large (base64 image)
     // The profilePic will be stored in localStorage by setUserDataCookies() on the client side
     
+    // Set additional user data (if available)
+    if (user.phone) {
+      cookieStore.set(COOKIE_KEYS.USER.PHONE, user.phone, cookieOptions);
+    }
+    if (user.affiliation) {
+      cookieStore.set(COOKIE_KEYS.USER.AFFILIATION, user.affiliation, cookieOptions);
+    }
+    if (user.designation) {
+      cookieStore.set(COOKIE_KEYS.USER.DESIGNATION, user.designation, cookieOptions);
+    }
+    if (user.abstractID) {
+      cookieStore.set(COOKIE_KEYS.USER.ABSTRACT_ID, user.abstractID, cookieOptions);
+    }
+    if (user.abstractTitle) {
+      cookieStore.set(COOKIE_KEYS.USER.ABSTRACT_TITLE, user.abstractTitle, cookieOptions);
+    }
+    if (user.participationCategory) {
+      cookieStore.set(COOKIE_KEYS.USER.PARTICIPATION_CATEGORY, user.participationCategory, cookieOptions);
+    }
+    if (user.registrationCategory) {
+      cookieStore.set(COOKIE_KEYS.USER.REGISTRATION_CATEGORY, user.registrationCategory, cookieOptions);
+    }
+    if (user.presenterName) {
+      cookieStore.set(COOKIE_KEYS.USER.PRESENTER_NAME, user.presenterName, cookieOptions);
+    }
+    if (user.role) {
+      cookieStore.set(COOKIE_KEYS.USER.ROLE, user.role, cookieOptions);
+    }
+    if (user.isActive !== undefined) {
+      cookieStore.set(COOKIE_KEYS.USER.IS_ACTIVE, user.isActive.toString(), cookieOptions);
+    }
+    if (user.isEmailVerified !== undefined) {
+      cookieStore.set(COOKIE_KEYS.USER.IS_EMAIL_VERIFIED, user.isEmailVerified.toString(), cookieOptions);
+    }
     if (user.payment_status !== undefined) {
-      cookieStore.set(COOKIE_KEYS.USER.PAYMENT_STATUS, user.payment_status.toString(), {
-        httpOnly: false,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 60 * 60 * 24 * 7,
-      });
+      cookieStore.set(COOKIE_KEYS.USER.PAYMENT_STATUS, user.payment_status.toString(), cookieOptions);
+    }
+
+    if (user.createdAt) {
+      cookieStore.set(COOKIE_KEYS.USER.CREATED_AT, user.createdAt, cookieOptions);
+    }
+    if (user.payment_date) {
+      cookieStore.set(COOKIE_KEYS.USER.PAYMENT_DATE, user.payment_date, cookieOptions);
     }
 
     // Return full user data including profilePic - it will be stored in localStorage client-side

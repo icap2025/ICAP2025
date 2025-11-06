@@ -49,6 +49,9 @@ export const createAuthSchemas = (validationT: (key: string) => string) => {
             participationCategory: z.enum(['Oral', 'Poster', 'Only Attendee', 'Online/Virtual'], {
                 message: validationT("Please select a participation category")
             }),
+            registrationCategory: z.enum(['International Student', 'International Professionals', 'Local Professionals', 'Local Student'], {
+                message: validationT("Please select a registration category")
+            }),
             presenterName: z
                 .string()
                 .min(2, validationT("Presenter name must be at least 2 characters"))

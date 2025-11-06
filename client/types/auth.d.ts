@@ -23,6 +23,7 @@ export interface SignupFormData {
   abstractID: string;
   abstractTitle: string;
   participationCategory: 'Oral' | 'Poster' | 'Only Attendee' |'Online/Virtual';
+  registrationCategory: 'International Student' | 'International Professionals' | 'Local Professionals' | 'Local Student';
   presenterName: string;
 }
 export interface SignupFormErrors {
@@ -37,6 +38,7 @@ export interface SignupFormErrors {
   abstractID?: string;
   abstractTitle?: string;
   participationCategory?: string;
+  registrationCategory?: string;
   presenterName?: string;
 }
 export interface SignupFormTouched {
@@ -51,6 +53,7 @@ export interface SignupFormTouched {
   abstractID: boolean;
   abstractTitle: boolean;
   participationCategory: boolean;
+  registrationCategory: boolean;
   presenterName: boolean;
 }
 

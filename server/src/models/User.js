@@ -11,13 +11,13 @@ const userSchema = new mongoose.Schema(
       minlength: [2, 'Full name must be at least 2 characters'],
       maxlength: [50, 'Full name must be no more than 50 characters'],
     },
-      affiliation: {
+    affiliation: {
       type: String,
       required: [true, 'Please provide your affiliation (institution/organization)'],
       trim: true,
       maxlength: [150, 'Affiliation must be no more than 150 characters'],
     },
-     designation: {
+    designation: {
       type: String,
       required: [true, 'Please provide your position/designation'],
       trim: true,
@@ -40,30 +40,35 @@ const userSchema = new mongoose.Schema(
       enum: ['Oral', 'Poster', 'Only Attendee','Online/Virtual'],
       required: [true, 'Please select a participation category'],
     },
+    registrationCategory: {
+      type: String,
+      enum: ['International Student', 'International Professionals', 'Local Professionals', 'Local Student'],
+      required: [true, 'Please select a registration category'],
+    },
     presenterName: {
       type: String,
-      required: [true, 'Please provide the presenter’s name'],
+      required: [true, 'Please provide the presenter'],
       trim: true,
       maxlength: [100, 'Presenter name must be no more than 100 characters'],
     },
-    transactionDetails: {
-      transactionID: {
+    transactionHistory: [
+    {
+      paymentID: {
         type: String,
         trim: true,
       },
-      dateTime: {
-        type: String,
-        trim: true,
+      amount: {
+        type: Number,
       },
-      senderBank: {
+      payment_status: {
         type: String,
-        trim: true,
       },
-      foreignRemittance: {
-        type: String,
-        trim: true,
+      payment_date: {
+        type: Date,
       },
-    },
+        }
+     
+    ],
     phone:{
         type: String,
         required: [true, 'Please provide your phone number'],
@@ -100,9 +105,19 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    SuccessPaymentID: {
+      type: String,
+      trim: true,
+    },
+    amount: {
+      type: Number,
+    },
     payment_status: {
       type: Boolean,
       default: false,
+    },
+    payment_date: {
+      type: Date,
     },
     isEmailVerified: {
       type: Boolean,

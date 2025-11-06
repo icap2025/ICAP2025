@@ -43,6 +43,7 @@ export const SignupForm = () => {
       abstractID: "",
       abstractTitle: "",
       participationCategory: undefined as "Oral" | "Poster" | "Only Attendee" | "Online/Virtual" | undefined,
+      registrationCategory: undefined as "International Student" | "International Professionals" | "Local Professionals" | "Local Student" | undefined,
       presenterName: "",
     },
   });
@@ -52,6 +53,13 @@ export const SignupForm = () => {
     { value: "Poster", label: "Poster Presentation" },
     { value: "Only Attendee", label: "Only Attendee" },
     { value: "Online/Virtual", label: "Online/Virtual" },
+  ];
+
+  const registrationOptions = [
+    { value: "International Student", label: "International Student" },
+    { value: "International Professionals", label: "International Professionals" },
+    { value: "Local Professionals", label: "Local Professionals" },
+    { value: "Local Student", label: "Local Student" },
   ];
 
   const onSubmit = async (data: SignupFormData) => {
@@ -304,7 +312,24 @@ export const SignupForm = () => {
                   required
                   error={errors.participationCategory?.message}
                   placeholder="Select presentation type"
-                  className="md:col-span-2"
+                />
+              )}
+            />
+
+            <Controller
+              name="registrationCategory"
+              control={control}
+              render={({ field }) => (
+                <SelectInput
+                  id="registrationCategory"
+                  label="Registration Category"
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  options={registrationOptions}
+                  required
+                  error={errors.registrationCategory?.message}
+                  placeholder="Select registration type"
                 />
               )}
             />
