@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
+import { P } from "framer-motion/dist/types.d-B_QPEvFK";
 
 
 const Header = () => {
@@ -169,13 +170,13 @@ const Header = () => {
                         </div>
                       ) : (
                         <div className="flex flex-col gap-2">
-                          <Link
+                          {/* <Link
                             href="/login"
                             onClick={() => setNavbarOpen(false)}
                             className="w-full text-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 transition-colors"
                           >
                             Sign In
-                          </Link>
+                          </Link> */}
                           
                         </div>
                       )}
@@ -334,12 +335,13 @@ const Header = () => {
                       </DropdownMenu>
                     </div>
                   ) : (
-                    <Link
-                      href="/login"
-                      className="ease-in-up hidden rounded-xl border border-[#cbd5e1] bg-primary px-5 py-2 shadow-xl backdrop-blur-sm text-base font-medium text-white transform transition duration-500 hover:scale-105 hover:bg-opacity-90 hover:shadow-btn-hover md:block "
-                    >
-                      Sign In
-                    </Link>
+                    // <Link
+                    //   href="/login"
+                    //   className="ease-in-up hidden rounded-xl border border-[#cbd5e1] bg-primary px-5 py-2 shadow-xl backdrop-blur-sm text-base font-medium text-white transform transition duration-500 hover:scale-105 hover:bg-opacity-90 hover:shadow-btn-hover md:block "
+                    // >
+                    //   Sign In
+                    // </Link>
+                    <p className="text-red-600 font-semibold animate-pulse">Reg Starting Soon ...</p>
                   )}
                 </div>
               </div>
