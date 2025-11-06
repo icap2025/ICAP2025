@@ -13,9 +13,12 @@ process.on('uncaughtException', (err) => {
 
 const app = require('./app');
 
-// Simple MongoDB connection
+
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log('✅ DB connection successful!'))
   .catch((err) => {
     console.log('❌ DB connection error:', err.message);
