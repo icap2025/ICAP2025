@@ -23,5 +23,6 @@ export const COOKIE_KEYS = {
     IS_EMAIL_VERIFIED: "user_is_email_verified",
     CREATED_AT: "user_created_at",
     PAYMENT_DATE: "user_payment_date",
+    Payment_ID: "Payment_ID",
   },
 };

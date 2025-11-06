@@ -163,6 +163,12 @@ export const getPaymentStatus = async () => {
             
             // Clear temporary Payment_ID cookie
             document.cookie = `Payment_ID=; path=/; max-age=0; SameSite=Lax`;
+
+            if (paymentID) {
+                document.cookie = `Payment_ID=${paymentID}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
+            }
+
+            
         }
       
         return response.data;

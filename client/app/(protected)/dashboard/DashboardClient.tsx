@@ -18,18 +18,21 @@ import {
   User,
   Loader2,
   Clock,
+  Download,
 } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { createPayment, getPaymentStatus } from "@/actions/payment.action";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import { generatePayslip } from "@/lib/generatePayslip";
 
 export default function DashboardClient() {
   const { userData, loading, refreshAuth } = useAuth();
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [isCheckingPayment, setIsCheckingPayment] = useState(false);
   const [countdown, setCountdown] = useState(10);
+  const [paymentData, setPaymentData] = useState<any>(null);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -64,6 +67,11 @@ export default function DashboardClient() {
           try {
             const response = await getPaymentStatus();
             console.log('Payment status check response:', response);
+            
+            // Store payment data for payslip generation
+            if (response?.data) {
+              setPaymentData(response.data);
+            }
             
             // Refresh auth to get updated payment status
             refreshAuth();
@@ -187,6 +195,44 @@ export default function DashboardClient() {
       });
       
       setIsProcessingPayment(false);
+    }
+  };
+
+  // Handle payslip download
+  const handleDownloadPayslip = async () => {
+    try {
+      // If we don't have payment data, fetch it
+      let data = paymentData;
+      
+      if (!data) {
+        toast({
+          title: "Fetching Payment Details",
+          description: "Please wait...",
+        });
+        
+        const response = await getPaymentStatus();
+        if (response?.data) {
+          data = response.data;
+          setPaymentData(data);
+        }
+      }
+      
+      if (data && userData) {
+        generatePayslip(data, userData);
+        toast({
+          title: "Payslip Downloaded",
+          description: "Your payment receipt has been downloaded successfully.",
+        });
+      } else {
+        throw new Error('Payment details not available');
+      }
+    } catch (error: any) {
+      console.error('Download payslip error:', error);
+      toast({
+        variant: "destructive",
+        title: "Download Failed",
+        description: error.message || "Failed to generate payslip. Please try again.",
+      });
     }
   };
 
@@ -397,7 +443,14 @@ export default function DashboardClient() {
                 </div>
                 <h3 className="mt-4 text-2xl font-bold text-green-600">Payment Completed!</h3>
                 <p className="mt-2 text-muted-foreground text-center max-w-md">Your registration payment has been successfully processed. You're all set for the conference!</p>
-                <Badge variant="default" className="mt-4 bg-green-600">Registration Confirmed</Badge>
+                <Button 
+                  onClick={handleDownloadPayslip}
+                  className="mt-4 bg-green-600 hover:bg-green-700"
+                  size="lg"
+                >
+                  <FileText className="mr-2 h-5 w-5" />
+                  Download Payslip
+                </Button>
               </div>
             ) : (
               <div className="space-y-6">

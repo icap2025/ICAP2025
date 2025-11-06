@@ -87,7 +87,9 @@ export async function loginAction(data: LoginFormData) {
     if (user.payment_date) {
       cookieStore.set(COOKIE_KEYS.USER.PAYMENT_DATE, user.payment_date, cookieOptions);
     }
-
+  if (user.SuccessPaymentID) {
+      cookieStore.set(COOKIE_KEYS.USER.Payment_ID, user.SuccessPaymentID, cookieOptions);
+    }
     // Return full user data including profilePic - it will be stored in localStorage client-side
     return {
       success: true,

@@ -11,6 +11,6 @@ router.post("/create", protect, createPayment);
 router.post("/ipn", handleIPN);
 
 // Protected route - get payment status
-router.post("/status", getPaymentStatus);
+router.post("/status", protect, getPaymentStatus);
 
 module.exports = router;
