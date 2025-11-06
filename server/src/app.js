@@ -19,8 +19,8 @@ app.use(helmet());
 const corsOptions = {
   origin: [
     process.env.NEXT_PUBLIC_APP_FRONTEND_URL,
-    process.env.NEXT_PUBLIC_ADMIN_FRONTEND_URL
-  ],
+    process.env.NEXT_PUBLIC_ADMIN_FRONTEND_URL || 'http://localhost:3001'
+  ].filter(Boolean), // Remove undefined values
   credentials: true,
   optionsSuccessStatus: 200
 };
