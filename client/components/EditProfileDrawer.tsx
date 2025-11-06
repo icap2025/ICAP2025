@@ -215,8 +215,8 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
-          <Edit className="h-4 w-4" />
+        <Button variant="outline" size="lg" className="gap-2 border-2 border-green-500">
+          <Edit className="h-4 w-4  " />
           Edit Profile
         </Button>
       </DrawerTrigger>
