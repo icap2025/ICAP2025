@@ -6,7 +6,7 @@ mongoose.set('bufferCommands', false);
 // MongoDB connection options optimized for serverless
 const mongooseOptions = {
   bufferCommands: false, // Disable mongoose buffering
-  serverSelectionTimeoutMS: 10000, // Increased to 10s
+  serverSelectionTimeoutMS: 10000, // Timeout for server selection
   socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
   maxPoolSize: 10, // Maintain up to 10 socket connections
   minPoolSize: 1, // Minimum 1 connection
@@ -38,6 +38,8 @@ const connectDB = async () => {
     }
 
     console.log('Establishing new database connection...');
+    
+    // IMPORTANT: Await the connection before proceeding
     const conn = await mongoose.connect(process.env.MONGO_URI, mongooseOptions);
     
     cachedConnection = conn.connection;
