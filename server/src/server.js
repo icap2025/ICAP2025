@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
+const connectDB = require('./config/database');
 
 // Load environment variables
 dotenv.config();
@@ -13,36 +13,8 @@ process.on('uncaughtException', (err) => {
 
 const app = require('./app');
 
-// MongoDB connection options for better stability
-const mongoOptions = {
-  serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-  socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
-};
-
-// MongoDB connection event listeners
-mongoose.connection.on('connected', () => {
-  console.log('📡 Mongoose connected to MongoDB');
-});
-
-mongoose.connection.on('error', (err) => {
-  console.log('❌ Mongoose connection error:', err);
-});
-
-mongoose.connection.on('disconnected', () => {
-  console.log('📴 Mongoose disconnected from MongoDB');
-});
-
-mongoose
-  .connect(process.env.MONGO_URI, mongoOptions)
-  .then(() => {
-    console.log('✅ DB connection successful!');
-    console.log('📊 Database:', mongoose.connection.name);
-  })
-  .catch((err) => {
-    console.log('❌ DB connection error:', err.message);
-    console.log('Please check your MONGO_URI in .env file');
-    process.exit(1);
-  });
+// Connect to MongoDB
+connectDB();
 
 // Start server
 const port = process.env.PORT || 5000;

@@ -3,6 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
+const connectDB = require('./config/database');
 
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
@@ -40,6 +41,20 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Cookie parser
 app.use(cookieParser());
+
+// Database connection middleware for serverless
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error('Database connection failed:', error);
+    res.status(503).json({
+      success: false,
+      message: 'Database connection failed. Please try again.'
+    });
+  }
+});
 
 // Test route - simple health check
 app.get('/api/health', (req, res) => {
@@ -84,6 +99,13 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/payment', paymentRoutes);
 
+// Handle 404 - Route not found (use /:path(*) instead of * for Express 5.x compatibility)
+app.use((req, res, next) => {
+  res.status(404).json({
+    success: false,
+    message: `Can't find ${req.originalUrl} on this server!`
+  });
+});
 
 // Global error handler
 app.use(errorHandler);

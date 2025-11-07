@@ -2,55 +2,55 @@ const mongoose = require('mongoose');
 
 // Disable buffering globally - critical for serverless
 mongoose.set('bufferCommands', false);
+mongoose.set('strictQuery', false);
 
-// MongoDB connection options optimized for serverless
+// Simple MongoDB connection options
 const mongooseOptions = {
-  bufferCommands: false, // Disable mongoose buffering
-  serverSelectionTimeoutMS: 10000, // Timeout for server selection
-  socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
-  maxPoolSize: 10, // Maintain up to 10 socket connections
-  minPoolSize: 1, // Minimum 1 connection
+  bufferCommands: false,
+  maxPoolSize: 10,
+  serverSelectionTimeoutMS: 10000,
+  socketTimeoutMS: 45000,
 };
 
-// Cache the MongoDB connection
-let cachedConnection = null;
+// Cache the MongoDB connection for serverless
+let isConnected = false;
 
 const connectDB = async () => {
-  // If we have a cached connection and it's ready, use it
-  if (cachedConnection && mongoose.connection.readyState === 1) {
-    console.log('Using cached database connection');
-    return cachedConnection;
+  // If already connected, return
+  if (isConnected && mongoose.connection.readyState === 1) {
+    console.log('📊 Using existing database connection');
+    return;
   }
 
   try {
-    // If connection is in progress, wait for it
-    if (mongoose.connection.readyState === 2) {
-      console.log('Database connection in progress, waiting...');
-      await new Promise((resolve, reject) => {
-        const timeout = setTimeout(() => reject(new Error('Connection timeout')), 10000);
-        mongoose.connection.once('connected', () => {
-          clearTimeout(timeout);
-          resolve();
-        });
-      });
-      cachedConnection = mongoose.connection;
-      return cachedConnection;
-    }
-
-    console.log('Establishing new database connection...');
+    // Connect to MongoDB
+    await mongoose.connect(process.env.MONGO_URI, mongooseOptions);
     
-    // IMPORTANT: Await the connection before proceeding
-    const conn = await mongoose.connect(process.env.MONGO_URI, mongooseOptions);
+    isConnected = true;
+    console.log('✅ MongoDB Connected:', mongoose.connection.host);
+    console.log('📊 Database:', mongoose.connection.name);
     
-    cachedConnection = conn.connection;
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-    
-    return cachedConnection;
   } catch (error) {
-    console.error(`❌ MongoDB Connection Error: ${error.message}`);
-    cachedConnection = null;
+    console.error('❌ MongoDB Connection Error:', error.message);
+    isConnected = false;
     throw error;
   }
 };
+
+// Connection event listeners
+mongoose.connection.on('connected', () => {
+  isConnected = true;
+  console.log('📡 Mongoose connected to MongoDB');
+});
+
+mongoose.connection.on('error', (err) => {
+  isConnected = false;
+  console.error('❌ Mongoose connection error:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+  isConnected = false;
+  console.log('📴 Mongoose disconnected from MongoDB');
+});
 
 module.exports = connectDB;

@@ -87,7 +87,7 @@ export const SignupForm = () => {
   ];
 
   const onSubmit = async (data: SignupFormData) => {
-    console.log("Form submitted with data:", data);
+    // console.log("Form submitted with data:", data);
     try {
       const response = await signupApi(data);
       console.log("API response:", response);
@@ -104,7 +104,7 @@ export const SignupForm = () => {
         toast.error(
           response.message || "Registration failed. Please try again.",
         );
-        console.error("Signup failed:", response);
+        // console.error("Signup failed:", response);
       }
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again.");
