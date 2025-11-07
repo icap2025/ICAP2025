@@ -8,9 +8,9 @@ export default function AuthLayout({
   return (
     <div className="flex flex-col">
       <main className="w-full bg-slate-100">
-        <section className="relative w-full flex justify-center items-center py-24">
+        <section className="relative w-full flex justify-center items-center pt-24">
 
-          <div className="w-full h-full lg:w-1/2 flex flex-col justify-start overflow-auto">
+          <div className="w-full h-full flex flex-col justify-start overflow-auto">
             {children}
           </div>
 

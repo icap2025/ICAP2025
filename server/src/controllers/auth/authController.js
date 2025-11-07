@@ -214,8 +214,8 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   try {
     const resetURL =
       userType === 'admin'
-        ? `${process.env.NEXT_PUBLIC_ADMIN_FRONTEND_URL}/reset-password?token=${resetToken}`
-        : `${process.env.NEXT_PUBLIC_APP_FRONTEND_URL}/reset-password?token=${resetToken}`;
+        ? `${process.env.NEXT_PUBLIC_ADMIN_FRONTEND_URL}/reset_password?token=${resetToken}`
+        : `${process.env.NEXT_PUBLIC_APP_FRONTEND_URL}/reset_password?token=${resetToken}`;
 
     await emailService.sendPasswordResetEmail(
       user.email,

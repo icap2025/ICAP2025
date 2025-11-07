@@ -6,7 +6,7 @@ export const resetPasswordApi = async (
     userType: "admin" | "user" = "user"
 ): Promise<AuthResponse> => {
     try {
-        const endpoint = `/api/auth/reset-password/${data.token}`;
+        const endpoint = `/api/auth/reset_password/${data.token}`;
 
         const response = await PUBLIC_AXIOS_CLIENT.post(
             `${endpoint}?userType=${userType}`,

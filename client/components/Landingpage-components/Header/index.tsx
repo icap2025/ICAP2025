@@ -97,7 +97,7 @@ const Header = () => {
                     }`}
                 >
                   <div className="flex items-center">
-                    <div className="relative h-10 w-auto md:h-12">
+                    <div className="relative h-10 w-auto">
                       <Image
                         src="/ICAPicon.svg"
                         alt="ICAP 2025 Logo"
