@@ -1,8 +1,38 @@
 import axios from "axios";
 import { COOKIE_KEYS } from "../cookies";
 
+// Public client for authentication endpoints (no token required)
+const PUBLIC_AXIOS_CLIENT = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_APP_BACKEND_URL,
+  timeout: 10000, // 10 second timeout
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
+
+// Response interceptor for public client
+PUBLIC_AXIOS_CLIENT.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error.response?.status;
+
+    if (status >= 500) {
+      console.error("Server error - try again later.");
+    } else if (status === 404) {
+      console.error("Endpoint not found.");
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+// Authenticated client for protected endpoints (token required)
 const AUTHENTICATED_AXIOS_CLIENT = axios.create({
   baseURL: process.env.NEXT_PUBLIC_APP_BACKEND_URL,
+  timeout: 10000, // 10 second timeout
+  headers: {
+    'Content-Type': 'application/json',
+  }
 });
 
 // Request interceptor - add token to headers
@@ -45,4 +75,5 @@ AUTHENTICATED_AXIOS_CLIENT.interceptors.response.use(
   }
 );
 
+export { PUBLIC_AXIOS_CLIENT };
 export default AUTHENTICATED_AXIOS_CLIENT;
