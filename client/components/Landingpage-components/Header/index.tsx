@@ -16,8 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
-import { P } from "framer-motion/dist/types.d-B_QPEvFK";
-
 
 const Header = () => {
   // Navbar toggle
@@ -165,19 +163,19 @@ const Header = () => {
                               {userData?.Name || "User"}
                             </p>
                             <p className="text-xs text-gray-500 truncate">
-                              {userData?.email || "user@example.com"}
+                              {userData?.email}
                             </p>
                           </div>
                         </div>
                       ) : (
                         <div className="flex flex-col gap-2">
-                          {/* <Link
+                          <Link
                             href="/login"
                             onClick={() => setNavbarOpen(false)}
                             className="w-full text-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 transition-colors"
                           >
                             Sign In
-                          </Link> */}
+                          </Link>
                           
                         </div>
                       )}
@@ -349,8 +347,7 @@ const Header = () => {
           </div>
         </header>
         <ScrollProgress
-          className={`top-[63px] md:top-[70px] ${sticky ? "fixed" : "absolute"
-            } z-[9999] w-full`}
+          className={`${sticky ? "fixed top-[63px] md:top-[70px]" : "absolute top-[54px] md:top-[94px]"} z-[9998] w-full`}
         />
       </ClickOutside>
     </>
