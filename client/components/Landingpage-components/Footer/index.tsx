@@ -88,7 +88,7 @@ const Footer = () => {
                   Useful Links
                 </h2>
                 <ul className="space-y-2 sm:space-y-3">
-                  <li>
+                  {/* <li>
                     <a
                       href="/signup"
                       className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
@@ -103,7 +103,7 @@ const Footer = () => {
                     >
                       Login
                     </a>
-                  </li>
+                  </li> */}
                   <li>
                     <a
                       href="/registration-fees"

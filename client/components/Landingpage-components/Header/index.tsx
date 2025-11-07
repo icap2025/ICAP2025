@@ -116,7 +116,7 @@ const Header = () => {
                     onClick={navbarToggleHandler}
                     id="navbarToggler"
                     aria-label="Mobile Menu"
-                    className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+                    className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] lg:hidden"
                   >
                     <span
                       className={`relative my-1.5 block h-0.5 w-[30px] bg-primary transition-all duration-300  ${navbarOpen ? " top-[7px] rotate-45" : " "
@@ -169,13 +169,13 @@ const Header = () => {
                         </div>
                       ) : (
                         <div className="flex flex-col gap-2">
-                          <Link
+                          {/* <Link
                             href="/login"
                             onClick={() => setNavbarOpen(false)}
                             className="w-full text-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 transition-colors"
                           >
                             Sign In
-                          </Link>
+                          </Link> */}
                           
                         </div>
                       )}
@@ -334,12 +334,13 @@ const Header = () => {
                       </DropdownMenu>
                     </div>
                   ) : (
-                    <Link
-                      href="/login"
-                      className="ease-in-up hidden rounded-xl border border-[#cbd5e1] bg-primary px-5 py-2 shadow-xl backdrop-blur-sm text-base font-medium text-white transform transition duration-500 hover:scale-105 hover:bg-opacity-90 hover:shadow-btn-hover md:block "
-                    >
-                      Sign In
-                    </Link>
+                    // <Link
+                    //   href="/login"
+                    //   className="ease-in-up hidden rounded-xl border border-[#cbd5e1] bg-primary px-5 py-2 shadow-xl backdrop-blur-sm text-base font-medium text-white transform transition duration-500 hover:scale-105 hover:bg-opacity-90 hover:shadow-btn-hover md:block "
+                    // >
+                    //   Sign In
+                    // </Link>
+                    <div></div>
                   )}
                 </div>
               </div>
