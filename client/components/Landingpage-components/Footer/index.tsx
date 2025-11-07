@@ -90,34 +90,26 @@ const Footer = () => {
                 <ul className="space-y-2 sm:space-y-3">
                   <li>
                     <a
-                      href="/tracks"
+                      href="/signup"
                       className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
                     >
-                      Tracks
+                      Sign Up
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/registration"
+                      href="/login"
                       className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
                     >
-                      Registration
+                      Login
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/schedule"
+                      href="/registration-fees"
                       className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
                     >
-                      Schedule
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/venue"
-                      className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
-                    >
-                      Venue
+                      Registration Fees
                     </a>
                   </li>
                 </ul>
@@ -129,20 +121,20 @@ const Footer = () => {
                   ABOUT
                 </h2>
                 <ul className="space-y-2 sm:space-y-3">
-                  <li>
+                   <li>
                     <a
-                      href="/for-authors"
+                      href="/scope"
                       className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
                     >
-                      For-Authors
+                      Conference Scope
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/about-us"
+                      href="/submission"
                       className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
                     >
-                      About Us
+                      Submission Guidelines
                     </a>
                   </li>
                   <li>
@@ -172,20 +164,20 @@ const Footer = () => {
                   </li>
                   <li>
                     <a
-                      href="/signin"
+                      href="/schedule"
                       className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
                     >
-                      Sign In
+                      Schedule
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a
-                      href="/terms"
+                      href="/venue"
                       className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
                     >
-                      Terms and Condition
+                      Venue
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

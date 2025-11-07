@@ -158,7 +158,7 @@ export default function ContactPage() {
                   href="tel:+8801521781591"
                   className="text-sm font-medium text-gray-900 transition-colors hover:text-[#0B8175]"
                 >
-                  +880 1521-781591
+                  +880 1844-902338
                 </a>
                 </div>
               </div>
