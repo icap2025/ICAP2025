@@ -90,7 +90,7 @@ export const SignupForm = () => {
     // console.log("Form submitted with data:", data);
     try {
       const response = await signupApi(data);
-      console.log("API response:", response);
+      // console.log("API response:", response);
 
       if (response.success) {
         toast.success(

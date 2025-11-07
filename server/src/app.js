@@ -20,7 +20,7 @@ app.use(helmet());
 const corsOptions = {
   origin: [
     process.env.NEXT_PUBLIC_APP_FRONTEND_URL,
-    process.env.NEXT_PUBLIC_ADMIN_FRONTEND_URL
+    "https://icap2025.sust.edu"
   ],
   credentials: true,
   optionsSuccessStatus: 200
