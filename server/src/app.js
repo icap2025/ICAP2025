@@ -22,6 +22,7 @@ const corsOptions = {
     process.env.NEXT_PUBLIC_APP_FRONTEND_URL,
     "https://icap2025.sust.edu"
   ],
+  methods:['GET','POST','PUT','DELETE','PATCH'],
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -57,7 +58,7 @@ app.use(async (req, res, next) => {
 });
 
 // Test route - simple health check
-app.get('/api/health', (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).json({
     status: 'success',
     message: 'Server is running!'
