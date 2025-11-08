@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getPaymentStatus as fetchPaymentStatus } from "@/actions/payment.action";
 
-export default function PaymentStatus() {
+export default function PaymentStatus({ params }: { params: { id: string } }) {
     const [loading, setLoading] = useState(true);
     const [countdown, setCountdown] = useState(10);
     const [paymentSuccess, setPaymentSuccess] = useState<boolean | null>(null);
+    const paymentId = params.id;
 
     useEffect(() => {
         // Countdown interval
@@ -36,7 +37,7 @@ export default function PaymentStatus() {
 
     const checkPaymentStatus = async () => {
         try {
-            const response = await fetchPaymentStatus();
+            const response = await fetchPaymentStatus(paymentId);
             console.log('Payment status response:', response);
             
             // Assuming response has a success field

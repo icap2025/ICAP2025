@@ -143,12 +143,12 @@ exports.getPaymentStatus = async (req, res) => {
             }
         );
 
-        console.log('Payment gateway response:', response.data);
+        // console.log('Payment gateway response:', response.data);
 
         const paymentData = response.data;
 
         const paymentStatus = paymentData?.paymentStatusCode;
-        console.log('paymetn status' + paymentStatus);
+        // console.log('paymetn status' + paymentStatus);
 
         // Update user payment information
         const user = await User.findOne({ _id });
@@ -162,21 +162,12 @@ exports.getPaymentStatus = async (req, res) => {
 
         // Find and update transaction in history
         const transaction = user.transactionHistory.find(tx => tx.paymentID === paymentID);
-        if (transaction) {
+        if (transaction && transaction.payment_status !== 'PAID') {
             transaction.payment_status = paymentStatus;
             transaction.payment_date = new Date();
-        } else {
-            // If transaction not found, add it
-            user.transactionHistory.push({
-                paymentID: paymentID,
-                amount: paymentData?.paymentAmount || 0,
-                payment_status: paymentStatus,
-                payment_date: new Date()
-            });
-        }
-
-        // If payment is successful (PAID status)
-        if (paymentStatus === 'PAID') {
+        
+        // If payment is successful (PAID stat
+        if (paymentStatus === 'PAID' ){
             user.SuccessPaymentID = paymentID;
             user.payment_status = true;
             user.payment_date = new Date();
@@ -189,15 +180,16 @@ exports.getPaymentStatus = async (req, res) => {
             });
         }
 
-        await user.save();
-
-        return res.status(200).json({
+        await user.save(); 
+         return res.status(200).json({
             success: true,
             status: paymentStatus,
             payment_date: user.payment_date,
             message: paymentData?.message || 'Payment status retrieved',
             data: response.data
         });
+    }
+      
     }
 
     catch (error) {

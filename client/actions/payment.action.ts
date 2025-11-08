@@ -126,13 +126,17 @@ export const createPayment = async (userData: UserData | null) => {
 
 
 
-export const getPaymentStatus = async () => {
+export const getPaymentStatus = async (paymentIDParam?: string) => {
     try {
-        // Retrieve Payment_ID from cookies
-        const paymentIDMatch = document.cookie.match(new RegExp('(^| )Payment_ID=([^;]+)'));
-        const userIDMatch = document.cookie.match(new RegExp('(^| )user_id=([^;]+)'));
+        // Use provided payment ID or retrieve from cookies
+        let paymentID: string | null = paymentIDParam || null;
         
-        const paymentID = paymentIDMatch ? paymentIDMatch[2] : null;
+        if (!paymentID) {
+            const paymentIDMatch = document.cookie.match(new RegExp('(^| )Payment_ID=([^;]+)'));
+            paymentID = paymentIDMatch ? paymentIDMatch[2] : null;
+        }
+        
+        const userIDMatch = document.cookie.match(new RegExp('(^| )user_id=([^;]+)'));
         const _id = userIDMatch ? userIDMatch[2] : null;
         
         if (!paymentID) {
