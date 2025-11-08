@@ -48,14 +48,14 @@ const COLORS = {
 } as const;
 
 const FONTS = {
-  title: { size: 20, style: 'bold' as const },
-  subtitle: { size: 9, style: 'normal' as const },
-  heading: { size: 14, style: 'bold' as const },
-  subheading: { size: 11, style: 'bold' as const },
-  body: { size: 9, style: 'normal' as const },
-  bodyBold: { size: 9, style: 'bold' as const },
-  small: { size: 8, style: 'normal' as const },
-  tiny: { size: 7, style: 'normal' as const },
+  title: { size: 16, style: 'bold' as const },
+  subtitle: { size: 8, style: 'normal' as const },
+  heading: { size: 12, style: 'bold' as const },
+  subheading: { size: 9, style: 'bold' as const },
+  body: { size: 8, style: 'normal' as const },
+  bodyBold: { size: 8, style: 'bold' as const },
+  small: { size: 7, style: 'normal' as const },
+  tiny: { size: 6, style: 'normal' as const },
 } as const;
 
 const MARGINS = {
@@ -90,44 +90,44 @@ const formatDateTime = (dateString?: string): string => {
 const addHeader = (doc: jsPDF): void => {
   // Green header background
   doc.setFillColor(...COLORS.primary);
-  doc.rect(0, 0, 210, 38, 'F');
+  doc.rect(0, 0, 210, 30, 'F');
   
   // Accent line
   doc.setFillColor(...COLORS.primaryLight);
-  doc.rect(0, 38, 210, 2, 'F');
+  doc.rect(0, 30, 210, 1.5, 'F');
 
   // Conference title
   doc.setFontSize(FONTS.title.size);
   doc.setTextColor(...COLORS.white);
   doc.setFont('helvetica', FONTS.title.style);
-  doc.text('ICAP 2025', 105, 14, { align: 'center' });
+  doc.text('ICAP 2025', 105, 11, { align: 'center' });
 
   // Conference details
   doc.setFontSize(FONTS.subtitle.size);
   doc.setFont('helvetica', FONTS.subtitle.style);
-  doc.text('International Conference on Advanced Computing and Simulation', 105, 21, { align: 'center' });
-  doc.text('Shahjalal University of Science and Technology, Sylhet, Bangladesh', 105, 27, { align: 'center' });
-  doc.text('December 17-18, 2025', 105, 33, { align: 'center' });
+  doc.text('International Conference on Advanced Computing and Simulation', 105, 17, { align: 'center' });
+  doc.text('Shahjalal University of Science and Technology, Sylhet, Bangladesh', 105, 22, { align: 'center' });
+  doc.text('December 17-18, 2025', 105, 27, { align: 'center' });
 };
 
 const addTitle = (doc: jsPDF): void => {
   // Receipt title box
   doc.setFillColor(...COLORS.tableBg);
-  doc.rect(MARGINS.content, 48, 180, 16, 'F');
+  doc.rect(MARGINS.content, 37, 180, 12, 'F');
   
   doc.setDrawColor(...COLORS.primary);
   doc.setLineWidth(0.5);
-  doc.rect(MARGINS.content, 48, 180, 16);
+  doc.rect(MARGINS.content, 37, 180, 12);
   
   doc.setFontSize(FONTS.heading.size);
   doc.setTextColor(...COLORS.primary);
   doc.setFont('helvetica', FONTS.heading.style);
-  doc.text('PAYMENT RECEIPT', 105, 56, { align: 'center' });
+  doc.text('PAYMENT RECEIPT', 105, 43, { align: 'center' });
   
   doc.setFontSize(FONTS.small.size);
   doc.setTextColor(...COLORS.mediumGray);
   doc.setFont('helvetica', 'normal');
-  doc.text(`Receipt No: ${Date.now().toString().slice(-10)}`, 105, 61, { align: 'center' });
+  doc.text(`Receipt No: ${Date.now().toString().slice(-10)}`, 105, 47, { align: 'center' });
 };
 
 const addStatusBadge = (doc: jsPDF, status: string): void => {
@@ -137,30 +137,30 @@ const addStatusBadge = (doc: jsPDF, status: string): void => {
 
   // Badge shadow
   doc.setFillColor(200, 200, 200);
-  doc.roundedRect(61, 72, 88, 11, 2, 2, 'F');
+  doc.roundedRect(61, 54, 88, 9, 2, 2, 'F');
   
   // Badge background
   doc.setFillColor(...badgeColor);
-  doc.roundedRect(60, 71, 90, 11, 2, 2, 'F');
+  doc.roundedRect(60, 53, 90, 9, 2, 2, 'F');
   
   // Badge text
-  doc.setFontSize(10);
+  doc.setFontSize(9);
   doc.setTextColor(...COLORS.white);
   doc.setFont('helvetica', 'bold');
-  doc.text(statusText, 105, 77.5, { align: 'center' });
+  doc.text(statusText, 105, 58.5, { align: 'center' });
 };
 
 const addPaymentDetails = (doc: jsPDF, paymentData: PaymentData, userData: UserData): number => {
-  const startY = 90;
+  const startY = 67;
 
   // Section header
   doc.setFillColor(...COLORS.primary);
-  doc.rect(MARGINS.content, startY, 180, 7, 'F');
+  doc.rect(MARGINS.content, startY, 180, 6, 'F');
   
   doc.setFontSize(FONTS.subheading.size);
   doc.setTextColor(...COLORS.white);
   doc.setFont('helvetica', FONTS.subheading.style);
-  doc.text('PAYMENT INFORMATION', MARGINS.content + 3, startY + 5);
+  doc.text('PAYMENT INFORMATION', MARGINS.content + 3, startY + 4);
 
   const paymentDetails = [
     ['Transaction ID:', paymentData.paymentID || 'N/A'],
@@ -172,14 +172,14 @@ const addPaymentDetails = (doc: jsPDF, paymentData: PaymentData, userData: UserD
   ];
 
   autoTable(doc, {
-    startY: startY + 8,
+    startY: startY + 7,
     head: [],
     body: paymentDetails,
     theme: 'grid',
     margin: { left: MARGINS.content, right: MARGINS.content },
     styles: {
       fontSize: FONTS.body.size,
-      cellPadding: 4,
+      cellPadding: 2.5,
       lineColor: COLORS.border,
       lineWidth: 0.3,
       textColor: COLORS.black,
@@ -207,16 +207,16 @@ const addPaymentDetails = (doc: jsPDF, paymentData: PaymentData, userData: UserD
 };
 
 const addParticipantDetails = (doc: jsPDF, userData: UserData, paymentData: PaymentData): number => {
-  const currentY = (doc as any).lastAutoTable.finalY + 10;
+  const currentY = (doc as any).lastAutoTable.finalY + 5;
 
   // Section header
   doc.setFillColor(...COLORS.primary);
-  doc.rect(MARGINS.content, currentY, 180, 7, 'F');
+  doc.rect(MARGINS.content, currentY, 180, 6, 'F');
   
   doc.setFontSize(FONTS.subheading.size);
   doc.setTextColor(...COLORS.white);
   doc.setFont('helvetica', FONTS.subheading.style);
-  doc.text('PARTICIPANT INFORMATION', MARGINS.content + 3, currentY + 5);
+  doc.text('PARTICIPANT INFORMATION', MARGINS.content + 3, currentY + 4);
 
   const participantDetails = [
     ['Full Name:', userData.Name || 'N/A'],
@@ -236,14 +236,14 @@ const addParticipantDetails = (doc: jsPDF, userData: UserData, paymentData: Paym
   }
 
   autoTable(doc, {
-    startY: currentY + 8,
+    startY: currentY + 7,
     head: [],
     body: participantDetails,
     theme: 'grid',
     margin: { left: MARGINS.content, right: MARGINS.content },
     styles: {
       fontSize: FONTS.body.size,
-      cellPadding: 4,
+      cellPadding: 2.5,
       lineColor: COLORS.border,
       lineWidth: 0.3,
       textColor: COLORS.black,
@@ -276,31 +276,16 @@ const addAbstractDetails = (doc: jsPDF, userData: UserData): number => {
     return (doc as any).lastAutoTable.finalY;
   }
 
-  // Add a new page for abstract details
-  doc.addPage();
-  
-  // Add page borders for the new page
-  doc.setDrawColor(...COLORS.primary);
-  doc.setLineWidth(1.5);
-  doc.rect(5, 5, 200, 287);
-  
-  doc.setDrawColor(...COLORS.primaryLight);
-  doc.setLineWidth(0.5);
-  doc.rect(8, 8, 194, 281);
-
-  // Add header on new page
-  addHeader(doc);
-
-  const currentY = 50;
+  const currentY = (doc as any).lastAutoTable.finalY + 5;
 
   // Section header
   doc.setFillColor(...COLORS.primary);
-  doc.rect(MARGINS.content, currentY, 180, 7, 'F');
+  doc.rect(MARGINS.content, currentY, 180, 6, 'F');
   
   doc.setFontSize(FONTS.subheading.size);
   doc.setTextColor(...COLORS.white);
   doc.setFont('helvetica', FONTS.subheading.style);
-  doc.text('ABSTRACT DETAILS', MARGINS.content + 3, currentY + 5);
+  doc.text('ABSTRACT DETAILS', MARGINS.content + 3, currentY + 4);
 
   const abstractDetails = [
     ['Abstract ID:', userData.abstractId || 'N/A'],
@@ -309,14 +294,14 @@ const addAbstractDetails = (doc: jsPDF, userData: UserData): number => {
   ];
 
   autoTable(doc, {
-    startY: currentY + 8,
+    startY: currentY + 7,
     head: [],
     body: abstractDetails,
     theme: 'grid',
     margin: { left: MARGINS.content, right: MARGINS.content },
     styles: {
       fontSize: FONTS.body.size,
-      cellPadding: 4,
+      cellPadding: 2.5,
       lineColor: COLORS.border,
       lineWidth: 0.3,
       textColor: COLORS.black,
@@ -344,42 +329,42 @@ const addAbstractDetails = (doc: jsPDF, userData: UserData): number => {
 };
 
 const addFooter = (doc: jsPDF, footerY: number): void => {
-  const footerStartY = Math.min(footerY + 15, 250);
+  const footerStartY = Math.min(footerY + 8, 250);
   
   // Important notes section
   doc.setFillColor(...COLORS.tableBg);
-  doc.rect(MARGINS.content, footerStartY, 180, 18, 'F');
+  doc.rect(MARGINS.content, footerStartY, 180, 14, 'F');
   
   doc.setDrawColor(...COLORS.primary);
   doc.setLineWidth(0.5);
-  doc.rect(MARGINS.content, footerStartY, 180, 18);
+  doc.rect(MARGINS.content, footerStartY, 180, 14);
   
   doc.setFontSize(FONTS.small.size);
   doc.setTextColor(...COLORS.secondary);
   doc.setFont('helvetica', 'bold');
-  doc.text('Important Notes:', MARGINS.content + 3, footerStartY + 5);
+  doc.text('Important Notes:', MARGINS.content + 3, footerStartY + 4);
   
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(FONTS.tiny.size);
-  doc.text('• This is a computer-generated receipt. No signature required.', MARGINS.content + 3, footerStartY + 9);
-  doc.text('• Please present this receipt at the conference registration desk.', MARGINS.content + 3, footerStartY + 13);
+  doc.text('• This is a computer-generated receipt. No signature required.', MARGINS.content + 3, footerStartY + 8);
+  doc.text('• Please present this receipt at the conference registration desk.', MARGINS.content + 3, footerStartY + 11);
 
   const currentDate = formatDateTime(new Date().toISOString());
   doc.setFontSize(FONTS.tiny.size);
   doc.setTextColor(...COLORS.mediumGray);
-  doc.text(`Generated: ${currentDate}`, 105, footerStartY + 23, { align: 'center' });
+  doc.text(`Generated: ${currentDate}`, 105, footerStartY + 18, { align: 'center' });
 
   // Footer separator
   doc.setDrawColor(...COLORS.primaryLight);
-  doc.setLineWidth(1);
-  doc.line(MARGINS.content, footerStartY + 27, 195, footerStartY + 27);
+  doc.setLineWidth(0.8);
+  doc.line(MARGINS.content, footerStartY + 22, 195, footerStartY + 22);
   
   // Contact info
   doc.setFontSize(FONTS.tiny.size);
   doc.setTextColor(...COLORS.darkGray);
   doc.setFont('helvetica', 'normal');
-  doc.text('Email: icap2025@sust.edu  |  Website: https://icap2025.sust.edu', 105, footerStartY + 32, { align: 'center' });
-  doc.text('Shahjalal University of Science and Technology, Sylhet-3114, Bangladesh', 105, footerStartY + 36, { align: 'center' });
+  doc.text('Email: icap2025@sust.edu  |  Website: https://icap2025.sust.edu', 105, footerStartY + 26, { align: 'center' });
+  doc.text('Shahjalal University of Science and Technology, Sylhet-3114, Bangladesh', 105, footerStartY + 29, { align: 'center' });
 };
 
 const getCookieValue = (name: string): string | undefined => {
