@@ -396,7 +396,7 @@ export default function DashboardClient() {
               <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 <div className="p-3 sm:p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-primary/20 shadow-sm">
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Registration Category</p>
-                  <p className="text-sm sm:text-base lg:text-lg font-bold text-primary break-words">
+                  <p className="text-sm sm:text-base lg:text-lg font-bold text-primary break-words">      {userData?.registrationCategory ?? "Not Set"}
                   </p>
                 </div>
 
