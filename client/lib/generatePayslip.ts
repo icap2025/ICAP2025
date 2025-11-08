@@ -21,6 +21,12 @@ interface UserData {
   registrationCategory?: string;
   _id: string;
   payment_date?: string;
+  abstractId?: string;
+  abstractTitle?: string;
+  presenterName?: string;
+  affiliation?: string;
+  designation?: string;
+  participationCategory?: string;
 }
 
 type RGB = [number, number, number];
@@ -217,13 +223,95 @@ const addParticipantDetails = (doc: jsPDF, userData: UserData, paymentData: Paym
     ['Email Address:', userData.email || 'N/A'],
     ['Contact Number:', userData.phone || 'N/A'],
     ['Registration Category:', userData.registrationCategory || 'N/A'],
+    ['Participation Category:', userData.participationCategory || 'N/A'],
     ['Participant ID:', userData._id || 'N/A'],
   ];
+
+  // Add affiliation and designation if available
+  if (userData.affiliation) {
+    participantDetails.push(['Affiliation:', userData.affiliation]);
+  }
+  if (userData.designation) {
+    participantDetails.push(['Designation:', userData.designation]);
+  }
 
   autoTable(doc, {
     startY: currentY + 8,
     head: [],
     body: participantDetails,
+    theme: 'grid',
+    margin: { left: MARGINS.content, right: MARGINS.content },
+    styles: {
+      fontSize: FONTS.body.size,
+      cellPadding: 4,
+      lineColor: COLORS.border,
+      lineWidth: 0.3,
+      textColor: COLORS.black,
+    },
+    columnStyles: {
+      0: { 
+        fontStyle: 'bold', 
+        textColor: COLORS.secondary, 
+        cellWidth: 60,
+        fillColor: COLORS.tableBg,
+      },
+      1: { 
+        textColor: COLORS.secondary,
+        fillColor: COLORS.white,
+      },
+    },
+    headStyles: {
+      fillColor: COLORS.primary,
+      textColor: COLORS.white,
+      fontStyle: 'bold',
+    },
+  });
+
+  return (doc as any).lastAutoTable.finalY;
+};
+
+const addAbstractDetails = (doc: jsPDF, userData: UserData): number => {
+  // Only add this section if abstract information is available
+  if (!userData.abstractId || userData.abstractId === 'N/A' || userData.abstractId === '') {
+    return (doc as any).lastAutoTable.finalY;
+  }
+
+  // Add a new page for abstract details
+  doc.addPage();
+  
+  // Add page borders for the new page
+  doc.setDrawColor(...COLORS.primary);
+  doc.setLineWidth(1.5);
+  doc.rect(5, 5, 200, 287);
+  
+  doc.setDrawColor(...COLORS.primaryLight);
+  doc.setLineWidth(0.5);
+  doc.rect(8, 8, 194, 281);
+
+  // Add header on new page
+  addHeader(doc);
+
+  const currentY = 50;
+
+  // Section header
+  doc.setFillColor(...COLORS.primary);
+  doc.rect(MARGINS.content, currentY, 180, 7, 'F');
+  
+  doc.setFontSize(FONTS.subheading.size);
+  doc.setTextColor(...COLORS.white);
+  doc.setFont('helvetica', FONTS.subheading.style);
+  doc.text('ABSTRACT DETAILS', MARGINS.content + 3, currentY + 5);
+
+  const abstractDetails = [
+    ['Abstract ID:', userData.abstractId || 'N/A'],
+    ['Abstract Title:', userData.abstractTitle || 'N/A'],
+    ['Presenter Name:', userData.presenterName || 'N/A'],
+  ];
+
+  autoTable(doc, {
+    startY: currentY + 8,
+    head: [],
+    body: abstractDetails,
     theme: 'grid',
     margin: { left: MARGINS.content, right: MARGINS.content },
     styles: {
@@ -294,6 +382,16 @@ const addFooter = (doc: jsPDF, footerY: number): void => {
   doc.text('Shahjalal University of Science and Technology, Sylhet-3114, Bangladesh', 105, footerStartY + 36, { align: 'center' });
 };
 
+const getCookieValue = (name: string): string | undefined => {
+  try {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : undefined;
+  } catch (error) {
+    console.error(`Error reading cookie ${name}:`, error);
+    return undefined;
+  }
+};
+
 const getPaymentDataFromCookies = (): PaymentData | null => {
   try {
     // Get payment data from cookies
@@ -338,6 +436,17 @@ export const generatePayslip = ( userData: UserData): void => {
       throw new Error('Payment data not found. Please ensure payment is completed.');
     }
 
+    // Enrich userData with additional cookie data if not already provided
+    const enrichedUserData: UserData = {
+      ...userData,
+      abstractId: userData.abstractId || getCookieValue('user_abstract_id'),
+      abstractTitle: userData.abstractTitle || getCookieValue('user_abstract_title'),
+      presenterName: userData.presenterName || getCookieValue('user_presenter_name'),
+      affiliation: userData.affiliation || getCookieValue('user_affiliation'),
+      designation: userData.designation || getCookieValue('user_designation'),
+      participationCategory: userData.participationCategory || getCookieValue('user_participation_category'),
+    };
+
     const doc = new jsPDF();
 
     // Add professional page border
@@ -353,9 +462,10 @@ export const generatePayslip = ( userData: UserData): void => {
     addHeader(doc);
     addTitle(doc);
     addStatusBadge(doc, data.paymentStatusCode);
-    addPaymentDetails(doc, data, userData);
-    const finalY = addParticipantDetails(doc, userData, data);
-    addFooter(doc, finalY);
+    addPaymentDetails(doc, data, enrichedUserData);
+    const participantY = addParticipantDetails(doc, enrichedUserData, data);
+    const abstractY = addAbstractDetails(doc, enrichedUserData);
+    addFooter(doc, abstractY);
 
     const fileName = `ICAP2025_PaymentReceipt_${data.paymentID}.pdf`;
     doc.save(fileName);
