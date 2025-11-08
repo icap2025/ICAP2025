@@ -24,5 +24,6 @@ export const COOKIE_KEYS = {
     CREATED_AT: "user_created_at",
     PAYMENT_DATE: "user_payment_date",
     Payment_ID: "Payment_ID",
+    Amount: "Amount",
   },
 };

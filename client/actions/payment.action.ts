@@ -1,6 +1,7 @@
 import AUTHENTICATED_AXIOS_CLIENT from '@/lib/axios_clients/public_client';
 import { UserData } from '@/lib/auth';
 import { cookies } from 'next/headers';
+import { set } from 'zod';
 
 interface PaymentData {
     name: string;
@@ -163,6 +164,12 @@ export const getPaymentStatus = async (paymentIDParam?: string) => {
             // Store payment date in cookies
             if (response.data.payment_date) {
                 document.cookie = `user_payment_date=${response.data.payment_date}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
+            }
+    
+       
+            
+            if (response.data?.data.paymentAmount) {
+                document.cookie = `Amount=${response.data.data.paymentAmount}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
             }
             
             // Clear temporary Payment_ID cookie

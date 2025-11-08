@@ -129,6 +129,7 @@ export function clearAuthCookies(): void {
   Cookies.remove(COOKIE_KEYS.USER.PAYMENT_DATE);
   Cookies.remove(COOKIE_KEYS.USER.CREATED_AT);
   Cookies.remove(COOKIE_KEYS.USER.Payment_ID);
+  Cookies.remove(COOKIE_KEYS.USER.Amount);
   
   // Clear profilePic from localStorage
   if (typeof window !== 'undefined') {

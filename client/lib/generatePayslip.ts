@@ -26,25 +26,30 @@ interface UserData {
 type RGB = [number, number, number];
 
 const COLORS = {
-  primary: [11, 129, 117] as RGB,
-  secondary: [45, 55, 72] as RGB,
-  success: [34, 197, 94] as RGB,
-  error: [239, 68, 68] as RGB,
-  lightGray: [245, 245, 245] as RGB,
-  mediumGray: [120, 120, 120] as RGB,
-  darkGray: [80, 80, 80] as RGB,
-  border: [200, 200, 200] as RGB,
+  primary: [21, 128, 61] as RGB, // Green 700
+  primaryLight: [34, 197, 94] as RGB, // Green 500
+  secondary: [31, 41, 55] as RGB, // Gray 800
+  accent: [5, 150, 105] as RGB, // Emerald 600
+  success: [22, 163, 74] as RGB, // Green 600
+  error: [220, 38, 38] as RGB, // Red 600
+  lightGray: [249, 250, 251] as RGB, // Gray 50
+  mediumGray: [107, 114, 128] as RGB, // Gray 500
+  darkGray: [55, 65, 81] as RGB, // Gray 700
+  border: [229, 231, 235] as RGB, // Gray 200
+  tableBg: [240, 253, 244] as RGB, // Green 50
   white: [255, 255, 255] as RGB,
+  black: [0, 0, 0] as RGB,
 } as const;
 
 const FONTS = {
-  title: { size: 24, style: 'bold' as const },
-  subtitle: { size: 10, style: 'normal' as const },
-  heading: { size: 18, style: 'bold' as const },
-  subheading: { size: 12, style: 'bold' as const },
-  body: { size: 10, style: 'normal' as const },
-  small: { size: 9, style: 'normal' as const },
-  tiny: { size: 8, style: 'normal' as const },
+  title: { size: 20, style: 'bold' as const },
+  subtitle: { size: 9, style: 'normal' as const },
+  heading: { size: 14, style: 'bold' as const },
+  subheading: { size: 11, style: 'bold' as const },
+  body: { size: 9, style: 'normal' as const },
+  bodyBold: { size: 9, style: 'bold' as const },
+  small: { size: 8, style: 'normal' as const },
+  tiny: { size: 7, style: 'normal' as const },
 } as const;
 
 const MARGINS = {
@@ -77,87 +82,118 @@ const formatDateTime = (dateString?: string): string => {
 };
 
 const addHeader = (doc: jsPDF): void => {
-  doc.setFillColor(...COLORS.lightGray);
-  doc.rect(MARGINS.page, MARGINS.page, 190, 30, 'F');
+  // Green header background
+  doc.setFillColor(...COLORS.primary);
+  doc.rect(0, 0, 210, 38, 'F');
+  
+  // Accent line
+  doc.setFillColor(...COLORS.primaryLight);
+  doc.rect(0, 38, 210, 2, 'F');
 
+  // Conference title
   doc.setFontSize(FONTS.title.size);
-  doc.setTextColor(...COLORS.primary);
+  doc.setTextColor(...COLORS.white);
   doc.setFont('helvetica', FONTS.title.style);
-  doc.text('ICAP 2025', 105, 20, { align: 'center' });
+  doc.text('ICAP 2025', 105, 14, { align: 'center' });
 
+  // Conference details
   doc.setFontSize(FONTS.subtitle.size);
-  doc.setTextColor(...COLORS.secondary);
   doc.setFont('helvetica', FONTS.subtitle.style);
-  doc.text('International Conference on Advanced Computing and Simulation', 105, 27, { align: 'center' });
-  doc.text('Shahjalal University of Science and Technology', 105, 33, { align: 'center' });
-
-  doc.setDrawColor(...COLORS.primary);
-  doc.setLineWidth(0.5);
-  doc.line(MARGINS.content, 37, 195, 37);
+  doc.text('International Conference on Advanced Computing and Simulation', 105, 21, { align: 'center' });
+  doc.text('Shahjalal University of Science and Technology, Sylhet, Bangladesh', 105, 27, { align: 'center' });
+  doc.text('December 17-18, 2025', 105, 33, { align: 'center' });
 };
 
 const addTitle = (doc: jsPDF): void => {
+  // Receipt title box
+  doc.setFillColor(...COLORS.tableBg);
+  doc.rect(MARGINS.content, 48, 180, 16, 'F');
+  
+  doc.setDrawColor(...COLORS.primary);
+  doc.setLineWidth(0.5);
+  doc.rect(MARGINS.content, 48, 180, 16);
+  
   doc.setFontSize(FONTS.heading.size);
   doc.setTextColor(...COLORS.primary);
   doc.setFont('helvetica', FONTS.heading.style);
-  doc.text('PAYMENT RECEIPT', 105, 48, { align: 'center' });
+  doc.text('PAYMENT RECEIPT', 105, 56, { align: 'center' });
+  
+  doc.setFontSize(FONTS.small.size);
+  doc.setTextColor(...COLORS.mediumGray);
+  doc.setFont('helvetica', 'normal');
+  doc.text(`Receipt No: ${Date.now().toString().slice(-10)}`, 105, 61, { align: 'center' });
 };
 
 const addStatusBadge = (doc: jsPDF, status: string): void => {
   const isPaid = status === 'PAID' || status === 'COMPLETED';
   const badgeColor = isPaid ? COLORS.success : COLORS.error;
-  const statusText = status.toUpperCase();
+  const statusText = isPaid ? 'PAYMENT VERIFIED' : '✗ PAYMENT FAILED';
 
-  doc.setFillColor(...badgeColor);
-  doc.roundedRect(70, 52, 70, 10, 2, 2, 'F');
+  // Badge shadow
+  doc.setFillColor(200, 200, 200);
+  doc.roundedRect(61, 72, 88, 11, 2, 2, 'F');
   
-  doc.setFontSize(FONTS.subheading.size);
+  // Badge background
+  doc.setFillColor(...badgeColor);
+  doc.roundedRect(60, 71, 90, 11, 2, 2, 'F');
+  
+  // Badge text
+  doc.setFontSize(10);
   doc.setTextColor(...COLORS.white);
   doc.setFont('helvetica', 'bold');
-  doc.text(statusText, 105, 58.5, { align: 'center' });
+  doc.text(statusText, 105, 77.5, { align: 'center' });
 };
 
 const addPaymentDetails = (doc: jsPDF, paymentData: PaymentData, userData: UserData): number => {
-  const startY = 70;
+  const startY = 90;
 
+  // Section header
+  doc.setFillColor(...COLORS.primary);
+  doc.rect(MARGINS.content, startY, 180, 7, 'F');
+  
   doc.setFontSize(FONTS.subheading.size);
-  doc.setTextColor(...COLORS.secondary);
+  doc.setTextColor(...COLORS.white);
   doc.setFont('helvetica', FONTS.subheading.style);
-  doc.text('Payment Information', MARGINS.content, startY);
+  doc.text('PAYMENT INFORMATION', MARGINS.content + 3, startY + 5);
 
   const paymentDetails = [
-    ['Transaction ID', paymentData.paymentID || 'N/A'],
-    ['Amount Paid', formatCurrency(paymentData.paymentAmount || '0')],
-    ['Payment Date', formatDateTime(userData.payment_date || paymentData.paymentTime)],
-    ['Payment Method', paymentData.paymentMethod || 'Online Payment'],
-    ['Transaction Status', paymentData.paymentStatusCode || 'N/A'],
-    ...(paymentData.bankTransactionID ? [['Bank Transaction ID', paymentData.bankTransactionID]] : []),
+    ['Transaction ID:', paymentData.paymentID || 'N/A'],
+    ['Amount Paid:', formatCurrency(paymentData.paymentAmount || '0')],
+    ['Payment Date & Time:', formatDateTime(userData.payment_date || paymentData.paymentTime)],
+    ['Payment Method:', paymentData.paymentMethod || 'Online Payment'],
+    ['Transaction Status:', paymentData.paymentStatusCode || 'N/A'],
+    ...(paymentData.bankTransactionID ? [['Bank Transaction ID:', paymentData.bankTransactionID]] : []),
   ];
 
   autoTable(doc, {
-    startY: startY + 5,
+    startY: startY + 8,
     head: [],
     body: paymentDetails,
-    theme: 'plain',
+    theme: 'grid',
     margin: { left: MARGINS.content, right: MARGINS.content },
     styles: {
       fontSize: FONTS.body.size,
       cellPadding: 4,
       lineColor: COLORS.border,
-      lineWidth: 0.1,
+      lineWidth: 0.3,
+      textColor: COLORS.black,
     },
     columnStyles: {
       0: { 
         fontStyle: 'bold', 
         textColor: COLORS.secondary, 
         cellWidth: 60,
+        fillColor: COLORS.tableBg,
       },
       1: { 
-        textColor: COLORS.darkGray,
+        textColor: COLORS.secondary,
+        fillColor: COLORS.white,
       },
     },
-    alternateRowStyles: {
-      fillColor: COLORS.lightGray,
+    headStyles: {
+      fillColor: COLORS.primary,
+      textColor: COLORS.white,
+      fontStyle: 'bold',
     },
   });
 
@@ -165,45 +201,54 @@ const addPaymentDetails = (doc: jsPDF, paymentData: PaymentData, userData: UserD
 };
 
 const addParticipantDetails = (doc: jsPDF, userData: UserData, paymentData: PaymentData): number => {
-  const currentY = (doc as any).lastAutoTable.finalY + 12;
+  const currentY = (doc as any).lastAutoTable.finalY + 10;
 
+  // Section header
+  doc.setFillColor(...COLORS.primary);
+  doc.rect(MARGINS.content, currentY, 180, 7, 'F');
+  
   doc.setFontSize(FONTS.subheading.size);
-  doc.setTextColor(...COLORS.secondary);
+  doc.setTextColor(...COLORS.white);
   doc.setFont('helvetica', FONTS.subheading.style);
-  doc.text('Participant Information', MARGINS.content, currentY);
+  doc.text('PARTICIPANT INFORMATION', MARGINS.content + 3, currentY + 5);
 
   const participantDetails = [
-    ['Full Name', userData.Name || 'N/A'],
-    ['Email Address', userData.email || 'N/A'],
-    ['Contact Number', userData.phone || 'N/A'],
-    ['Registration Category', userData.registrationCategory || 'N/A'],
-    ['Participant ID', userData._id || 'N/A'],
+    ['Full Name:', userData.Name || 'N/A'],
+    ['Email Address:', userData.email || 'N/A'],
+    ['Contact Number:', userData.phone || 'N/A'],
+    ['Registration Category:', userData.registrationCategory || 'N/A'],
+    ['Participant ID:', userData._id || 'N/A'],
   ];
 
   autoTable(doc, {
-    startY: currentY + 5,
+    startY: currentY + 8,
     head: [],
     body: participantDetails,
-    theme: 'plain',
+    theme: 'grid',
     margin: { left: MARGINS.content, right: MARGINS.content },
     styles: {
       fontSize: FONTS.body.size,
       cellPadding: 4,
       lineColor: COLORS.border,
-      lineWidth: 0.1,
+      lineWidth: 0.3,
+      textColor: COLORS.black,
     },
     columnStyles: {
       0: { 
         fontStyle: 'bold', 
         textColor: COLORS.secondary, 
         cellWidth: 60,
+        fillColor: COLORS.tableBg,
       },
       1: { 
-        textColor: COLORS.darkGray,
+        textColor: COLORS.secondary,
+        fillColor: COLORS.white,
       },
     },
-    alternateRowStyles: {
-      fillColor: COLORS.lightGray,
+    headStyles: {
+      fillColor: COLORS.primary,
+      textColor: COLORS.white,
+      fontStyle: 'bold',
     },
   });
 
@@ -211,41 +256,108 @@ const addParticipantDetails = (doc: jsPDF, userData: UserData, paymentData: Paym
 };
 
 const addFooter = (doc: jsPDF, footerY: number): void => {
-  const footerStartY = Math.min(footerY + 15, 260);
+  const footerStartY = Math.min(footerY + 15, 250);
+  
+  // Important notes section
+  doc.setFillColor(...COLORS.tableBg);
+  doc.rect(MARGINS.content, footerStartY, 180, 18, 'F');
   
   doc.setDrawColor(...COLORS.primary);
-  doc.setLineWidth(0.3);
-  doc.line(MARGINS.content, footerStartY, 195, footerStartY);
+  doc.setLineWidth(0.5);
+  doc.rect(MARGINS.content, footerStartY, 180, 18);
+  
+  doc.setFontSize(FONTS.small.size);
+  doc.setTextColor(...COLORS.secondary);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Important Notes:', MARGINS.content + 3, footerStartY + 5);
+  
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(FONTS.tiny.size);
+  doc.text('• This is a computer-generated receipt. No signature required.', MARGINS.content + 3, footerStartY + 9);
+  doc.text('• Please present this receipt at the conference registration desk.', MARGINS.content + 3, footerStartY + 13);
 
   const currentDate = formatDateTime(new Date().toISOString());
-
-  doc.setFontSize(FONTS.small.size);
-  doc.setTextColor(...COLORS.mediumGray);
-  doc.setFont('helvetica', FONTS.small.style);
-  doc.text('This is a computer-generated receipt and does not require a signature.', 105, footerStartY + 6, { align: 'center' });
-  doc.text(`Generated on: ${currentDate}`, 105, footerStartY + 11, { align: 'center' });
-
   doc.setFontSize(FONTS.tiny.size);
-  doc.text('For queries, contact: icap2025@sust.edu', 105, footerStartY + 18, { align: 'center' });
-  doc.text('Website: https://icap2025.sust.edu', 105, footerStartY + 23, { align: 'center' });
+  doc.setTextColor(...COLORS.mediumGray);
+  doc.text(`Generated: ${currentDate}`, 105, footerStartY + 23, { align: 'center' });
+
+  // Footer separator
+  doc.setDrawColor(...COLORS.primaryLight);
+  doc.setLineWidth(1);
+  doc.line(MARGINS.content, footerStartY + 27, 195, footerStartY + 27);
+  
+  // Contact info
+  doc.setFontSize(FONTS.tiny.size);
+  doc.setTextColor(...COLORS.darkGray);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Email: icap2025@sust.edu  |  Website: https://icap2025.sust.edu', 105, footerStartY + 32, { align: 'center' });
+  doc.text('Shahjalal University of Science and Technology, Sylhet-3114, Bangladesh', 105, footerStartY + 36, { align: 'center' });
 };
 
-export const generatePayslip = (paymentData: PaymentData, userData: UserData): void => {
+const getPaymentDataFromCookies = (): PaymentData | null => {
   try {
+    // Get payment data from cookies
+    const paymentIDMatch = document.cookie.match(new RegExp('(^| )Payment_ID=([^;]+)'));
+    const paymentID = paymentIDMatch ? decodeURIComponent(paymentIDMatch[2]) : null;
+
+    const amountMatch = document.cookie.match(new RegExp('(^| )Amount=([^;]+)'));
+    const paymentAmount = amountMatch ? decodeURIComponent(amountMatch[2]) : null;
+
+    const dateMatch = document.cookie.match(new RegExp('(^| )user_payment_date=([^;]+)'));
+    const paymentTime = dateMatch ? decodeURIComponent(dateMatch[2]) : null;
+
+    const statusMatch = document.cookie.match(new RegExp('(^| )user_payment_status=([^;]+)'));
+    const paymentStatus = statusMatch ? decodeURIComponent(statusMatch[2]) : null;
+
+    if (!paymentID || !paymentAmount) {
+      return null;
+    }
+
+    return {
+      paymentID,
+      paymentStatusCode: paymentStatus? 'PAID' : 'UNPAID',
+      paymentAmount,
+      paymentTime: paymentTime || new Date().toISOString(),
+      paymentMethod: 'Online Payment',
+    };
+  } catch (error) {
+    console.error('Error reading payment data from cookies:', error);
+    return null;
+  }
+};
+
+export const generatePayslip = ( userData: UserData): void => {
+  try {
+    // If paymentData is not provided, get it from cookies
+    let data: PaymentData | null = null;
+    if (!data) {
+      data = getPaymentDataFromCookies();
+    }
+
+    if (!data) {
+      throw new Error('Payment data not found. Please ensure payment is completed.');
+    }
+
     const doc = new jsPDF();
 
-    doc.setDrawColor(...COLORS.border);
+    // Add professional page border
+    doc.setDrawColor(...COLORS.primary);
+    doc.setLineWidth(1.5);
+    doc.rect(5, 5, 200, 287);
+    
+    // Add inner border
+    doc.setDrawColor(...COLORS.primaryLight);
     doc.setLineWidth(0.5);
-    doc.rect(MARGINS.page, MARGINS.page, 190, 277);
+    doc.rect(8, 8, 194, 281);
 
     addHeader(doc);
     addTitle(doc);
-    addStatusBadge(doc, paymentData.paymentStatusCode);
-    addPaymentDetails(doc, paymentData, userData);
-    const finalY = addParticipantDetails(doc, userData, paymentData);
+    addStatusBadge(doc, data.paymentStatusCode);
+    addPaymentDetails(doc, data, userData);
+    const finalY = addParticipantDetails(doc, userData, data);
     addFooter(doc, finalY);
 
-    const fileName = `ICAP2025_Receipt_${paymentData.paymentID}_${Date.now()}.pdf`;
+    const fileName = `ICAP2025_PaymentReceipt_${data.paymentID}.pdf`;
     doc.save(fileName);
     
     console.log(`Payment receipt generated successfully: ${fileName}`);

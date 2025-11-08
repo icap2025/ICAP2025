@@ -87,6 +87,9 @@ export async function loginAction(data: LoginFormData) {
     if (user.payment_date) {
       cookieStore.set(COOKIE_KEYS.USER.PAYMENT_DATE, user.payment_date, cookieOptions);
     }
+    if (user.amount) {
+      cookieStore.set(COOKIE_KEYS.USER.Amount, user.amount, cookieOptions);
+    }
   if (user.SuccessPaymentID) {
       cookieStore.set(COOKIE_KEYS.USER.Payment_ID, user.SuccessPaymentID, cookieOptions);
     }

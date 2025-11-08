@@ -42,15 +42,15 @@ export default function DashboardClient() {
       // Get Payment_ID from cookies
       const paymentIDMatch = document.cookie.match(new RegExp('(^| )Payment_ID=([^;]+)'));
       const paymentID = paymentIDMatch ? paymentIDMatch[2] : null;
-      
+
       // Check if user's payment status is false
       const paymentStatus = userData?.payment_status ?? false;
-      
+
       // Only check if PaymentID exists and payment_status is false
       if (paymentID && !paymentStatus && !loading) {
         console.log('Payment ID found and payment not confirmed. Starting status check...');
         setIsCheckingPayment(true);
-        
+
         // Start countdown
         const countdownInterval = setInterval(() => {
           setCountdown((prev) => {
@@ -61,21 +61,21 @@ export default function DashboardClient() {
             return prev - 1;
           });
         }, 1000);
-        
+
         // Check payment status after 10 seconds
         setTimeout(async () => {
           try {
             const response = await getPaymentStatus();
             console.log('Payment status check response:', response);
-            
+
             // Store payment data for payslip generation
             if (response?.data) {
               setPaymentData(response.data);
             }
-            
+
             // Refresh auth to get updated payment status
             refreshAuth();
-            
+
             if (response?.status === 'PAID') {
               toast({
                 title: "Payment Confirmed!",
@@ -99,11 +99,11 @@ export default function DashboardClient() {
             setIsCheckingPayment(false);
           }
         }, 10000);
-        
+
         return () => clearInterval(countdownInterval);
       }
     };
-    
+
     checkPaymentOnLoad();
   }, [userData, loading, refreshAuth, toast]);
 
@@ -142,7 +142,7 @@ export default function DashboardClient() {
 
   const registrationFee = getRegistrationFee();
   const currentFee = registrationFee ? (isEarlyBird ? registrationFee.earlyBird : registrationFee.regular) : null;
-  
+
   const initials = userFullName
     .split(" ")
     .map((n: string) => n[0])
@@ -154,7 +154,7 @@ export default function DashboardClient() {
   const handlePayment = async () => {
     try {
       setIsProcessingPayment(true);
-      
+
       toast({
         title: "Processing Payment",
         description: "Please wait while we connect to the payment gateway...",
@@ -163,20 +163,20 @@ export default function DashboardClient() {
       console.log('Initiating payment...');
 
       const response = await createPayment(userData);
-      
+
       console.log('Payment response received:', response);
-      
+
       // Extract redirect URL from the nested response structure
       const redirectURL = response?.data?.data?.redirectURL || response?.data?.redirectURL;
-      
+
       if (response?.success && redirectURL) {
         console.log('Redirecting to payment gateway:', redirectURL);
-        
+
         toast({
           title: "Payment Gateway Ready",
           description: "Redirecting you to complete your payment...",
         });
-        
+
         // Small delay to show the success toast before redirect
         setTimeout(() => {
           window.location.href = redirectURL;
@@ -187,13 +187,13 @@ export default function DashboardClient() {
       }
     } catch (error: any) {
       console.error('Payment handler error:', error);
-      
+
       toast({
         variant: "destructive",
         title: "Payment Failed",
         description: error.message || "Failed to initiate payment. Please try again.",
       });
-      
+
       setIsProcessingPayment(false);
     }
   };
@@ -201,31 +201,18 @@ export default function DashboardClient() {
   // Handle payslip download
   const handleDownloadPayslip = async () => {
     try {
-      // If we don't have payment data, fetch it
-      let data = paymentData;
+      toast({
+        title: "Generating Payslip",
+        description: "Please wait...",
+      });
+
+      // Generate payslip - it will get data from cookies if needed
+      generatePayslip(userData);
       
-      if (!data) {
-        toast({
-          title: "Fetching Payment Details",
-          description: "Please wait...",
-        });
-        
-        const response = await getPaymentStatus();
-        if (response?.data) {
-          data = response.data;
-          setPaymentData(data);
-        }
-      }
-      
-      if (data && userData) {
-        generatePayslip(data, userData);
-        toast({
-          title: "Payslip Downloaded",
-          description: "Your payment receipt has been downloaded successfully.",
-        });
-      } else {
-        throw new Error('Payment details not available');
-      }
+      toast({
+        title: "Payslip Downloaded",
+        description: "Your payment receipt has been downloaded successfully.",
+      });
     } catch (error: any) {
       console.error('Download payslip error:', error);
       toast({
@@ -275,12 +262,12 @@ export default function DashboardClient() {
           <h2 className="text-3xl font-bold tracking-tight">Welcome back👋</h2>
           <p className="text-muted-foreground mt-1">Here&apos;s an overview of your conference registration and activities.</p>
         </div>
-        <EditProfileDrawer 
-          userData={userData} 
+        <EditProfileDrawer
+          userData={userData}
           onProfileUpdated={refreshAuth}
         />
       </div>
-  {/* <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>
           <CardDescription>Access important conference resources</CardDescription>
@@ -403,7 +390,7 @@ export default function DashboardClient() {
                   {isEarlyBird ? '🎉 Early Bird Rate' : '📅 Regular Rate'}
                 </Badge>
               </div>
-              
+
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-primary/20 shadow-sm">
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Registration Category</p>
@@ -411,7 +398,7 @@ export default function DashboardClient() {
                     {userData?.registrationCategory ?? "Not Set"}
                   </p>
                 </div>
-                
+
                 <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-blue-200 shadow-sm">
                   <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Current Fee</p>
                   <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">
@@ -449,7 +436,7 @@ export default function DashboardClient() {
                 </div>
                 <h3 className="mt-4 text-2xl font-bold text-green-600">Payment Completed!</h3>
                 <p className="mt-2 text-muted-foreground text-center max-w-md">Your registration payment has been successfully processed. You&apos;re all set for the conference!</p>
-                <Button 
+                <Button
                   onClick={handleDownloadPayslip}
                   className="mt-4 bg-green-600 hover:bg-green-700"
                   size="lg"
@@ -464,7 +451,7 @@ export default function DashboardClient() {
                   <XCircle className="h-16 w-16 text-orange-600 mb-4" />
                   <h3 className="text-xl font-bold text-orange-900">Payment Pending</h3>
                   <p className="mt-2 text-muted-foreground text-center max-w-md">Complete your registration payment to confirm your attendance at the conference.</p>
-               
+
                 </div>
 
                 <Separator />
@@ -472,10 +459,10 @@ export default function DashboardClient() {
                 <div className="space-y-4">
                   <h4 className="font-semibold">Next Steps:</h4>
                   <div className="grid gap-3">
-                    <Button 
-                      onClick={handlePayment} 
+                    <Button
+                      onClick={handlePayment}
                       disabled={isProcessingPayment}
-                      className="w-full h-auto py-4" 
+                      className="w-full h-auto py-4"
                       size="lg"
                     >
                       <div className="flex items-center gap-3">
@@ -494,7 +481,7 @@ export default function DashboardClient() {
                         </div>
                       </div>
                     </Button>
-{/* 
+                    {/* 
                     <Button  asChild variant="outline" className="w-full h-auto py-4 " size="lg">
                       <Link href="/submission" className="flex items-center gap-3">
                         <FileText className="h-5 w-5" />
@@ -513,90 +500,90 @@ export default function DashboardClient() {
       </div>
 
 
-    <Card className="shadow-md">
-      <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 border-b">
-        <div className="flex items-center justify-between">
-          <div>
-            <CardTitle className="text-xl">Abstract Details</CardTitle>
-            <CardDescription>Your research submission and presentation information</CardDescription>
+      <Card className="shadow-md">
+        <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 border-b">
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="text-xl">Abstract Details</CardTitle>
+              <CardDescription>Your research submission and presentation information</CardDescription>
+            </div>
+            <FileText className="h-8 w-8 text-blue-700 dark:text-blue-400" />
           </div>
-          <FileText className="h-8 w-8 text-blue-700 dark:text-blue-400" />
-        </div>
-      </CardHeader>
-      <CardContent className="pt-6">
-        <div className="space-y-6">
-          {/* Submission Overview */}
-          <div className="p-5 rounded-xl border-2 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <div className="h-1.5 w-1.5 rounded-full bg-purple-600 animate-pulse"></div>
-              Submission Overview
-            </h3>
-            
-            <div className="grid gap-4 md:grid-cols-3">
-              <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-purple-200 dark:border-purple-800 shadow-sm">
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
-                  <span className="inline-block h-2 w-2 rounded-full bg-purple-600"></span>
-                  Abstract ID
-                </p>
-                <p className="text-2xl font-bold text-green-700 dark:text-purple-400 font-mono tracking-tight">
-                  {userData?.abstractID ?? "—"}
-                </p>
-              </div>
-              
-              <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Participation Type</p>
-                <Badge variant="secondary" className="text-sm font-bold px-3 py-1.5 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 border-blue-300 dark:border-blue-700">
-                  {userData?.participationCategory ?? "Not Set"}
-                </Badge>
-              </div>
+        </CardHeader>
+        <CardContent className="pt-6">
+          <div className="space-y-6">
+            {/* Submission Overview */}
+            <div className="p-5 rounded-xl border-2 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-purple-600 animate-pulse"></div>
+                Submission Overview
+              </h3>
 
-              <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-green-200 dark:border-green-800 shadow-sm">
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Registration Type</p>
-                <Badge variant="outline" className="text-sm font-bold px-3 py-1.5 bg-green-50 text-green-800 dark:bg-green-950 dark:text-green-200 border-green-400 dark:border-green-600">
-                  {userData?.registrationCategory ?? "Not Set"}
-                </Badge>
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-purple-200 dark:border-purple-800 shadow-sm">
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
+                    <span className="inline-block h-2 w-2 rounded-full bg-purple-600"></span>
+                    Abstract ID
+                  </p>
+                  <p className="text-2xl font-bold text-green-700 dark:text-purple-400 font-mono tracking-tight">
+                    {userData?.abstractID ?? "—"}
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Participation Type</p>
+                  <Badge variant="secondary" className="text-sm font-bold px-3 py-1.5 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 border-blue-300 dark:border-blue-700">
+                    {userData?.participationCategory ?? "Not Set"}
+                  </Badge>
+                </div>
+
+                <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-green-200 dark:border-green-800 shadow-sm">
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Registration Type</p>
+                  <Badge variant="outline" className="text-sm font-bold px-3 py-1.5 bg-green-50 text-green-800 dark:bg-green-950 dark:text-green-200 border-green-400 dark:border-green-600">
+                    {userData?.registrationCategory ?? "Not Set"}
+                  </Badge>
+                </div>
               </div>
             </div>
-          </div>
-        
-          {/* Abstract Title Section */}
-          <div className="rounded-xl border-2 overflow-hidden shadow-sm">
-            <div className="bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 px-5 py-3 border-b-2">
-              <h4 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
-                <FileText className="h-4 w-4" />
-                Research Title
+
+            {/* Abstract Title Section */}
+            <div className="rounded-xl border-2 overflow-hidden shadow-sm">
+              <div className="bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 px-5 py-3 border-b-2">
+                <h4 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                  <FileText className="h-4 w-4" />
+                  Research Title
+                </h4>
+              </div>
+              <div className="p-5 bg-white dark:bg-gray-900">
+                <p className="text-base font-semibold leading-relaxed text-gray-900 dark:text-gray-100">
+                  {userData?.abstractTitle ?? "No abstract title provided"}
+                </p>
+              </div>
+            </div>
+
+            {/* Presenter Information */}
+            <div className="p-5 rounded-xl border-2 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 dark:from-indigo-950/50 dark:to-purple-950/50">
+              <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <User className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                Presenter Information
               </h4>
-            </div>
-            <div className="p-5 bg-white dark:bg-gray-900">
-              <p className="text-base font-semibold leading-relaxed text-gray-900 dark:text-gray-100">
-                {userData?.abstractTitle ?? "No abstract title provided"}
-              </p>
-            </div>
-          </div>
-        
-          {/* Presenter Information */}
-          <div className="p-5 rounded-xl border-2 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 dark:from-indigo-950/50 dark:to-purple-950/50">
-            <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <User className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-              Presenter Information
-            </h4>
-            <div className="flex items-center gap-4 p-4 rounded-lg bg-white dark:bg-gray-800 border shadow-sm">
-              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900 flex items-center justify-center flex-shrink-0 border-2 border-indigo-300 dark:border-indigo-700">
-                <User className="h-6 w-6 text-indigo-700 dark:text-indigo-300" />
-              </div>
-              <div className="space-y-1 flex-1">
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Presenter Name</p>
-                <p className="text-lg font-bold text-gray-900 dark:text-white">
-                  {userData?.presenterName ?? "—"}
-                </p>
+              <div className="flex items-center gap-4 p-4 rounded-lg bg-white dark:bg-gray-800 border shadow-sm">
+                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900 flex items-center justify-center flex-shrink-0 border-2 border-indigo-300 dark:border-indigo-700">
+                  <User className="h-6 w-6 text-indigo-700 dark:text-indigo-300" />
+                </div>
+                <div className="space-y-1 flex-1">
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Presenter Name</p>
+                  <p className="text-lg font-bold text-gray-900 dark:text-white">
+                    {userData?.presenterName ?? "—"}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
 
-     
+
     </div>
   );
 }
