@@ -73,13 +73,17 @@ exports.handleIPN = async (req, res) => {
     try {
         const { paymentID, amount, status, payment_date } = req.body;
         const auth = req.headers.authorization;
-        console.log('header ' + auth);
 
         if (auth !== `Bearer ${process.env.PAYMENT_API_TOKEN}`) {
             return res.status(403).json({ message: "Unauthorized" });
         }
 
         console.log("IPN received:", req.body);
+        const token = req.headers.authorization?.split(' ')[1];
+        
+        // Verify token and get user ID
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const _id = decoded.userId || decoded.id;
         // const user = await User.findOne({ _id: req.body.reg || req.body._id });
 
         // if (!user) {

@@ -5,12 +5,13 @@ import { CheckCircle2, Loader2, XCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getPaymentStatus as fetchPaymentStatus } from "@/actions/payment.action";
+import { use } from "react";
 
-export default function PaymentStatus({ params }: { params: { id: string } }) {
+export default function PaymentStatus({ params }: { params: Promise<{ id: string }> }) {
+    const { id: paymentId } = use(params);
     const [loading, setLoading] = useState(true);
     const [countdown, setCountdown] = useState(10);
     const [paymentSuccess, setPaymentSuccess] = useState<boolean | null>(null);
-    const paymentId = params.id;
 
     useEffect(() => {
         // Countdown interval
