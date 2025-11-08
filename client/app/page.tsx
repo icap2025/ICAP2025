@@ -4,6 +4,7 @@ import Image from "next/image";
 import RegistrationTimer from "@/components/Landingpage-components/RegistrationTImer";
 import ImportantDates from "@/components/ImportantDates";
 import Notice from "@/components/Notice";
+import RegistrationPopup from "@/components/RegistrationPopup";
 import { SlCalender } from "react-icons/sl";
 import { CiLocationOn } from "react-icons/ci";
 import { BsFillPersonLinesFill } from "react-icons/bs";
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="flex flex-col">
+      <RegistrationPopup />
       <main className="w-full bg-white">
         {/* Hero Section */}
         <section className="relative w-full">
