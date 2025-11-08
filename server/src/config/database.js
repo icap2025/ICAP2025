@@ -12,44 +12,54 @@ const mongooseOptions = {
   socketTimeoutMS: 45000,
 };
 
-// Cache the MongoDB connection for serverless
-let isConnected = false;
+// Track connection promise to prevent multiple simultaneous connections
+let connectionPromise = null;
 
 const connectDB = async () => {
-  // If already connected, return
-  if (isConnected && mongoose.connection.readyState === 1) {
-    console.log('📊 Using existing database connection');
-    return;
+  // If already connected, return immediately
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+
+  // If connection is in progress, wait for it
+  if (connectionPromise) {
+    return connectionPromise;
   }
 
   try {
-    // Connect to MongoDB
-    await mongoose.connect(process.env.MONGO_URI, mongooseOptions);
+    console.log('🔄 Connecting to MongoDB...');
     
-    isConnected = true;
+    // Store the connection promise
+    connectionPromise = mongoose.connect(process.env.MONGO_URI, mongooseOptions);
+    
+    // Wait for connection to complete
+    await connectionPromise;
+    
     console.log('✅ MongoDB Connected:', mongoose.connection.host);
     console.log('📊 Database:', mongoose.connection.name);
     
+    // Reset promise after successful connection
+    connectionPromise = null;
+    
+    return mongoose.connection;
+    
   } catch (error) {
     console.error('❌ MongoDB Connection Error:', error.message);
-    isConnected = false;
+    connectionPromise = null; // Reset on error
     throw error;
   }
 };
 
 // Connection event listeners
 mongoose.connection.on('connected', () => {
-  isConnected = true;
   console.log('📡 Mongoose connected to MongoDB');
 });
 
 mongoose.connection.on('error', (err) => {
-  isConnected = false;
   console.error('❌ Mongoose connection error:', err);
 });
 
 mongoose.connection.on('disconnected', () => {
-  isConnected = false;
   console.log('📴 Mongoose disconnected from MongoDB');
 });
 

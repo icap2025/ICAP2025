@@ -44,15 +44,24 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 
 // Database connection middleware for serverless
+// This ensures DB is connected before processing any request
 app.use(async (req, res, next) => {
   try {
+    // Wait for database connection to complete
     await connectDB();
+    
+    // Verify connection is actually ready
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState !== 1) {
+      throw new Error('Database not ready');
+    }
+    
     next();
   } catch (error) {
-    console.error('Database connection failed:', error);
-    res.status(503).json({
+    console.error('Database connection failed:', error.message);
+    return res.status(503).json({
       success: false,
-      message: 'Database connection failed. Please try again.'
+      message: 'Database connection failed. Please try again in a moment.'
     });
   }
 });

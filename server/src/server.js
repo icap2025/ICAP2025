@@ -13,28 +13,40 @@ process.on('uncaughtException', (err) => {
 
 const app = require('./app');
 
-// Connect to MongoDB
-connectDB();
+// Connect to MongoDB and start server
+const startServer = async () => {
+  try {
+    // Wait for database connection before starting server
+    await connectDB();
+    
+    // Start server only after DB is connected
+    const port = process.env.PORT || 5000;
+    const server = app.listen(port, () => {
+      console.log(`🚀 Server running on port ${port} in ${process.env.NODE_ENV} mode`);
+    });
 
-// Start server
-const port = process.env.PORT || 5000;
-const server = app.listen(port, () => {
-  console.log(`🚀 Server running on port ${port} in ${process.env.NODE_ENV} mode`);
-});
+    // Handle unhandled promise rejections
+    process.on('unhandledRejection', (err) => {
+      console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+      console.log(err.name, err.message);
+      server.close(() => {
+        process.exit(1);
+      });
+    });
 
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (err) => {
-  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
-  console.log(err.name, err.message);
-  server.close(() => {
+    // Handle SIGTERM
+    process.on('SIGTERM', () => {
+      console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
+      server.close(() => {
+        console.log('💥 Process terminated!');
+      });
+    });
+    
+  } catch (error) {
+    console.error('Failed to start server:', error);
     process.exit(1);
-  });
-});
+  }
+};
 
-// Handle SIGTERM
-process.on('SIGTERM', () => {
-  console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
-  server.close(() => {
-    console.log('💥 Process terminated!');
-  });
-});
+// Start the server
+startServer();

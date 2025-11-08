@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const authenticated = isAuthenticated();
     const user = getUserData();
     
-    console.log("Auth Check:", { authenticated, user });
+    // console.log("Auth Check:", { authenticated, user });
     
     setIsLoggedIn(authenticated);
     setUserData(user);
