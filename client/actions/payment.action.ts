@@ -84,7 +84,7 @@ export const createPayment = async (userData: UserData | null) => {
         const paymentData: PaymentData = {
             name: userData.Name || '',
             _id: userData._id || '',
-            amount: 1,
+            amount: calculatedAmount,
             email: userData.email || '',
             mobile: userData.phone || ''
         };
