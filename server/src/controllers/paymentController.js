@@ -82,8 +82,8 @@ exports.handleIPN = async (req, res) => {
         const token = req.headers.authorization?.split(' ')[1];
         
         // Verify token and get user ID
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const _id = decoded.userId || decoded.id;
+        // const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        // const _id = decoded.userId || decoded.id;
         // const user = await User.findOne({ _id: req.body.reg || req.body._id });
 
         // if (!user) {
@@ -150,7 +150,8 @@ exports.getPaymentStatus = async (req, res) => {
         // console.log('Payment gateway response:', response.data);
 
         const paymentData = response.data;
-
+       console.log
+      
         const paymentStatus = paymentData?.paymentStatusCode;
         // console.log('paymetn status' + paymentStatus);
 
@@ -166,15 +167,14 @@ exports.getPaymentStatus = async (req, res) => {
 
         // Find and update transaction in history
         const transaction = user.transactionHistory.find(tx => tx.paymentID === paymentID);
-        if (transaction && transaction.payment_status !== 'PAID') {
+        if (transaction && transaction.payment_status !== 'PAID' && paymentStatus === 'PAID' ) {
             transaction.payment_status = paymentStatus;
             transaction.payment_date = new Date();
         
-        // If payment is successful (PAID stat
-        if (paymentStatus === 'PAID' ){
+       
             user.SuccessPaymentID = paymentID;
             user.payment_status = true;
-            user.payment_date = new Date();
+            user.payment_date = new Date() ;
             user.amount = parseFloat(paymentData?.paymentAmount) || user.amount;
 
             console.log('Payment successful - User updated:', {
@@ -182,7 +182,7 @@ exports.getPaymentStatus = async (req, res) => {
                 paymentID,
                 amount: user.amount
             });
-        }
+      
 
         await user.save(); 
          return res.status(200).json({
