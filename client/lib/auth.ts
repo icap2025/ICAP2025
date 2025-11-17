@@ -48,14 +48,14 @@ export function getUserData(): UserData | null {
     const userId = Cookies.get(COOKIE_KEYS.USER.ID);
     const Name = Cookies.get(COOKIE_KEYS.USER.FULL_NAME);
     const email = Cookies.get(COOKIE_KEYS.USER.EMAIL);
-    
+
     if (!userId || !email) {
       return null;
     }
 
     // Get profilePic from localStorage instead of cookies (too large for cookies)
     const profilePic = typeof window !== 'undefined' ? localStorage.getItem('user_profile_pic') : null;
-    
+
     // Get all other user data from cookies
     const phone = Cookies.get(COOKIE_KEYS.USER.PHONE);
     const affiliation = Cookies.get(COOKIE_KEYS.USER.AFFILIATION);
@@ -130,7 +130,7 @@ export function clearAuthCookies(): void {
   Cookies.remove(COOKIE_KEYS.USER.CREATED_AT);
   Cookies.remove(COOKIE_KEYS.USER.Payment_ID);
   Cookies.remove(COOKIE_KEYS.USER.Amount);
-  
+
   // Clear profilePic from localStorage
   if (typeof window !== 'undefined') {
     localStorage.removeItem('user_profile_pic');
@@ -152,12 +152,12 @@ export function setUserDataCookies(userData: UserData, token: string): void {
   Cookies.set(COOKIE_KEYS.USER.ID, userData._id, cookieOptions);
   Cookies.set(COOKIE_KEYS.USER.FULL_NAME, userData.Name, cookieOptions);
   Cookies.set(COOKIE_KEYS.USER.EMAIL, userData.email, cookieOptions);
-  
+
   // Store profilePic in localStorage instead of cookies (base64 is too large)
   if (userData.profilePic && typeof window !== 'undefined') {
     localStorage.setItem('user_profile_pic', userData.profilePic);
   }
-  
+
   // Store additional user data
   if (userData.phone) {
     Cookies.set(COOKIE_KEYS.USER.PHONE, userData.phone, cookieOptions);
@@ -287,4 +287,80 @@ export function updateUserDataCookies(updates: Partial<UserData>): void {
       Cookies.remove(COOKIE_KEYS.USER.PAYMENT_DATE);
     }
   }
+}
+
+// ============= ADMIN AUTH FUNCTIONS =============
+
+export interface AdminData {
+  _id: string;
+  fullName: string;
+  email: string;
+  role: 'admin';
+  isActive: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+/**
+ * Check if admin is authenticated by verifying token exists
+ */
+export function isAdminAuthenticated(): boolean {
+  const token = Cookies.get(COOKIE_KEYS.ADMIN.TOKEN);
+  return !!token;
+}
+
+/**
+ * Get admin data from cookies
+ */
+export function getAdminData(): AdminData | null {
+  try {
+    const token = Cookies.get(COOKIE_KEYS.ADMIN.TOKEN);
+    if (!token) return null;
+
+    const email = Cookies.get(COOKIE_KEYS.ADMIN.EMAIL);
+
+    if (!email) {
+      return null;
+    }
+
+    return {
+      _id: '',
+      fullName: 'Admin',
+      email: email,
+      role: 'admin',
+      isActive: true,
+    };
+  } catch (error) {
+    console.error("Error getting admin data:", error);
+    return null;
+  }
+}
+
+/**
+ * Get admin token
+ */
+export function getAdminToken(): string | null {
+  return Cookies.get(COOKIE_KEYS.ADMIN.TOKEN) || null;
+}
+
+/**
+ * Clear all admin cookies
+ */
+export function clearAdminCookies(): void {
+  Cookies.remove(COOKIE_KEYS.ADMIN.TOKEN);
+  Cookies.remove(COOKIE_KEYS.ADMIN.EMAIL);
+}
+
+/**
+ * Set admin data in cookies (client-side)
+ */
+export function setAdminDataCookies(adminData: AdminData, token: string): void {
+  const cookieOptions = {
+    expires: 90, // 90 days
+    sameSite: 'strict' as const,
+    secure: process.env.NODE_ENV === "production",
+  };
+
+  Cookies.set(COOKIE_KEYS.ADMIN.TOKEN, token, cookieOptions);
+  Cookies.set(COOKIE_KEYS.ADMIN.EMAIL, adminData.email, cookieOptions);
 }

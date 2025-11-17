@@ -5,30 +5,33 @@ import { NextRequest, NextResponse } from "next/server";
  */
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   const protectedRoutes = ["/dashboard", "/admin"];
-  
-  const isProtectedRoute = protectedRoutes.some(route => 
+
+  const isProtectedRoute = protectedRoutes.some(route =>
     pathname.startsWith(route)
   );
-  
+
   if (isProtectedRoute) {
     const userToken = request.cookies.get("user_token")?.value;
-    const adminToken = request.cookies.get("adminToken")?.value;
-    
+    const adminToken = request.cookies.get("admin_token")?.value;
+
     if (pathname.startsWith("/admin")) {
+      // Admin routes require admin token
       if (!adminToken) {
-        const adminSignInUrl = new URL("/adminSignin", request.url);
-        return NextResponse.redirect(adminSignInUrl);
+        const loginUrl = new URL("/login", request.url);
+        return NextResponse.redirect(loginUrl);
       }
     }
     else if (pathname.startsWith("/dashboard")) {
+      // Dashboard routes require user token
       if (!userToken) {
-        const signInUrl = new URL("/login", request.url);
-        return NextResponse.redirect(signInUrl);
+        const loginUrl = new URL("/login", request.url);
+        return NextResponse.redirect(loginUrl);
       }
     }
   }
+
   return NextResponse.next();
 }
 

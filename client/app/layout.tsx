@@ -1,15 +1,15 @@
 
 import type { Metadata } from "next";
-import Footer from "@/components/Landingpage-components/Footer";
-import Header from "@/components/Landingpage-components/Header";
 import ScrollToTop from "@/components/Landingpage-components/ScrollToTop";
 import { Inter } from "next/font/google";
 import "../styles/index.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { Toaster } from "sonner";
 import { Toaster as ShadcnToaster } from "@/components/ui/toaster";
+import ConditionalLayout from "./ConditionalLayout";
 
 const inter = Inter({ subsets: ["latin"] });
+
 
 
 
@@ -179,10 +179,10 @@ export default function RootLayout({
         <AuthProvider>
           <Toaster position="top-right" richColors />
           <ShadcnToaster />
-          {<Header />}
-          {children}
+          <ConditionalLayout>
+            {children}
+          </ConditionalLayout>
           <div id="modal-root" />
-          {<Footer />}
           <ScrollToTop />
         </AuthProvider>
       </body>
