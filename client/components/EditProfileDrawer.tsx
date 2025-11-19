@@ -51,6 +51,7 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
     participationCategory: userData?.participationCategory || "",
     presenterName: userData?.presenterName || "",
     CoAuthorNames: userData?.CoAuthorNames || "",
+    abstractID: userData?.abstractID || "",
   });
 
   // Helper to check if participation type is Only Attendee
@@ -77,6 +78,7 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
         participationCategory: userData.participationCategory || "",
         presenterName: userData.presenterName || "",
         CoAuthorNames: userData.CoAuthorNames || "",
+        abstractID: userData.abstractID || "",
       });
       setProfilePicPreview(userData.profilePic || null);
     }
@@ -171,10 +173,13 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
         CoAuthorNames: formData.CoAuthorNames,
       };
 
-      // Only include abstract fields if payment is not complete
+      // Only include abstract fields and attendeeID if payment is not complete
       if (!isPaymentComplete) {
         updateData.abstractTitle = formData.abstractTitle;
         updateData.participationCategory = formData.participationCategory;
+        if (formData.participationCategory !== "Only Attendee") {
+          updateData.abstractID = formData.abstractID;
+        }
       }
 
       const response = await updateProfile(updateData);
@@ -191,6 +196,7 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
           ...((!isPaymentComplete) && {
             abstractTitle: formData.abstractTitle,
             participationCategory: formData.participationCategory as any,
+            ...(formData.participationCategory !== "Only Attendee" && { abstractID: formData.abstractID }),
           }),
         });
         
@@ -345,21 +351,8 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
                     ⚠️ Abstract details are locked after payment. Only presenter name can be changed.
                   </p>
                 )}
-                
                 <div className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="abstractTitle">Abstract Title *</Label>
-                    <Textarea
-                      id="abstractTitle"
-                      value={formData.abstractTitle}
-                      onChange={(e) => handleInputChange("abstractTitle", e.target.value)}
-                      placeholder="Enter your abstract title"
-                      rows={3}
-                      disabled={isPaymentComplete || isOnlyAttendee}
-                      className={(isPaymentComplete || isOnlyAttendee) ? "bg-gray-100 dark:bg-gray-800 cursor-not-allowed" : ""}
-                    />
-                  </div>
-
+                  {/* Hide Abstract Title if Only Attendee */}
                   <div className="space-y-2">
                     <Label htmlFor="participationCategory">Participation Category *</Label>
                     <Select
@@ -382,6 +375,34 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
                       </SelectContent>
                     </Select>
                   </div>
+ {!isOnlyAttendee && (
+                    <div className="space-y-2">
+                      <Label htmlFor="abstractTitle">Abstract Title *</Label>
+                      <Textarea
+                        id="abstractTitle"
+                        value={formData.abstractTitle}
+                        onChange={(e) => handleInputChange("abstractTitle", e.target.value)}
+                        placeholder="Enter your abstract title"
+                        rows={3}
+                        disabled={isPaymentComplete}
+                        className={isPaymentComplete ? "bg-gray-100 dark:bg-gray-800 cursor-not-allowed" : ""}
+                      />
+                    </div>
+                  )}
+
+                 
+                  {/* abstractID field: editable only before payment and not Only Attendee */}
+                  {!isPaymentComplete && formData.participationCategory !== "Only Attendee" && (
+                    <div className="space-y-2">
+                      <Label htmlFor="abstractID">Abstract ID *</Label>
+                      <Input
+                        id="abstractID"
+                        value={formData.abstractID}
+                        onChange={(e) => handleInputChange("abstractID", e.target.value)}
+                        placeholder="Enter your abstract ID"
+                      />
+                    </div>
+                  )}
 
                   {!isOnlyAttendee && (
                     <div className="space-y-2">
@@ -395,19 +416,22 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
                     </div>
                   )}
 
-                  <div className="space-y-2">
-                    <Label htmlFor="CoAuthorNames">Co-Author Names</Label>
-                    <Textarea
-                      id="CoAuthorNames"
-                      value={formData.CoAuthorNames}
-                      onChange={(e) => handleInputChange("CoAuthorNames", e.target.value)}
-                      placeholder="Enter co-author names (comma-separated)"
-                      rows={2}
-                    />
-                    <p className="text-xs text-muted-foreground">
-                      Optional: List all co-authors separated by commas
-                    </p>
-                  </div>
+                  {/* Hide Co-Author Names if Only Attendee */}
+                  {!isOnlyAttendee && (
+                    <div className="space-y-2">
+                      <Label htmlFor="CoAuthorNames">Co-Author Names</Label>
+                      <Textarea
+                        id="CoAuthorNames"
+                        value={formData.CoAuthorNames}
+                        onChange={(e) => handleInputChange("CoAuthorNames", e.target.value)}
+                        placeholder="Enter co-author names (comma-separated)"
+                        rows={2}
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        Optional: List all co-authors separated by commas
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

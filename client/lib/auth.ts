@@ -10,6 +10,7 @@ export interface UserData {
   affiliation?: string; // Matches User.js (institution/organization)
   designation?: string; // Matches User.js (position/designation)
   abstractID?: string;
+  attendeeID?: string;
   abstractTitle?: string;
   participationCategory?: 'Oral' | 'Poster' | 'Only Attendee' | 'Online/Virtual';
   registrationCategory?: 'International Student' | 'International Professionals' | 'Local Professionals' | 'Local Student';
