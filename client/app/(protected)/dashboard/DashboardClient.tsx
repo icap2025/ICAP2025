@@ -504,7 +504,7 @@ export default function DashboardClient() {
 
     <div className="flex justify-center items-center py-8">
      
-      <Card className="w-full max-w-2xl shadow-lg rounded-2xl border bg-white dark:bg-slate-900">
+      <Card className="w-full  shadow-lg rounded-2xl border bg-white dark:bg-slate-900">
       <CardHeader className="border-b bg-slate-50/60 dark:bg-slate-800/60">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <CardTitle className="text-xl font-semibold flex items-center gap-2">
