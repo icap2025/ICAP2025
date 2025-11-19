@@ -105,7 +105,7 @@ const addHeader = (doc: jsPDF): void => {
   // Conference details
   doc.setFontSize(FONTS.subtitle.size);
   doc.setFont('helvetica', FONTS.subtitle.style);
-  doc.text('International Conference on Advanced Computing and Simulation', 105, 17, { align: 'center' });
+  doc.text('International Conference on Advances in Physics', 105, 17, { align: 'center' });
   doc.text('Shahjalal University of Science and Technology, Sylhet, Bangladesh', 105, 22, { align: 'center' });
   doc.text('December 17-18, 2025', 105, 27, { align: 'center' });
 };

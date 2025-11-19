@@ -14,6 +14,7 @@ export interface UserData {
   participationCategory?: 'Oral' | 'Poster' | 'Only Attendee' | 'Online/Virtual';
   registrationCategory?: 'International Student' | 'International Professionals' | 'Local Professionals' | 'Local Student';
   presenterName?: string;
+  CoAuthorNames?: string;
   transactionDetails?: {
     transactionID?: string;
     dateTime?: string;
@@ -65,6 +66,7 @@ export function getUserData(): UserData | null {
     const participationCategory = Cookies.get(COOKIE_KEYS.USER.PARTICIPATION_CATEGORY);
     const registrationCategory = Cookies.get(COOKIE_KEYS.USER.REGISTRATION_CATEGORY);
     const presenterName = Cookies.get(COOKIE_KEYS.USER.PRESENTER_NAME);
+    const CoAuthorNames = Cookies.get(COOKIE_KEYS.USER.CO_AUTHOR_NAMES);
     const role = Cookies.get(COOKIE_KEYS.USER.ROLE);
     const isActive = Cookies.get(COOKIE_KEYS.USER.IS_ACTIVE);
     const isEmailVerified = Cookies.get(COOKIE_KEYS.USER.IS_EMAIL_VERIFIED);
@@ -85,6 +87,7 @@ export function getUserData(): UserData | null {
       participationCategory: participationCategory as 'Oral' | 'Poster' | 'Only Attendee' | 'Online/Virtual' | undefined,
       registrationCategory: registrationCategory as 'International Student' | 'International Professionals' | 'Local Professionals' | 'Local Student' | undefined,
       presenterName: presenterName || undefined,
+      CoAuthorNames: CoAuthorNames || undefined,
       role: role || undefined,
       isActive: isActive === "true",
       isEmailVerified: isEmailVerified === "true",
@@ -122,6 +125,7 @@ export function clearAuthCookies(): void {
   Cookies.remove(COOKIE_KEYS.USER.PARTICIPATION_CATEGORY);
   Cookies.remove(COOKIE_KEYS.USER.REGISTRATION_CATEGORY);
   Cookies.remove(COOKIE_KEYS.USER.PRESENTER_NAME);
+  Cookies.remove(COOKIE_KEYS.USER.CO_AUTHOR_NAMES);
   Cookies.remove(COOKIE_KEYS.USER.ROLE);
   Cookies.remove(COOKIE_KEYS.USER.IS_ACTIVE);
   Cookies.remove(COOKIE_KEYS.USER.IS_EMAIL_VERIFIED);
@@ -182,6 +186,9 @@ export function setUserDataCookies(userData: UserData, token: string): void {
   }
   if (userData.presenterName) {
     Cookies.set(COOKIE_KEYS.USER.PRESENTER_NAME, userData.presenterName, cookieOptions);
+  }
+  if (userData.CoAuthorNames) {
+    Cookies.set(COOKIE_KEYS.USER.CO_AUTHOR_NAMES, userData.CoAuthorNames, cookieOptions);
   }
   if (userData.role) {
     Cookies.set(COOKIE_KEYS.USER.ROLE, userData.role, cookieOptions);
@@ -268,6 +275,13 @@ export function updateUserDataCookies(updates: Partial<UserData>): void {
       Cookies.set(COOKIE_KEYS.USER.PRESENTER_NAME, updates.presenterName, cookieOptions);
     } else {
       Cookies.remove(COOKIE_KEYS.USER.PRESENTER_NAME);
+    }
+  }
+  if (updates.CoAuthorNames !== undefined) {
+    if (updates.CoAuthorNames) {
+      Cookies.set(COOKIE_KEYS.USER.CO_AUTHOR_NAMES, updates.CoAuthorNames, cookieOptions);
+    } else {
+      Cookies.remove(COOKIE_KEYS.USER.CO_AUTHOR_NAMES);
     }
   }
   if (updates.registrationCategory !== undefined) {

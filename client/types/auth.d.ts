@@ -20,11 +20,12 @@ export interface SignupFormData {
   password: string;
   confirmPassword: string;
   profilePic?: string; // base64 encoded image
-  abstractID: string;
-  abstractTitle: string;
-  participationCategory: 'Oral' | 'Poster' | 'Only Attendee' |'Online/Virtual';
+  abstractID?: string;
+  abstractTitle?: string;
+  participationCategory?: 'Oral' | 'Poster' | 'Only Attendee' |'Online/Virtual';
   registrationCategory: 'International Student' | 'International Professionals' | 'Local Professionals' | 'Local Student';
-  presenterName: string;
+  presenterName?: string;
+  CoAuthorNames?: string;
 }
 export interface SignupFormErrors {
   Name?: string;
@@ -40,6 +41,7 @@ export interface SignupFormErrors {
   participationCategory?: string;
   registrationCategory?: string;
   presenterName?: string;
+  CoAuthorNames?: string;
 }
 export interface SignupFormTouched {
   Name: boolean;
@@ -55,6 +57,7 @@ export interface SignupFormTouched {
   participationCategory: boolean;
   registrationCategory: boolean;
   presenterName: boolean;
+  CoAuthorNames: boolean;
 }
 
 export interface ForgetPasswordFormData {

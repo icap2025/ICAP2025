@@ -25,13 +25,10 @@ const userSchema = new mongoose.Schema(
     },
     abstractID: {
       type: String,
-      required: [true, 'Please provide the Abstract ID or Serial (from CMT)'],
       trim: true,
-      unique: true,
     },
     abstractTitle: {
       type: String,
-      required: [true, 'Please provide the Abstract Title'],
       trim: true,
       maxlength: [300, 'Abstract title must be no more than 300 characters'],
     },
@@ -47,9 +44,13 @@ const userSchema = new mongoose.Schema(
     },
     presenterName: {
       type: String,
-      required: [true, 'Please provide the presenter'],
       trim: true,
       maxlength: [100, 'Presenter name must be no more than 100 characters'],
+    },
+     CoAuthorNames: {
+      type: String,
+      trim: true,
+      maxlength: [300, ' names must be no more than 300 characters'],
     },
     transactionHistory: [
     {

@@ -18,6 +18,7 @@ export const COOKIE_KEYS = {
     PARTICIPATION_CATEGORY: "user_participation_category",
     REGISTRATION_CATEGORY: "user_registration_category",
     PRESENTER_NAME: "user_presenter_name",
+    CO_AUTHOR_NAMES: "user_co_author_names",
     ROLE: "user_role",
     IS_ACTIVE: "user_is_active",
     IS_EMAIL_VERIFIED: "user_is_email_verified",

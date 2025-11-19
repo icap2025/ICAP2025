@@ -50,7 +50,11 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
     abstractTitle: userData?.abstractTitle || "",
     participationCategory: userData?.participationCategory || "",
     presenterName: userData?.presenterName || "",
+    CoAuthorNames: userData?.CoAuthorNames || "",
   });
+
+  // Helper to check if participation type is Only Attendee
+  const isOnlyAttendee = formData.participationCategory === "Only Attendee";
 
   const participationOptions = [
     { value: "Oral", label: "Oral" },
@@ -72,6 +76,7 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
         abstractTitle: userData.abstractTitle || "",
         participationCategory: userData.participationCategory || "",
         presenterName: userData.presenterName || "",
+        CoAuthorNames: userData.CoAuthorNames || "",
       });
       setProfilePicPreview(userData.profilePic || null);
     }
@@ -163,6 +168,7 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
         designation: formData.designation,
         phone: formData.phone,
         presenterName: formData.presenterName,
+        CoAuthorNames: formData.CoAuthorNames,
       };
 
       // Only include abstract fields if payment is not complete
@@ -181,6 +187,7 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
           designation: formData.designation,
           phone: formData.phone,
           presenterName: formData.presenterName,
+          CoAuthorNames: formData.CoAuthorNames,
           ...((!isPaymentComplete) && {
             abstractTitle: formData.abstractTitle,
             participationCategory: formData.participationCategory as any,
@@ -348,8 +355,8 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
                       onChange={(e) => handleInputChange("abstractTitle", e.target.value)}
                       placeholder="Enter your abstract title"
                       rows={3}
-                      disabled={isPaymentComplete}
-                      className={isPaymentComplete ? "bg-gray-100 dark:bg-gray-800 cursor-not-allowed" : ""}
+                      disabled={isPaymentComplete || isOnlyAttendee}
+                      className={(isPaymentComplete || isOnlyAttendee) ? "bg-gray-100 dark:bg-gray-800 cursor-not-allowed" : ""}
                     />
                   </div>
 
@@ -376,14 +383,30 @@ export default function EditProfileDrawer({ userData, onProfileUpdated }: EditPr
                     </Select>
                   </div>
 
+                  {!isOnlyAttendee && (
+                    <div className="space-y-2">
+                      <Label htmlFor="presenterName">Presenter Name *</Label>
+                      <Input
+                        id="presenterName"
+                        value={formData.presenterName}
+                        onChange={(e) => handleInputChange("presenterName", e.target.value)}
+                        placeholder="Name of the presenter"
+                      />
+                    </div>
+                  )}
+
                   <div className="space-y-2">
-                    <Label htmlFor="presenterName">Presenter Name *</Label>
-                    <Input
-                      id="presenterName"
-                      value={formData.presenterName}
-                      onChange={(e) => handleInputChange("presenterName", e.target.value)}
-                      placeholder="Name of the presenter"
+                    <Label htmlFor="CoAuthorNames">Co-Author Names</Label>
+                    <Textarea
+                      id="CoAuthorNames"
+                      value={formData.CoAuthorNames}
+                      onChange={(e) => handleInputChange("CoAuthorNames", e.target.value)}
+                      placeholder="Enter co-author names (comma-separated)"
+                      rows={2}
                     />
+                    <p className="text-xs text-muted-foreground">
+                      Optional: List all co-authors separated by commas
+                    </p>
                   </div>
                 </div>
               </div>
