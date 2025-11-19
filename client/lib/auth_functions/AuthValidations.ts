@@ -48,22 +48,23 @@ export const createAuthSchemas = (validationT: (key: string) => string) => {
             profilePic: z.string().optional(),
             abstractID: z
                 .string()
-                .min(2, validationT("Abstract ID must be at least 2 characters"))
-                .max(50, validationT("Abstract ID must be no more than 50 characters")),
+                .optional(),
             abstractTitle: z
                 .string()
-                .min(5, validationT("Abstract title must be at least 5 characters"))
-                .max(300, validationT("Abstract title must be no more than 300 characters")),
+                .optional(),
             participationCategory: z.enum(['Oral', 'Poster', 'Only Attendee', 'Online/Virtual'], {
                 message: validationT("Please select a participation category")
-            }),
+            }).optional(),
             registrationCategory: z.enum(['International Student', 'International Professionals', 'Local Professionals', 'Local Student'], {
                 message: validationT("Please select a registration category")
             }),
             presenterName: z
                 .string()
-                .min(2, validationT("Presenter name must be at least 2 characters"))
-                .max(100, validationT("Presenter name must be no more than 100 characters")),
+                .optional(),
+            CoAuthorNames: z
+                .string()
+                .max(300, validationT("Co-author names must be no more than 300 characters"))
+                .optional(),
         })
             .refine((data) => data.password === data.confirmPassword, {
                 message: validationT("Password does not match"),

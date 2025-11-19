@@ -54,6 +54,7 @@ exports.userRegister = catchAsync(async (req, res, next) => {
         phone, 
         email, 
         password,
+        CoAuthorNames,
         profilePic
     } = req.body;
 
@@ -83,11 +84,11 @@ exports.userRegister = catchAsync(async (req, res, next) => {
         }
     }
 
-    // Check if abstractID already exists
-    const existingAbstractID = await User.findOne({ abstractID });
-    if (existingAbstractID) {
-        return next(new AppError('Abstract ID already registered', 400));
-    }
+    // // Check if abstractID already exists
+    // const existingAbstractID = await User.findOne({ abstractID });
+    // if (existingAbstractID) {
+    //     return next(new AppError('Abstract ID already registered', 400));
+    // }
 
     // Create new user
     const newUser = await User.create({
@@ -99,6 +100,7 @@ exports.userRegister = catchAsync(async (req, res, next) => {
         participationCategory,
         registrationCategory,
         presenterName,
+        CoAuthorNames,
         phone,
         email,
         password,

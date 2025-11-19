@@ -24,7 +24,8 @@ exports.updateProfile = catchAsync(async (req, res, next) => {
     phone, 
     abstractTitle,
     participationCategory,
-    presenterName
+    presenterName,
+    CoAuthorNames
   } = req.body;
 
   const updateData = {};
@@ -35,6 +36,7 @@ exports.updateProfile = catchAsync(async (req, res, next) => {
   if (abstractTitle) updateData.abstractTitle = abstractTitle;
   if (participationCategory) updateData.participationCategory = participationCategory;
   if (presenterName) updateData.presenterName = presenterName;
+  if (CoAuthorNames !== undefined) updateData.CoAuthorNames = CoAuthorNames;
 
   const updatedUser = await User.findByIdAndUpdate(
     req.user.id,
@@ -130,6 +132,7 @@ exports.refreshUserData = catchAsync(async (req, res, next) => {
   res.cookie('participationCategory', user.participationCategory || '', cookieOptions);
   res.cookie('registrationCategory', user.registrationCategory || '', cookieOptions);
   res.cookie('presenterName', user.presenterName || '', cookieOptions);
+  res.cookie('CoAuthorNames', user.CoAuthorNames || '', cookieOptions);
   res.cookie('role', user.role || '', cookieOptions);
   res.cookie('isActive', user.isActive ? 'true' : 'false', cookieOptions);
   res.cookie('isEmailVerified', user.isEmailVerified ? 'true' : 'false', cookieOptions);

@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import {
   FaBriefcase,
   FaBuilding,
@@ -66,6 +66,7 @@ export const SignupForm = () => {
         | "Local Student"
         | undefined,
       presenterName: "",
+      CoAuthorNames: "",
     },
   });
 
@@ -85,6 +86,14 @@ export const SignupForm = () => {
     { value: "Local Professionals", label: "Local Professionals" },
     { value: "Local Student", label: "Local Student" },
   ];
+
+  // Watch participation category to conditionally require fields
+  const participationCategory = useWatch({
+    control,
+    name: "participationCategory",
+  });
+
+  const isOnlyAttendee = participationCategory === "Only Attendee";
 
   const onSubmit = async (data: SignupFormData) => {
     // console.log("Form submitted with data:", data);
@@ -316,7 +325,8 @@ export const SignupForm = () => {
                     trigger("abstractID");
                   }}
                   label="Abstract ID / CMT Serial"
-                  required
+                  required={!isOnlyAttendee}
+                  disabled={isOnlyAttendee}
                   error={
                     touchedFields.abstractID
                       ? errors.abstractID?.message
@@ -344,7 +354,8 @@ export const SignupForm = () => {
                     trigger("presenterName");
                   }}
                   label="Presenter Name"
-                  required
+                  required={!isOnlyAttendee}
+                  disabled={isOnlyAttendee}
                   error={
                     touchedFields.presenterName
                       ? errors.presenterName?.message
@@ -355,6 +366,44 @@ export const SignupForm = () => {
                 />
               )}
             />
+
+            <div className="md:col-span-2">
+              <Controller
+                name="CoAuthorNames"
+                control={control}
+                render={({ field }) => (
+                  <TextInput
+                    id="CoAuthorNames"
+                    type="text"
+                    placeholder="Enter co-author names (comma-separated)"
+                    value={field.value}
+                    onChange={(e) => {
+                      field.onChange(e);
+                    }}
+                    onBlur={() => {
+                      field.onBlur();
+                      trigger("CoAuthorNames");
+                    }}
+                    label="Co-Author Names (Optional)"
+                    disabled={isOnlyAttendee}
+                    error={
+                      touchedFields.CoAuthorNames
+                        ? errors.CoAuthorNames?.message
+                        : undefined
+                    }
+                    className="w-full"
+                  />
+                 
+                )}
+              />
+              {!isOnlyAttendee && (
+                <p className="mt-1 text-sm text-red-500 font-semibold dark:text-gray-400">
+                  All co-authors must register and pay individually to
+                  participate, using the same abstract information for their
+                  registration.
+                </p>
+              )}
+            </div>
 
             <div className="md:col-span-2">
               <Controller
@@ -374,7 +423,8 @@ export const SignupForm = () => {
                       trigger("abstractTitle");
                     }}
                     label="Abstract Title"
-                    required
+                    required={!isOnlyAttendee}
+                    disabled={isOnlyAttendee}
                     error={
                       touchedFields.abstractTitle
                         ? errors.abstractTitle?.message

@@ -18,6 +18,7 @@ import {
   Loader2,
   Clock,
   Download,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
@@ -501,88 +502,102 @@ export default function DashboardClient() {
       </div>
 
 
-      <Card className="shadow-md">
-        <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 border-b pb-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div className="flex-1">
-              <CardTitle className="text-lg sm:text-xl">Abstract Details</CardTitle>
-              <CardDescription className="text-xs sm:text-sm mt-1">Your research submission and presentation information</CardDescription>
-            </div>
-            <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-blue-700 dark:text-blue-400 flex-shrink-0" />
+    <div className="flex justify-center items-center py-8">
+     
+      <Card className="w-full max-w-2xl shadow-lg rounded-2xl border bg-white dark:bg-slate-900">
+      <CardHeader className="border-b bg-slate-50/60 dark:bg-slate-800/60">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <CardTitle className="text-xl font-semibold flex items-center gap-2">
+          <FileText className="h-5 w-5 text-primary" />
+          Abstract & Submission Details
+        </CardTitle>
+        <CardDescription className="mt-1 text-sm">
+          Your research submission and presentation information.
+        </CardDescription>
+        </div>
+    </CardHeader>
+      <CardContent className="p-6 space-y-8">
+        {/* Research Title */}
+        <section>
+        <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+          Research Title
+        </h3>
+        <blockquote className="border-l-4 border-primary pl-4 py-3 bg-slate-50 dark:bg-slate-800/50 rounded-r-xl">
+          <p className="text-lg font-semibold leading-snug text-primary">
+          {userData?.abstractTitle ?? "No abstract title provided."}
+          </p>
+        </blockquote>
+        </section>
+        <Separator />
+        {/* Submission Info */}
+        <section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div>
+          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+            Abstract ID
+          </h3>
+          <p className="text-xl font-bold font-mono text-primary tracking-wide">
+            {userData?.abstractID ?? "N/A"}
+          </p>
           </div>
-        </CardHeader>
-        <CardContent className="pt-4 sm:pt-6">
-          <div className="space-y-4 sm:space-y-6">
-            {/* Submission Overview */}
-            <div className="p-4 sm:p-5 rounded-xl border-2 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
-              <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center gap-2">
-                <div className="h-1.5 w-1.5 rounded-full bg-purple-600 animate-pulse flex-shrink-0"></div>
-                <span>Submission Overview</span>
-              </h3>
-
-              <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                <div className="p-3 sm:p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-purple-200 dark:border-purple-800 shadow-sm">
-                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
-                    <span className="inline-block h-2 w-2 rounded-full bg-purple-600 flex-shrink-0"></span>
-                    <span>Abstract ID</span>
-                  </p>
-                  <p className="text-xl sm:text-2xl font-bold text-green-700 dark:text-purple-400 font-mono tracking-tight break-all">
-                    {userData?.abstractID ?? "—"}
-                  </p>
-                </div>
-
-                <div className="p-3 sm:p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
-                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Participation Type</p>
-                  <Badge variant="secondary" className="text-xs sm:text-sm font-bold px-2 sm:px-3 py-1 sm:py-1.5 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 border-blue-300 dark:border-blue-700 break-words max-w-full">
-                    {userData?.participationCategory ?? "Not Set"}
-                  </Badge>
-                </div>
-
-                <div className="p-3 sm:p-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-green-200 dark:border-green-800 shadow-sm col-span-1 sm:col-span-2 lg:col-span-1">
-                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Registration Type</p>
-                  <Badge variant="outline" className="text-xs sm:text-sm font-bold px-2 sm:px-3 py-1 sm:py-1.5 bg-green-50 text-green-800 dark:bg-green-950 dark:text-green-200 border-green-400 dark:border-green-600 break-words max-w-full">
-                    {userData?.registrationCategory ?? "Not Set"}
-                  </Badge>
-                </div>
-              </div>
+          <div>
+          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+            Participation Type
+          </h3>
+          <Badge variant="secondary" className="px-3 py-1 text-sm font-medium rounded-md">
+            {userData?.participationCategory ?? "Not Set"}
+          </Badge>
+          </div>
+          <div>
+          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+            Registration Type
+          </h3>
+          <Badge
+            variant="outline"
+            className="px-3 py-1 text-sm font-medium border-green-600/50 text-green-700 dark:text-green-400 rounded-md"
+          >
+            {userData?.registrationCategory ?? "Not Set"}
+          </Badge>
+          </div>
+        </div>
+        </section>
+        <Separator />
+        {/* Authorship Section */}
+        <section>
+        <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+          Authorship
+        </h3>
+        <div className="flex flex-col gap-3">
+          {/* Presenter */}
+          <div className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <User className="h-5 w-5" />
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground font-medium">Presenter</p>
+            <p className="text-base font-semibold">{userData?.presenterName ?? "—"}</p>
+          </div>
+          </div>
+          {/* Co-authors */}
+          {userData?.CoAuthorNames && (
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-secondary-foreground mt-1">
+            <Users className="h-5 w-5" />
             </div>
-
-            {/* Abstract Title Section */}
-            <div className="rounded-xl border-2 overflow-hidden shadow-sm">
-              <div className="bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 px-4 sm:px-5 py-2.5 sm:py-3 border-b-2">
-                <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white flex items-center gap-2">
-                  <FileText className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
-                  <span>Research Title</span>
-                </h4>
-              </div>
-              <div className="p-4 sm:p-5 bg-white dark:bg-gray-900">
-                <p className="text-sm sm:text-base font-semibold leading-relaxed text-gray-900 dark:text-gray-100 break-words">
-                  {userData?.abstractTitle ?? "No abstract title provided"}
-                </p>
-              </div>
-            </div>
-
-            {/* Presenter Information */}
-            <div className="p-4 sm:p-5 rounded-xl border-2 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 dark:from-indigo-950/50 dark:to-purple-950/50">
-              <h4 className="font-bold text-xs sm:text-sm text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center gap-2">
-                <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
-                <span>Presenter Information</span>
-              </h4>
-              <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg bg-white dark:bg-gray-800 border shadow-sm">
-                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900 flex items-center justify-center flex-shrink-0 border-2 border-indigo-300 dark:border-indigo-700">
-                  <User className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-700 dark:text-indigo-300" />
-                </div>
-                <div className="space-y-1 flex-1 min-w-0">
-                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Presenter Name</p>
-                  <p className="text-base sm:text-lg font-bold text-gray-900 dark:text-white break-words">
-                    {userData?.presenterName ?? "—"}
-                  </p>
-                </div>
-              </div>
+            <div>
+            <p className="text-xs text-muted-foreground font-medium">Co-Authors</p>
+            <p className="text-sm leading-relaxed break-words">
+              {userData.CoAuthorNames}
+            </p>
             </div>
           </div>
-        </CardContent>
+          )}
+        </div>
+        </section>
+      </CardContent>
       </Card>
+    </div>
+
 
 
     </div>

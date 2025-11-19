@@ -32,31 +32,27 @@ exports.userRegisterValidation = [
     .isLength({ max: 100 })
     .withMessage('Designation must be no more than 100 characters'),
   body('abstractID')
-    .trim()
-    .notEmpty()
-    .withMessage('Abstract ID is required'),
+    .optional()
+    .trim(),
   body('abstractTitle')
-    .trim()
-    .notEmpty()
-    .withMessage('Abstract title is required')
-    .isLength({ max: 300 })
-    .withMessage('Abstract title must be no more than 300 characters'),
+    .optional()
+    .trim(),
   body('participationCategory')
-    .notEmpty()
-    .withMessage('Participation category is required')
-    .isIn(['Oral', 'Poster', 'Only Attendee', 'Online/Virtual'])
-    .withMessage('Invalid participation category'),
+    .optional()
+    .trim(),
   body('registrationCategory')
     .notEmpty()
     .withMessage('Registration category is required')
     .isIn(['International Student', 'International Professionals', 'Local Professionals', 'Local Student'])
     .withMessage('Invalid registration category'),
   body('presenterName')
+    .optional()
+    .trim(),
+  body('CoAuthorNames')
+    .optional()
     .trim()
-    .notEmpty()
-    .withMessage('Presenter name is required')
-    .isLength({ max: 100 })
-    .withMessage('Presenter name must be no more than 100 characters'),
+    .isLength({ max: 300 })
+    .withMessage('Co-author names must be no more than 300 characters'),
   body('phone')
     .trim()
     .notEmpty()
