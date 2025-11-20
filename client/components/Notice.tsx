@@ -12,6 +12,7 @@ interface Notice {
 
 const Notice: React.FC = () => {
     const [Notices, setNotices] = useState<Notice[]>([
+
         {
             id: "1",
             title: "Abstract Submission Deadline",
@@ -34,7 +35,13 @@ const Notice: React.FC = () => {
             description: "The deadline for submitting abstracts has been extended to October 9, 2025.",
             createdAt: "2025-09-19T00:00:00Z",
             show: true,
-        }
+        }, {
+            id: "4",
+            title: "Extended Early Bird Registration Deadline",
+            description: "The deadline for Early Bird Registration is November 30, 2025.",
+            createdAt: "2025-11-20T00:00:00Z",
+            show: true,
+        },
     ]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
