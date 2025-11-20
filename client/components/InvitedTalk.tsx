@@ -33,6 +33,20 @@ const InvitedTalk = [
         bio: `Professor Dr. Masashi Ohashi, a distinguished physicist from Kanazawa University, Japan, whose pioneering research in low-temperature physics and functional materials has made significant contributions to the advancement of thermophysical and magnetic materials science.`,
         status: 'Distinguished Speaker'
     },
+    {
+        name: "Professor Md. Wahadoszamen",
+        university: "University of Dhaka, Bangladesh",
+        image: "/guest/Wahadoszamen.png",
+        bio: `Professor Md. Wahadoszamen is a distinguished physicist renowned for his pioneering contributions to laser and optical spectroscopy, nanomaterials research, and biophysical energy studies, whose work has significantly advanced the understanding of molecular interactions, light–matter dynamics, and spectroscopic innovations in contemporary experimental physics.`,
+        status: 'Invited Speaker'
+    },
+    {
+        name: "Professor Dr. Saleh Hasan Naqib",
+        university: "Department of Physics, University of Rajshahi,Bangladesh",
+        image: "/guest/SalehHasanNaqib.png",
+        bio: `Professor Dr. Saleh Hasan Naqib, Department of Physics, University of Rajshahi, is a leading condensed matter physicist whose extensive research on high-temperature superconductivity, strongly correlated electron systems, and transport phenomena has significantly advanced the understanding of complex quantum materials in both theoretical and experimental domains.`,
+        status: 'Invited Speaker'
+    }
 ];
 
 interface Speaker {
