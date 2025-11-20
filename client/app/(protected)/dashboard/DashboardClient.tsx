@@ -121,10 +121,10 @@ export default function DashboardClient() {
   const PaymentStatus = userData?.payment_status ?? false;
   const CreatedAt = userData?.createdAt ?? null;
 
-  // Calculate if Early Bird period (before Nov 20, 2025)
-  const earlyBirdDeadline = new Date('2025-11-20');
+  // Early Bird deadline: November 30, 2025 (end of day, local time)
+  const earlyBirdDeadline = new Date('2025-11-30T23:59:59');
   const currentDate = new Date();
-  const isEarlyBird = currentDate < earlyBirdDeadline;
+  const isEarlyBird = currentDate <= earlyBirdDeadline;
 
   // Get registration fee based on category
   const getRegistrationFee = () => {
@@ -209,7 +209,7 @@ export default function DashboardClient() {
 
       // Generate payslip - it will get data from cookies if needed
       generatePayslip(userData);
-      
+
       toast({
         title: "Payslip Downloaded",
         description: "Your payment receipt has been downloaded successfully.",
@@ -384,12 +384,39 @@ export default function DashboardClient() {
               <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
             </div>
           </CardHeader>
+          <CardContent className="pt-4 pb-2 px-4 sm:px-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+                  Registration Deadlines
+                </h4>
+                <div className="flex  gap-2">
+                  <div className="flex items-center gap-2">
+                    <Badge variant="default" className="bg-green-600 text-white px-2 py-1 text-xs">
+                      Early Bird
+                    </Badge>
+                    <span className="text-sm font-medium">
+                      {earlyBirdDeadline.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="secondary" className="bg-orange-600 text-white px-2 py-1 text-xs">
+                      Regular
+                    </Badge>
+                    <span className="text-sm font-medium">
+                      December 10, 2025
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
           <CardContent className="pt-4 sm:pt-6 space-y-4 sm:space-y-6">
             {/* Current Registration Status */}
             <div className="p-4 sm:p-5 rounded-xl border-2 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">Current Registration Fee</h3>
-                <Badge variant={isEarlyBird ? "default" : "secondary"} className={`${isEarlyBird ? 'bg-green-600' : 'bg-orange-600'} text-white px-2 sm:px-3 py-1 text-xs sm:text-sm whitespace-nowrap`}>
+                <Badge variant={isEarlyBird ? "default" : "secondary"} className={`${isEarlyBird ? 'bg-green-600' : 'bg-orange-600'} text-white animate-bounce px-2 sm:px-3 py-1 text-xs sm:text-sm whitespace-nowrap`}>
                   {isEarlyBird ? '🎉 Early Bird Rate' : '📅 Regular Rate'}
                 </Badge>
               </div>
@@ -502,101 +529,101 @@ export default function DashboardClient() {
       </div>
 
 
-    <div className="flex justify-center items-center py-8">
-     
-      <Card className="w-full  shadow-lg rounded-2xl border bg-white dark:bg-slate-900">
-      <CardHeader className="border-b bg-slate-50/60 dark:bg-slate-800/60">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <CardTitle className="text-xl font-semibold flex items-center gap-2">
-          <FileText className="h-5 w-5 text-primary" />
-          Abstract & Submission Details
-        </CardTitle>
-        <CardDescription className="mt-1 text-sm">
-          Your research submission and presentation information.
-        </CardDescription>
-        </div>
-    </CardHeader>
-      <CardContent className="p-6 space-y-8">
-        {/* Research Title */}
-        <section>
-        <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-          Research Title
-        </h3>
-        <blockquote className="border-l-4 border-primary pl-4 py-3 bg-slate-50 dark:bg-slate-800/50 rounded-r-xl">
-          <p className="text-lg font-semibold leading-snug text-primary">
-          {userData?.abstractTitle ?? "No abstract title provided."}
-          </p>
-        </blockquote>
-        </section>
-        <Separator />
-        {/* Submission Info */}
-        <section>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div>
-          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
-            Abstract ID
-          </h3>
-          <p className="text-xl font-bold font-mono text-primary tracking-wide">
-            {userData?.abstractID ?? "N/A"}
-          </p>
-          </div>
-          <div>
-          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
-            Participation Type
-          </h3>
-          <Badge variant="secondary" className="px-3 py-1 text-sm font-medium rounded-md">
-            {userData?.participationCategory ?? "Not Set"}
-          </Badge>
-          </div>
-          <div>
-          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
-            Registration Type
-          </h3>
-          <Badge
-            variant="outline"
-            className="px-3 py-1 text-sm font-medium border-green-600/50 text-green-700 dark:text-green-400 rounded-md"
-          >
-            {userData?.registrationCategory ?? "Not Set"}
-          </Badge>
-          </div>
-        </div>
-        </section>
-        <Separator />
-        {/* Authorship Section */}
-        <section>
-        <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-          Authorship
-        </h3>
-        <div className="flex flex-col gap-3">
-          {/* Presenter */}
-          <div className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <User className="h-5 w-5" />
-          </div>
-          <div>
-            <p className="text-xs text-muted-foreground font-medium">Presenter</p>
-            <p className="text-base font-semibold">{userData?.presenterName ?? "—"}</p>
-          </div>
-          </div>
-          {/* Co-authors */}
-          {userData?.CoAuthorNames && (
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-secondary-foreground mt-1">
-            <Users className="h-5 w-5" />
+      <div className="flex justify-center items-center py-8">
+
+        <Card className="w-full  shadow-lg rounded-2xl border bg-white dark:bg-slate-900">
+          <CardHeader className="border-b bg-slate-50/60 dark:bg-slate-800/60">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <CardTitle className="text-xl font-semibold flex items-center gap-2">
+                <FileText className="h-5 w-5 text-primary" />
+                Abstract & Submission Details
+              </CardTitle>
+              <CardDescription className="mt-1 text-sm">
+                Your research submission and presentation information.
+              </CardDescription>
             </div>
-            <div>
-            <p className="text-xs text-muted-foreground font-medium">Co-Authors</p>
-            <p className="text-sm leading-relaxed break-words">
-              {userData.CoAuthorNames}
-            </p>
-            </div>
-          </div>
-          )}
-        </div>
-        </section>
-      </CardContent>
-      </Card>
-    </div>
+          </CardHeader>
+          <CardContent className="p-6 space-y-8">
+            {/* Research Title */}
+            <section>
+              <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                Research Title
+              </h3>
+              <blockquote className="border-l-4 border-primary pl-4 py-3 bg-slate-50 dark:bg-slate-800/50 rounded-r-xl">
+                <p className="text-lg font-semibold leading-snug text-primary">
+                  {userData?.abstractTitle ?? "No abstract title provided."}
+                </p>
+              </blockquote>
+            </section>
+            <Separator />
+            {/* Submission Info */}
+            <section>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div>
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+                    Abstract ID
+                  </h3>
+                  <p className="text-xl font-bold font-mono text-primary tracking-wide">
+                    {userData?.abstractID ?? "N/A"}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+                    Participation Type
+                  </h3>
+                  <Badge variant="secondary" className="px-3 py-1 text-sm font-medium rounded-md">
+                    {userData?.participationCategory ?? "Not Set"}
+                  </Badge>
+                </div>
+                <div>
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+                    Registration Type
+                  </h3>
+                  <Badge
+                    variant="outline"
+                    className="px-3 py-1 text-sm font-medium border-green-600/50 text-green-700 dark:text-green-400 rounded-md"
+                  >
+                    {userData?.registrationCategory ?? "Not Set"}
+                  </Badge>
+                </div>
+              </div>
+            </section>
+            <Separator />
+            {/* Authorship Section */}
+            <section>
+              <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                Authorship
+              </h3>
+              <div className="flex flex-col gap-3">
+                {/* Presenter */}
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <User className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground font-medium">Presenter</p>
+                    <p className="text-base font-semibold">{userData?.presenterName ?? "—"}</p>
+                  </div>
+                </div>
+                {/* Co-authors */}
+                {userData?.CoAuthorNames && (
+                  <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-secondary-foreground mt-1">
+                      <Users className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground font-medium">Co-Authors</p>
+                      <p className="text-sm leading-relaxed break-words">
+                        {userData.CoAuthorNames}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+          </CardContent>
+        </Card>
+      </div>
 
 
 

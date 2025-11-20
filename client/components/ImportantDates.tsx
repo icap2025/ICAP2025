@@ -13,6 +13,13 @@ interface ImportantDates {
 
 const ImportantDates: React.FC = () => {
     const [dates, setDates] = useState<ImportantDates[]>([
+       { 
+            id: "0",
+            title: "Extended Early Bird Registration",
+            description: "Early bird registration ends on November 30, 2025.",
+            date: "2025-11-30",
+            show: true,
+        },
         {
             id: "1",
             title: "Extended abstract submission deadline (final)",
@@ -30,7 +37,7 @@ const ImportantDates: React.FC = () => {
         {
             id: "3",
             title: "Updated Early Bird Registration",
-            description: "Early bird registration ends on November 15, 2025.",
+            description: "Early bird registration ends on November 20, 2025.",
             date: "2025-11-20",
             show: true,
         },
@@ -40,7 +47,8 @@ const ImportantDates: React.FC = () => {
             description: "Regular registration ends on December 10, 2025.",
             date: "2025-12-10",
             show: true,
-        }
+        },
+
     ]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);

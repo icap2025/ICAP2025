@@ -29,8 +29,8 @@ export const calculateRegistrationFee = (
         throw new Error('Registration category is required');
     }
 
-    // Early Bird Deadline: November 20, 2025
-    const earlyBirdDeadline = new Date('2025-11-20T23:59:59');
+    // Early Bird Deadline: November 30, 2025
+    const earlyBirdDeadline = new Date('2025-11-30T23:59:59');
     const isEarlyBird = currentDate <= earlyBirdDeadline;
 
     // Fee structure based on registration category
