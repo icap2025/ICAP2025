@@ -95,12 +95,12 @@ export const exportUsers = async (params: Omit<GetUsersParams, 'page' | 'limit'>
         return response.data;
     } catch (error: any) {
         console.error('Export users error:', error);
-        
+
         // Handle specific timeout error
         if (error.code === 'ECONNABORTED') {
             throw new Error('Export is taking too long. Please try with filters to reduce data size.');
         }
-        
+
         throw new Error(
             error.response?.data?.message ||
             error.message ||
