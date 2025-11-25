@@ -230,7 +230,7 @@ export default function AccommodationPage() {
                 <li className="flex items-start gap-2">
                   <span className="font-bold text-primary">2.</span>
                   <span>
-                    Mention the reference code:{" "}
+                    Mention the reference:{" "}
                     <strong>ICAP-2025, Physics, SUST</strong> to avail special
                     conference discount.
                   </span>
