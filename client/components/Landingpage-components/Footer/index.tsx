@@ -95,15 +95,15 @@ const Footer = () => {
                     >
                       Sign Up
                     </a>
-                  </li>
+                  </li> */}
                   <li>
                     <a
-                      href="/login"
+                      href="/accommodation"
                       className="inline-block text-sm text-body-color transition-colors duration-300 hover:text-primary sm:text-base"
                     >
-                      Login
+                      Accommodation
                     </a>
-                  </li> */}
+                  </li>
                   <li>
                     <a
                       href="/registration-fees"

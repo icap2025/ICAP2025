@@ -37,29 +37,9 @@ import { toast } from "sonner";
 
 const menuItems = [
   {
-    title: "Dashboard",
-    icon: LayoutDashboard,
-    href: "/admin",
-  },
-  {
     title: "Users Management",
     icon: Users,
     href: "/admin/users",
-  },
-  {
-    title: "Notice",
-    icon: CreditCard,
-    href: "/admin/notice",
-  },
-  {
-    title: "Important Dates",
-    icon: FileText,
-    href: "/admin/important-dates",
-  },
-  {
-    title: "Speakers",
-    icon: Settings,
-    href: "/admin/speakers",
   },
 ];
 

@@ -60,7 +60,7 @@ export const LogInForm = () => {
 
           // Navigate to admin dashboard
           setTimeout(() => {
-            router.push("/admin");
+            router.push("/admin/users");
             router.refresh();
           }, 100);
         } else {

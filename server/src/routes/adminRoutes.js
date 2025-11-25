@@ -47,6 +47,7 @@ router.get('/profile', adminController.getProfile);
 router.patch('/profile', adminController.updateProfile);
 
 // User management
+router.get('/users/export', adminController.exportUsers); // Must be before /:id route
 router.get('/users', adminController.getAllUsers);
 router.get('/users/:id', adminController.getUser);
 router.patch('/users/:id/deactivate', adminController.deactivateUser);
