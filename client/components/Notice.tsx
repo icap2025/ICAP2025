@@ -12,34 +12,46 @@ interface Notice {
 
 const Notice: React.FC = () => {
     const [Notices, setNotices] = useState<Notice[]>([
-
         {
             id: "1",
+            title: "Poster Guidelines Added",
+            description: "Poster guidelines have been added to the Author Guidelines page.",
+            createdAt: "2025-12-02T00:00:00Z",
+            show: true,
+        },
+        {
+            id: "2",
             title: "Abstract Submission Deadline",
             description: "The deadline for submitting abstracts is September 20, 2025.",
             createdAt: "2025-04-31T00:00:00Z",
             show: true,
         },
-
         {
-            id: "2",
+            id: "3",
             title: "Abstract Submission CMT Link Added",
             description: "https://cmt3.research.microsoft.com/ICAP2025",
             createdAt: "2025-06-02T00:00:00Z",
             show: true,
         },
-
         {
-            id: "3",
+            id: "4",
             title: "Abstract Submission Deadline Extended",
             description: "The deadline for submitting abstracts has been extended to October 9, 2025.",
             createdAt: "2025-09-19T00:00:00Z",
             show: true,
-        }, {
-            id: "4",
+        },
+        {
+            id: "5",
             title: "Extended Early Bird Registration Deadline",
             description: "The deadline for Early Bird Registration is November 30, 2025.",
             createdAt: "2025-11-20T00:00:00Z",
+            show: true,
+        },
+        {
+            id: "6",
+            title: "Abstract Submission Deadline",
+            description: "The deadline for submitting abstracts is September 20, 2025.",
+            createdAt: "2025-04-31T00:00:00Z",
             show: true,
         },
     ]);

@@ -47,6 +47,21 @@ const InvitedTalk = [
         bio: `Professor Dr. Saleh Hasan Naqib, Department of Physics, University of Rajshahi, is a leading condensed matter physicist whose extensive research on high-temperature superconductivity, strongly correlated electron systems, and transport phenomena has significantly advanced the understanding of complex quantum materials in both theoretical and experimental domains.`,
         status: 'Invited Speaker'
     }
+    ,
+        {
+            name: "Professor Dr. Khondkar Siddique-e-Rabbani",
+            university: "Department of Biomedical Physics and Technology, University of Dhaka, Bangladesh",
+            image: "/guest/KhondkarSiddique.jpg",
+            bio: `Professor Dr. Khondkar Siddique-e-Rabbani, Department of Biomedical Physics and Technology, University of Dhaka, is a pioneering physicist internationally recognized for his groundbreaking contributions to biomedical instrumentation, electrical impedance technology, and innovation in affordable medical diagnostics for resource-limited settings.`,
+            status: 'Distinguished Invited Speaker'
+        },
+        {
+            name: "Dr. Mohammad Akbar",
+            university: "The University of Texas at Dallas, USA",
+            image: "/guest/MohammadAkbar.png",
+            bio: `Dr. Mohammad Akbar, Clinical Associate Professor of Mathematical Sciences at The University of Texas at Dallas, is an expert in differential geometry and quantum gravity, whose insightful work on Ricci flow, general relativity and mathematical physics promises to enrich the theoretical discourse at ICAP-2025.`,
+            status: 'Distinguished Invited Speaker'
+        }
 ];
 
 interface Speaker {

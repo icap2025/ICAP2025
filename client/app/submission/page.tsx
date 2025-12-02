@@ -320,7 +320,7 @@ function ScopePage() {
             </div>
 
             {/* Poster Submission */}
-            {/* <div className="mx-2 sm:mx-4 md:mx-6 lg:mx-10 xl:mx-16">
+            <div className="mx-2 sm:mx-4 md:mx-6 lg:mx-10 xl:mx-16">
               <div className="overflow-hidden rounded-2xl border border-green-100 bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
                 <div className="bg-[#0B8175] p-3 sm:p-4">
                   <h2 className="flex items-center text-lg font-bold text-white sm:text-xl md:text-2xl">
@@ -330,12 +330,22 @@ function ScopePage() {
                 </div>
 
                 <div className="space-y-4 p-4 sm:p-6 md:p-8">
-                  <p>
-                    &ldquo;<span className="font-semibold text-[#0B8175]">Poster specifications</span>&rdquo; will be announced later.
-                  </p>
+                 <div className="text-center">
+                        <a
+                          href="/Poster.docx"
+                          download="Poster Guidelines.docx"
+                          className="group inline-flex max-w-full items-center justify-center rounded-lg bg-[#0B8175] px-4 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:bg-[#0A6B61] hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0B8175] focus:ring-offset-2"
+                        >
+                          <span className="mr-2 text-sm sm:text-base">
+                            Download Poster Presentation Guidelines
+                          </span>
+                          <TfiDownload className="text-sm transition-transform duration-300 group-hover:animate-bounce sm:text-base" />
+                        </a>
+              
+                      </div>
                 </div>
               </div>
-            </div> */}
+            </div>
 
 
           </div>
