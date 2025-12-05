@@ -1,17 +1,18 @@
-import { default as ScrollUp } from "@/components/Landingpage-components/Common/ScrollUp";
-import { Metadata } from "next";
-import Image from "next/image";
-import RegistrationTimer from "@/components/Landingpage-components/RegistrationTImer";
 import ImportantDates from "@/components/ImportantDates";
+import InvitedTalkSlider from "@/components/InvitedTalk";
+import { default as ScrollUp } from "@/components/Landingpage-components/Common/ScrollUp";
+import RegistrationTimer from "@/components/Landingpage-components/RegistrationTImer";
+import { BlurFade } from "@/components/magicui/blur-fade";
+import { BorderBeam } from "@/components/magicui/border-beam";
 import Notice from "@/components/Notice";
 import RegistrationPopup from "@/components/RegistrationPopup";
-import { SlCalender } from "react-icons/sl";
-import { CiLocationOn } from "react-icons/ci";
+import Sponsors from "@/components/Sponsors";
+import { Metadata } from "next";
+import Image from "next/image";
 import { BsFillPersonLinesFill } from "react-icons/bs";
-import { BorderBeam } from "@/components/magicui/border-beam";
-import { BlurFade } from "@/components/magicui/blur-fade";
+import { CiLocationOn } from "react-icons/ci";
+import { SlCalender } from "react-icons/sl";
 import { TfiDownload } from "react-icons/tfi";
-import InvitedTalkSlider from "@/components/InvitedTalk";
 
 export const metadata: Metadata = {
   title: "ICAP2025 | International Conference on Advances in Physics, SUST",
@@ -49,7 +50,7 @@ export default function Home() {
                   </BlurFade>
 
                   <BlurFade delay={0.5}>
-                    <span className="bg-primary inline-block px-2 py-1 text-white transition-all duration-300 hover:shadow-lg sm:px-3 sm:py-2">
+                    <span className="inline-block bg-primary px-2 py-1 text-white transition-all duration-300 hover:shadow-lg sm:px-3 sm:py-2">
                       {" "}
                       ADVANCES IN PHYSICS
                     </span>
@@ -153,6 +154,9 @@ export default function Home() {
             <div className="my-2 sm:my-4 md:my-6 lg:my-8">
               <InvitedTalkSlider />
             </div>
+
+            {/* Sponsors Section */}
+            <Sponsors />
           </div>
         </section>
 
