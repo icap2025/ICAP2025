@@ -14,25 +14,25 @@ interface Sponsor {
 const allSponsors: Sponsor[] = [
     {
         name: "SUST",
-        logo: "/sponsors/sust.png",
+        logo: "/sponsors/SUST.png",
         website: "https://www.sust.edu",
         size: "xl",
     },
     {
         name: "UGC",
-        logo: "/sponsors/ugc.png",
+        logo: "/sponsors/UGC.png",
         website: "https://www.ugc.gov.bd",
         size: "xl",
     },
     {
         name: "Invent Technologies",
-        logo: "/sponsors/Invent Technologies.jpg",
+        logo: "/sponsors/invent.jpg",
         website: "https://www.invent.com.bd/",
         size: "lg",
     },
     {
         name: "BSCL",
-        logo: "/sponsors/bscl.png",
+        logo: "/sponsors/BSCL.png",
         website: "https://bscl.gov.bd/",
         size: "lg",
     },
