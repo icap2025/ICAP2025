@@ -132,14 +132,34 @@ export default function Home() {
               developments in the field of physics
             </p>
 
-            <div className="my-8 text-center sm:my-10 md:my-12">
+            <div className="my-8 flex flex-col items-center justify-center gap-4 sm:my-10 sm:flex-row sm:gap-6 md:my-12 md:gap-8">
               <a
                 href="/Brochure.pdf"
                 download="Brochure.pdf"
-                className="group inline-flex max-w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-primary to-[#0B8175] px-5 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:scale-105 hover:from-[#0A6B61] hover:to-primary hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 active:scale-95 sm:gap-3 sm:px-6 sm:py-3.5 sm:text-base md:px-8 md:py-4 md:text-lg"
+                className="group relative inline-flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-6 py-4 text-sm font-semibold text-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2  sm:w-auto sm:gap-3 sm:px-8 sm:py-5 sm:text-base md:text-lg"
               >
-                <span>Download Brochure</span>
-                <TfiDownload className="text-sm transition-transform duration-300 group-hover:translate-y-1 sm:text-base md:text-lg" />
+                <BorderBeam
+                  duration={6}
+                  size={150}
+                  className="absolute inset-0 from-transparent via-primary to-transparent"
+                />
+                <TfiDownload className="z-10 text-base transition-transform duration-300 group-hover:translate-y-1 sm:text-lg md:text-xl" />
+                <span className="z-10">Download Brochure</span>
+              </a>
+
+              <a
+                href="/Poster.docx"
+                download="Poster.docx"
+                className="group relative inline-flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-6 py-4 text-sm font-semibold text-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto sm:gap-3 sm:px-8 sm:py-5 sm:text-base md:text-lg"
+              >
+                <BorderBeam
+                  duration={6}
+                  delay={3}
+                  size={150}
+                  className="absolute inset-0 from-transparent via-primary to-transparent"
+                />
+                <TfiDownload className="z-10 text-base transition-transform duration-300 group-hover:translate-y-1 sm:text-lg md:text-xl" />
+                <span className="z-10">Download Poster Guideline</span>
               </a>
             </div>
 
