@@ -38,7 +38,7 @@ const allSponsors: Sponsor[] = [
     },
     {
         name: "SUST Physics Alumni Association",
-        logo: "/sponsors/spaa.png",
+        logo: "/sponsors/spaa.jpg",
         website: "https://www.facebook.com/groups/sust.physics.alumni/",
         size: "lg",
     },

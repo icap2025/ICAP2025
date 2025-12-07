@@ -8,6 +8,7 @@ import {
   Building2,
   Info,
   Map,
+  Download,
 } from "lucide-react";
 
 export default function AccommodationPage() {
@@ -32,6 +33,30 @@ export default function AccommodationPage() {
       ],
       mapLink: "https://maps.app.goo.gl/nZrxMPoGg6dsp54g6",
     },
+    {
+      name: "Hotel Grand Akther",
+      image: "/grandAkter.jpg",
+      website: "https://www.facebook.com/hotelgrandakther/",
+      address: "Akther Shopping City, Floor 7th, Pathantula, Madina Market, Sylhet-3100",
+      contacts: {
+        reception: "01766 555 106",
+        manager: "01819 711908",
+        alternate: "01711 476 589",
+        email: "grandaktherhotel@gmail.com",
+      },
+      distance: "Central Sylhet Location",
+      features: [
+        "Special Conference Rates",
+        "Rooftop Restaurant",
+        "Free Breakfast",
+        "WiFi",
+        "Parking",
+        "Airport Pickup Available",
+        "24/7 Room Service",
+      ],
+      mapLink: "https://maps.app.goo.gl/MA37RK1duMCB3eGm9",
+      pdfLink: "/hotel_grand_akter.pdf",
+    },
   ];
 
   return (
@@ -39,7 +64,6 @@ export default function AccommodationPage() {
       <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20">
         <main className="flex-grow">
           {/* Header Section */}
-
           <div className="mb-6 text-center sm:mb-8 lg:mb-12">
             <div className="inline-block">
               <h1 className="mb-2 mt-10 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl lg:text-5xl">
@@ -76,15 +100,14 @@ export default function AccommodationPage() {
             </motion.div>
 
             {/* Hotels List */}
-            <div className="mx-auto max-w-6xl">
-
+            <div className="mx-auto max-w-6xl space-y-8">
               {hotels.map((hotel, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
-                  className="mb-8 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl"
+                  className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl"
                 >
                   <div className="grid gap-0 md:grid-cols-2">
                     {/* Image Section */}
@@ -95,7 +118,7 @@ export default function AccommodationPage() {
                         className="h-full w-full object-cover"
                         onError={(e) => {
                           e.currentTarget.src =
-                            'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%230C9488" width="400" height="300"/%3E%3Ctext fill="%23fff" font-size="24" font-family="Arial" x="50%25" y="50%25" text-anchor="middle" dominant-baseline="middle"%3ERainbow Guest House%3C/text%3E%3C/svg%3E';
+                            `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%230C9488" width="400" height="300"/%3E%3Ctext fill="%23fff" font-size="20" font-family="Arial" x="50%25" y="50%25" text-anchor="middle" dominant-baseline="middle"%3E${hotel.name}%3C/text%3E%3C/svg%3E`;
                         }}
                       />
                       <div className="absolute right-4 top-4 rounded-full bg-primary px-3 py-1 text-sm font-semibold text-white">
@@ -123,10 +146,22 @@ export default function AccommodationPage() {
                             <p className="text-sm font-medium">
                               Reception: {hotel.contacts.reception}
                             </p>
-                            <p className="text-sm">GM: {hotel.contacts.gm}</p>
-                            <p className="text-sm">
-                              Restaurant: {hotel.contacts.restaurant}
-                            </p>
+                            {hotel.contacts.gm && (
+                              <p className="text-sm">GM: {hotel.contacts.gm}</p>
+                            )}
+                            {hotel.contacts.manager && (
+                              <p className="text-sm">Manager: {hotel.contacts.manager}</p>
+                            )}
+                            {hotel.contacts.restaurant && (
+                              <p className="text-sm">
+                                Restaurant: {hotel.contacts.restaurant}
+                              </p>
+                            )}
+                            {hotel.contacts.alternate && (
+                              <p className="text-sm">
+                                Alternate: {hotel.contacts.alternate}
+                              </p>
+                            )}
                           </div>
                         </div>
 
@@ -178,6 +213,16 @@ export default function AccommodationPage() {
                           View on Map
                           <Map className="h-4 w-4" />
                         </a>
+                        {hotel.pdfLink && (
+                          <a
+                            href={hotel.pdfLink}
+                            download
+                            className="inline-flex items-center gap-2 rounded-lg border-2 border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 transition-all duration-300 hover:border-primary hover:text-primary"
+                          >
+                            Download Details
+                            <Download className="h-4 w-4" />
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -185,35 +230,11 @@ export default function AccommodationPage() {
               ))}
             </div>
 
-            {/* Google Maps Embed */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="mx-auto mb-8 mt-12 max-w-6xl"
-            >
-              <h2 className="mb-6 text-center text-3xl font-bold text-gray-800">
-                Location Map
-              </h2>
-              <div className="overflow-hidden rounded-xl border border-gray-200 shadow-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.0337898765!2d91.86403508465746!3d24.908353809447203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDU0JzMwLjEiTiA5McKwNTEnNTAuNSJF!5e0!3m2!1sen!2sbd!4v1234567890"
-                  width="100%"
-                  height="450"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full"
-                />
-              </div>
-            </motion.div>
-
             {/* Additional Information */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.7 }}
               className="mx-auto mt-12 max-w-4xl rounded-lg border border-gray-200 bg-gray-50 p-8"
             >
               <h3 className="mb-4 text-2xl font-bold text-gray-800">
@@ -244,6 +265,12 @@ export default function AccommodationPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="font-bold text-primary">4.</span>
+                  <span>
+                    For Hotel Grand Akther, one-night room rent must be paid in advance for confirmation (non-refundable).
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-bold text-primary">5.</span>
                   <span>
                     For any assistance, please contact the conference organizing
                     committee.
