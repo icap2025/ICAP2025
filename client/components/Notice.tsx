@@ -54,6 +54,13 @@ const Notice: React.FC = () => {
             createdAt: "2025-04-31T00:00:00Z",
             show: true,
         },
+         {
+            id: "6",
+            title: "Conference Schedule ",
+            description: "The conference schedule has been uploaded. ",
+            createdAt: "2025-12-11T00:11:12Z",
+            show: true,
+        },
     ]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -89,7 +96,7 @@ const Notice: React.FC = () => {
                             Notices
                             <hr className="mx-auto border-t-2 border-primary shadow-xl" />
                         </div>
-                        <span className="mx-1 rounded-full bg-primary px-3 text-[10px] text-white transition-all duration-300 hover:scale-110 hover:shadow-lg sm:mx-2 sm:px-3 sm:py-1 sm:text-[11px] md:mx-3 md:px-4 md:py-1 md:text-xs lg:mx-4 lg:px-5 lg:py-1 lg:text-sm">
+                        <span className="mx-1 rounded-full bg-primary px-3 text-[10px] text-white transition-all duration-500 animate-bounce sm:mx-2 sm:px-3 sm:py-1 sm:text-[11px] md:mx-3 md:px-4 md:py-1 md:text-xs lg:mx-4 lg:px-5 lg:py-1 lg:text-sm">
                             New
                         </span>
                     </div>

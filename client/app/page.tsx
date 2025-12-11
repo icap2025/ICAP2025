@@ -132,35 +132,107 @@ export default function Home() {
               developments in the field of physics
             </p>
 
-            <div className="my-8 flex flex-col items-center justify-center gap-4 sm:my-10 sm:flex-row sm:gap-6 md:my-12 md:gap-8">
-              <a
-                href="/Brochure.pdf"
-                download="Brochure.pdf"
-                className="group relative inline-flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-6 py-4 text-sm font-semibold text-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2  sm:w-auto sm:gap-3 sm:px-8 sm:py-5 sm:text-base md:text-lg"
-              >
-                <BorderBeam
-                  duration={6}
-                  size={150}
-                  className="absolute inset-0 from-transparent via-primary to-transparent"
-                />
-                <TfiDownload className="z-10 text-base transition-transform duration-300 group-hover:translate-y-1 sm:text-lg md:text-xl" />
-                <span className="z-10">Download Brochure</span>
-              </a>
+            {/* Important Resources Section */}
+            <div className="my-12 sm:my-16">
+              <div className="relative overflow-hidden   p-6  sm:p-8 md:p-10">
+                {/* Decorative background elements */}
+                <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary/5 blur-3xl"></div>
+                <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-primary/5 blur-3xl"></div>
+                
+                <div className="relative">
+                  {/* Section Header */}
+                  <div className="mb-6 text-center sm:mb-8">
+                    <h3 className="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+                      Important Resources
+                    </h3>
+                    <div className="mx-auto h-1 w-24 rounded-full bg-primary"></div>
+                    <p className="mt-3 text-sm text-gray-600 sm:text-base">
+                      Download essential conference materials
+                    </p>
+                  </div>
 
-              <a
-                href="/Poster.docx"
-                download="Poster.docx"
-                className="group relative inline-flex w-full max-w-sm items-center justify-center gap-2 overflow-hidden rounded-xl bg-white px-6 py-4 text-sm font-semibold text-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto sm:gap-3 sm:px-8 sm:py-5 sm:text-base md:text-lg"
-              >
-                <BorderBeam
-                  duration={6}
-                  delay={3}
-                  size={150}
-                  className="absolute inset-0 from-transparent via-primary to-transparent"
-                />
-                <TfiDownload className="z-10 text-base transition-transform duration-300 group-hover:translate-y-1 sm:text-lg md:text-xl" />
-                <span className="z-10">Download Poster Guideline</span>
-              </a>
+                  {/* Download Buttons Grid */}
+                  <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-3">
+                    {/* Brochure Button */}
+                    <a
+                      href="/Brochure.pdf"
+                      download="Brochure.pdf"
+                      className="group relative overflow-hidden rounded-xl border-2 border-primary bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                      <div className="relative flex flex-col items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-4 transition-colors duration-300 group-hover:bg-primary/20">
+                          <TfiDownload className="text-2xl text-primary transition-transform duration-300 group-hover:scale-110" />
+                        </div>
+                        <div className="text-center">
+                          <h4 className="mb-1 font-semibold text-gray-900 group-hover:text-primary">
+                            Conference Brochure
+                          </h4>
+                          <p className="text-xs text-gray-600">
+                            Complete event details
+                          </p>
+                        </div>
+                        <div className="mt-2 flex items-center gap-2 text-sm font-medium text-primary">
+                          <span>Download PDF</span>
+                          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                      </div>
+                    </a>
+
+                    {/* Poster Guideline Button */}
+                    <a
+                      href="/Poster.docx"
+                      download="Poster.docx"
+                      className="group relative overflow-hidden rounded-xl border-2 border-primary bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                      <div className="relative flex flex-col items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-4 transition-colors duration-300 group-hover:bg-primary/20">
+                          <TfiDownload className="text-2xl text-primary transition-transform duration-300 group-hover:scale-110" />
+                        </div>
+                        <div className="text-center">
+                          <h4 className="mb-1 font-semibold text-gray-900 group-hover:text-primary">
+                            Poster Guidelines
+                          </h4>
+                          <p className="text-xs text-gray-600">
+                            Presentation standards
+                          </p>
+                        </div>
+                        <div className="mt-2 flex items-center gap-2 text-sm font-medium text-primary">
+                          <span>Download DOCX</span>
+                          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                      </div>
+                    </a>
+
+                    {/* Schedule Button */}
+                    <a
+                      href="/schedule.pdf"
+                      download="Schedule.pdf"
+                      className="group relative overflow-hidden rounded-xl border-2 border-primary bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                      <div className="relative flex flex-col items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-4 transition-colors duration-300 group-hover:bg-primary/20">
+                          <TfiDownload className="text-2xl text-primary transition-transform duration-300 group-hover:scale-110" />
+                        </div>
+                        <div className="text-center">
+                          <h4 className="mb-1 font-semibold text-gray-900 group-hover:text-primary">
+                            Conference Schedule
+                          </h4>
+                          <p className="text-xs text-gray-600">
+                            Full program timeline
+                          </p>
+                        </div>
+                        <div className="mt-2 flex items-center gap-2 text-sm font-medium text-primary">
+                          <span>Download PDF</span>
+                          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Registration Timer */}
