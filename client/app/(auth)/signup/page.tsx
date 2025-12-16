@@ -17,7 +17,7 @@ const SignUpPage = () => {
             <div className="h-1 w-24 bg-red-600 mx-auto rounded-full mb-4"></div>
           </div>
           <p className="text-lg text-gray-700 mb-6">
-            We're sorry, but registration for ICAP 2025 has been closed.
+            We&apos;re sorry, but registration for ICAP 2025 has been closed.
           </p>
           <p className="text-base text-gray-600 mb-8">
             Thank you for your interest in the International Conference on Advances in Physics. 

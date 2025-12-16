@@ -293,7 +293,7 @@ const ManualPayslipPage = () => {
         <Card>
           <CardHeader>
             <CardTitle className="text-xl text-primary">Participant Information</CardTitle>
-            <CardDescription>Enter the participant's personal details</CardDescription>
+            <CardDescription>Enter the participant&apos;s personal details</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

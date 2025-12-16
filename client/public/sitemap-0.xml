@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://icap2025.sust.edu/committee</loc><lastmod>2025-12-11T05:50:48.954Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/registration-fees</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/dashboard</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/scope</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/accommodation</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/submission</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/schedule</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/contact</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/login</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/signup</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/test</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/verify-email</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/reset_password</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/admin/users</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://icap2025.sust.edu/forget_password</loc><lastmod>2025-12-11T05:50:48.956Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/admin/payslip</loc><lastmod>2025-12-16T07:01:16.445Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/dashboard</loc><lastmod>2025-12-16T07:01:16.446Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/committee</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/schedule</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/scope</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/registration-fees</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/submission</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/signup</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/login</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/verify-email</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/contact</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/forget_password</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/admin/users</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/reset_password</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/test</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://icap2025.sust.edu/accommodation</loc><lastmod>2025-12-16T07:01:16.447Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
