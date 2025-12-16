@@ -33,7 +33,7 @@ export default function Home() {
               alt="Conference Cover Photo"
               width={1920}
               height={1080}
-              className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
+              className="h-full w-full object-cover object-center transition-transform duration-500"
               priority
             />
           </div>
@@ -153,6 +153,85 @@ export default function Home() {
 
                   {/* Download Buttons Grid */}
                   <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-3">
+                  {/* Schedule Button */}
+                    <a
+                      href="/schedule.pdf"
+                      download="Schedule.pdf"
+                      className="group relative overflow-hidden rounded-xl border-2 border-primary bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                      <div className="relative flex flex-col items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-4 transition-colors duration-300 group-hover:bg-primary/20">
+                          <TfiDownload className="text-2xl text-primary transition-transform duration-300 group-hover:scale-110" />
+                        </div>
+                        <div className="text-center">
+                          <h4 className="mb-1 font-semibold text-gray-900 group-hover:text-primary">
+                            Conference Schedule
+                          </h4>
+                          <p className="text-xs text-gray-600">
+                            Full program timeline
+                          </p>
+                        </div>
+                        <div className="mt-2 flex items-center gap-2 text-sm font-medium text-primary">
+                          <span>Download PDF</span>
+                          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                      </div>
+                    </a>
+
+                    {/* Zoom meeting schedule download Button */}
+                    <a
+                      href="/zoom_schedule.docx"
+                      download="Zoom_Schedule.docx"
+                      className="group relative overflow-hidden rounded-xl border-2 border-primary bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                      <div className="relative flex flex-col items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-4 transition-colors duration-300 group-hover:bg-primary/20">
+                          <TfiDownload className="text-2xl text-primary transition-transform duration-300 group-hover:scale-110" />
+                        </div>
+                        <div className="text-center">
+                          <h4 className="mb-1 font-semibold text-gray-900 group-hover:text-primary">
+                            Zoom Meeting Access
+                          </h4>
+                          <p className="text-xs text-gray-600">
+                            Zoom meeting id and password
+                          </p>
+                        </div>
+                        <div className="mt-2 flex items-center gap-2 text-sm font-medium text-primary">
+                          <span>Download DOCX</span>
+                          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                      </div>
+                    </a>
+
+
+                    {/* ICAP_2025 Abstract Book download Button */}
+                    <a
+                      href="/ICAP_2025_Abstract_Book_Final.pdf"
+                      download="ICAP_2025_Abstract_Book_Final.pdf"
+                      className="group relative overflow-hidden rounded-xl border-2 border-primary bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                      <div className="relative flex flex-col items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-4 transition-colors duration-300 group-hover:bg-primary/20">
+                          <TfiDownload className="text-2xl text-primary transition-transform duration-300 group-hover:scale-110" />
+                        </div>
+                        <div className="text-center">
+                          <h4 className="mb-1 font-semibold text-gray-900 group-hover:text-primary">
+                            ICAP 2025 Abstract Book
+                          </h4>
+                          <p className="text-xs text-gray-600">
+                            Collection of accepted abstracts
+                          </p>
+                        </div>
+                        <div className="mt-2 flex items-center gap-2 text-sm font-medium text-primary">
+                          <span>Download PDF</span>
+                          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                      </div>
+                    </a>
+                    
                     {/* Brochure Button */}
                     <a
                       href="/Brochure.pdf"
@@ -205,10 +284,10 @@ export default function Home() {
                       </div>
                     </a>
 
-                    {/* Schedule Button */}
+                     {/* Abstract template download Button */}
                     <a
-                      href="/schedule.pdf"
-                      download="Schedule.pdf"
+                      href="/Abstract Template.docx"
+                      download="Abstract Template.docx"
                       className="group relative overflow-hidden rounded-xl border-2 border-primary bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
@@ -218,18 +297,19 @@ export default function Home() {
                         </div>
                         <div className="text-center">
                           <h4 className="mb-1 font-semibold text-gray-900 group-hover:text-primary">
-                            Conference Schedule
+                            Abstract Template
                           </h4>
                           <p className="text-xs text-gray-600">
-                            Full program timeline
+                            Template for submitting abstracts
                           </p>
                         </div>
                         <div className="mt-2 flex items-center gap-2 text-sm font-medium text-primary">
-                          <span>Download PDF</span>
+                          <span>Download DOCX</span>
                           <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </div>
                       </div>
                     </a>
+
                   </div>
                 </div>
               </div>

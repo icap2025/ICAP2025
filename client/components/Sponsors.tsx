@@ -37,6 +37,12 @@ const allSponsors: Sponsor[] = [
         size: "lg",
     },
     {
+        name: "WZPDCL",
+        logo: "/sponsors/wzpdcl.png",
+        website: "https://wzpdcl.org.bd/",
+        size: "lg",
+    },
+    {
         name: "SUST Physics Alumni Association",
         logo: "/sponsors/spaa.jpg",
         website: "https://www.facebook.com/groups/sust.physics.alumni/",

@@ -67,6 +67,13 @@ const Notice: React.FC = () => {
             description: "The updated conference schedule is now available on the Schedule page.",
             createdAt: "2025-12-14T14:00:00Z",
             show: true,
+        },
+        {
+            id: "8",
+            title: "Uploaded the Abstract Book and Zoom Meeting Access Details",
+            description: "Download the Abstract Book and find Zoom meeting IDs and passwords on the home page.",
+            createdAt: "2025-12-16T18:00:00Z",
+            show: true,
         }
     ]);
     const [isLoading, setIsLoading] = useState(true);
