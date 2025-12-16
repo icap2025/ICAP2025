@@ -88,7 +88,7 @@ const handleDownloadPayslip = async () => {
 ### Footer Section
 - Disclaimer text
 - Generation timestamp
-- Contact email: icap2025@sust.edu
+- Contact email: icap2025sust@gmail.com
 - Website: https://icap2025.sust.edu
 - Full page border
 
@@ -316,7 +316,7 @@ No additional environment variables required for this feature.
 
 ## Support & Maintenance
 
-**Contact**: icap2025@sust.edu
+**Contact**: icap2025sust@gmail.com
 **Documentation**: This README file
 **Last Updated**: November 7, 2025
 **Version**: 1.0.0

@@ -239,10 +239,10 @@ function ScopePage() {
                         If you face any problems with online submission, please
                         contact the conference secretary at{" "}
                         <a
-                          href="mailto:icap2025@sust.edu"
+                          href="mailto:icap2025sust@gmail.com"
                           className="font-semibold text-green-700 underline decoration-2 underline-offset-2 transition-colors duration-200 hover:text-green-800 hover:decoration-green-800"
                         >
-                          icap2025@sust.edu
+                          icap2025sust@gmail.com
                         </a>
                       </p>
                     </div>

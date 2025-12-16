@@ -363,7 +363,7 @@ const addFooter = (doc: jsPDF, footerY: number): void => {
   doc.setFontSize(FONTS.tiny.size);
   doc.setTextColor(...COLORS.darkGray);
   doc.setFont('helvetica', 'normal');
-  doc.text('Email: icap2025@sust.edu  |  Website: https://icap2025.sust.edu', 105, footerStartY + 26, { align: 'center' });
+  doc.text('Email: icap2025sust@gmail.com  |  Website: https://icap2025.sust.edu', 105, footerStartY + 26, { align: 'center' });
   doc.text('Shahjalal University of Science and Technology, Sylhet-3114, Bangladesh', 105, footerStartY + 29, { align: 'center' });
 };
 

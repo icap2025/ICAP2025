@@ -1,11 +1,11 @@
 import ImportantDates from "@/components/ImportantDates";
 import InvitedTalkSlider from "@/components/InvitedTalk";
 import { default as ScrollUp } from "@/components/Landingpage-components/Common/ScrollUp";
-import RegistrationTimer from "@/components/Landingpage-components/RegistrationTImer";
+// import RegistrationTimer from "@/components/Landingpage-components/RegistrationTImer"; // REGISTRATION CLOSED
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import Notice from "@/components/Notice";
-import RegistrationPopup from "@/components/RegistrationPopup";
+// import RegistrationPopup from "@/components/RegistrationPopup"; // REGISTRATION CLOSED
 import Sponsors from "@/components/Sponsors";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <RegistrationPopup />
+      {/* <RegistrationPopup /> */} {/* REGISTRATION CLOSED */}
       <main className="w-full bg-white">
         {/* Hero Section */}
         <section className="relative w-full">
@@ -236,7 +236,30 @@ export default function Home() {
             </div>
 
             {/* Registration Timer */}
-            <RegistrationTimer />
+            {/* <RegistrationTimer /> */} {/* REGISTRATION CLOSED */}
+            
+            {/* Registration Closed Notice */}
+            <div className="my-12 sm:my-16">
+              <div className="relative overflow-hidden rounded-2xl border-2 border-red-200 bg-gradient-to-br from-red-50 via-white to-red-50 p-6 shadow-lg sm:p-8 md:p-10">
+                <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-red-100 opacity-50 blur-3xl"></div>
+                <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-red-100 opacity-50 blur-3xl"></div>
+                
+                <div className="relative text-center">
+                  <div className="mx-auto mb-4 w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                  </div>
+                  <h3 className="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+                    Registration Closed
+                  </h3>
+                  <div className="mx-auto h-1 w-24 rounded-full bg-red-600 mb-4"></div>
+                  <p className="text-base text-gray-700 sm:text-lg max-w-2xl mx-auto">
+                    Registration for ICAP 2025 has been closed. Thank you for your interest!
+                  </p>
+                </div>
+              </div>
+            </div>
 
             <div className="mt-12 flex w-full flex-col items-start justify-between gap-8 sm:mt-16 md:mt-20 lg:flex-row lg:items-center">
               <ImportantDates />

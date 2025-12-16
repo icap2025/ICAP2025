@@ -41,6 +41,11 @@ const menuItems = [
     icon: Users,
     href: "/admin/users",
   },
+  {
+    title: "Generate Payslip",
+    icon: FileText,
+    href: "/admin/payslip",
+  },
 ];
 
 export default function AdminLayout({

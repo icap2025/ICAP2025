@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
+// REGISTRATION CLOSED - Popup disabled
 export default function RegistrationPopup() {
+  // const [isVisible, setIsVisible] = useState(false);
+  return null; // Registration closed
+  
+  /* COMMENTED OUT - REGISTRATION CLOSED
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [countdown, setCountdown] = useState(15);
