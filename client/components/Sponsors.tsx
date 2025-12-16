@@ -43,40 +43,70 @@ const allSponsors: Sponsor[] = [
         size: "lg",
     },
     {
-        name: "SUST Physics Alumni Association",
-        logo: "/sponsors/spaa.jpg",
-        website: "https://www.facebook.com/groups/sust.physics.alumni/",
+        name: "Jalalabad Gas",
+        logo: "/sponsors/Jalalabad Gas.png",
+        website: "https://jalalabadgas.portal.gov.bd/",
+        size: "lg",
+    },
+    {
+        name: "US-Bangla Airlines",
+        logo: "/sponsors/USBangla airlines.png",
+        website: "https://usbair.com/",
         size: "lg",
     },
     {
         name: "Karnaphuli Group",
         logo: "/sponsors/Karnaphuli group.png",
         website: "https://www.karnaphuli.com/",
+        size: "lg",
+    },
+    {
+        name: "Metropolitan University",
+        logo: "/sponsors/mu.png",
+        website: "https://www.metrouni.edu.bd/",
         size: "md",
     },
     {
-        name: "Jalalabad Gas",
-        logo: "/sponsors/Jalalabad Gas.png",
-        website: "https://jalalabadgas.portal.gov.bd/",
-        size: "md",
-    },
-    {
-        name: "US-Bangla Airlines",
-        logo: "/sponsors/USBangla airlines.png",
-        website: "https://usbair.com/",
+        name: "Sylhet City Corporation",
+        logo: "/sponsors/sylhet city corporation.png",
+        website: "https://www.scc.gov.bd/",
         size: "md",
     },
     {
         name: "SIU",
         logo: "/sponsors/siu.png",
         website: "https://www.siu.edu.bd/",
-        size: "sm",
+        size: "md",
+    },
+    {
+        name: "Speed Tech",
+        logo: "/sponsors/speed tech.jpg",
+        website: "https://speedtechsylhet.com/",
+        size: "md",
     },
     {
         name: "Leading University",
         logo: "/sponsors/Leading University.png",
         website: "https://lus.ac.bd/",
-        size: "sm",
+        size: "md",
+    },
+    {
+        name: "SIMCO ELectronics",
+        logo: "/sponsors/SIMCO ELectronics.png",
+        website: "https://simco.com.bd/",
+        size: "md",
+    },
+    {
+        name: "CDIP",
+        logo: "/sponsors/cdip.png",
+        website: "https://www.democdip.cdipits.com/en",
+        size: "md",
+    },
+    {
+        name: "SUST Physics Alumni Association",
+        logo: "/sponsors/spaa.jpg",
+        website: "https://www.facebook.com/groups/sust.physics.alumni/",
+        size: "md",
     },
     {
         name: "NEUB",
@@ -85,19 +115,27 @@ const allSponsors: Sponsor[] = [
         size: "sm",
     },
     {
-        name: "Metropolitan University",
-        logo: "/sponsors/mu.png",
-        website: "https://www.metrouni.edu.bd/",
+        name: "PRAN FOOD",
+        logo: "/sponsors/PRAN FOOD.gif",
+        website: "https://www.pranfoods.net/",
         size: "sm",
     },
+    {
+        name: "Cinnamon Restaurant",
+        logo: "/sponsors/Cinnamon Restaurant.jpg",
+        website: "https://www.facebook.com/TheCinnamonRestaurant/",
+        size: "sm",
+    }
 ];
 
-// Split sponsors into rows
+// Split sponsors into rows based on their order in allSponsors
 const sponsorRows = [
-    allSponsors.slice(0, 2),  // Row 1: SUST, UGC
-    allSponsors.slice(2, 5),  // Row 2: Invent, BSCL, SPAA
-    allSponsors.slice(5, 8),  // Row 3: Karnaphuli, Jalalabad, US-Bangla
-    allSponsors.slice(8),     // Row 4: SIU, Leading, NEUB, Metropolitan
+    allSponsors.slice(0, 2),   // Row 1: SUST, UGC (xl)
+    allSponsors.slice(2, 5),   // Row 2: Invent, BSCL, WZPDCL (lg)
+    allSponsors.slice(5, 8),   // Row 3: Jalalabad Gas, US-Bangla, Karnaphuli (md)
+    allSponsors.slice(8, 12),  // Row 4: Metropolitan, Sylhet City, SIU, Speed Tech
+    allSponsors.slice(12, 16), // Row 5: Leading, SIMCO, CDIP, SPAA
+    allSponsors.slice(16),     // Row 6: NEUB, PRAN FOOD, Cinnamon
 ];
 
 const SponsorCard = ({ sponsor }: { sponsor: Sponsor }) => {
@@ -120,9 +158,9 @@ const SponsorCard = ({ sponsor }: { sponsor: Sponsor }) => {
     };
 
     const content = (
-        <div className="group flex flex-col items-center gap-2 transition-all duration-300 hover:scale-105 sm:gap-3">
+        <div className="group flex flex-col items-center gap-2 transition-all duration-300 sm:gap-3">
             <div
-                className={`${sizeClasses[size]} relative overflow-hidden rounded-xl bg-white p-3 shadow-md transition-all duration-300 group-hover:shadow-xl sm:p-4`}
+                className={`${sizeClasses[size]} relative overflow-hidden rounded-xl bg-white p-3 shadow-md transition-all duration-300 sm:p-4`}
             >
                 <Image
                     src={sponsor.logo}
