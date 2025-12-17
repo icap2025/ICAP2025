@@ -108,6 +108,17 @@ function Schedule() {
                           10839
                         </span>
                       </div>
+                      <a 
+                        href="https://bdren.zoom.us/j/6629126508?pwd=QU5BODcvV2tjMGU2N24rZzhHa2d0QT09"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center justify-center gap-2 rounded-lg bg-[#0B8175] px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#096B61] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#0B8175] focus:ring-offset-2"
+                      >
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Join Now
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -198,6 +209,17 @@ function Schedule() {
                           108398
                         </span>
                       </div>
+                        <a 
+                        href="https://bdren.zoom.us/j/6629126508?pwd=QU5BODcvV2tjMGU2N24rZzhHa2d0QT09"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center justify-center gap-2 rounded-lg bg-[#0B8175] px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#096B61] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#0B8175] focus:ring-offset-2"
+                      >
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Join Now
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -223,7 +245,7 @@ function Schedule() {
                         </svg>
                       </div>
                       <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
-                        Room 307A
+                        Room 307A (IICT Virtual Room)
                       </h3>
                     </div>
                     <div className="space-y-2">
